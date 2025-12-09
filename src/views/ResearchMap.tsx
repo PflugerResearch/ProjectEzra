@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Layers, X, Calendar } from 'lucide-react';
+import { Search, Layers, X, Calendar, BarChart3, ExternalLink } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
 import { useProjects } from '../context/ProjectsContext';
 import type { ResearchProject } from '../data/loadProjects';
@@ -9,7 +9,14 @@ import { MAPBOX_TOKEN } from '../config/mapbox';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
-const ResearchMap: React.FC = () => {
+// Projects that have interactive dashboards
+const PROJECTS_WITH_DASHBOARDS = ['X25-RB02', 'X25-RB08'];
+
+interface ResearchMapProps {
+  onOpenProjectDashboard?: (projectId: string) => void;
+}
+
+const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => {
   const { projects: researchProjects, loading } = useProjects();
   const { researchColors, componentThemes } = useTheme();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -345,6 +352,20 @@ const ResearchMap: React.FC = () => {
                     ))}
                   </div>
                 </div>
+              )}
+
+              {/* View Dashboard Button - Only for projects with dashboards */}
+              {PROJECTS_WITH_DASHBOARDS.includes(selectedProject.id) && onOpenProjectDashboard && (
+                <motion.button
+                  onClick={() => onOpenProjectDashboard(selectedProject.id)}
+                  className="w-full mt-4 py-3 px-4 bg-gradient-to-r from-neon-red-500 to-neon-red-600 hover:from-neon-red-600 hover:to-neon-red-700 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-neon-red-500/25"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <BarChart3 className="w-5 h-5" />
+                  View Interactive Dashboard
+                  <ExternalLink className="w-4 h-4 ml-1" />
+                </motion.button>
               )}
             </div>
           </motion.div>

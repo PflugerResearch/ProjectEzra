@@ -8,7 +8,6 @@ import {
   Home,
   Sparkles,
   Building2,
-  Network,
   LogIn,
   LogOut,
   Mail
@@ -27,8 +26,9 @@ import PitchSubmission from './views/PitchSubmission';
 import Portfolio from './views/Portfolio';
 import Analytics from './views/Analytics';
 import Collaborate from './views/Collaborate';
+import { ModulizerDashboard, Phase1Dashboard, MassTimberDashboard } from './views/projects';
 
-type ViewType = 'dashboard' | 'map' | 'pitch' | 'portfolio' | 'analytics' | 'collaborate';
+type ViewType = 'dashboard' | 'map' | 'pitch' | 'portfolio' | 'analytics' | 'collaborate' | 'project-rb02' | 'project-rb05' | 'project-rb08';
 
 interface NavItem {
   id: ViewType;
@@ -118,17 +118,30 @@ function AppContent() {
   const renderView = () => {
     switch (activeView) {
       case 'dashboard':
-        return <Dashboard onNavigate={setActiveView} />;
+        return <Dashboard onNavigate={(view) => setActiveView(view as ViewType)} />;
       case 'map':
-        return <ResearchMap />;
+        return <ResearchMap onOpenProjectDashboard={(projectId) => {
+          if (projectId === 'X25-RB02') setActiveView('project-rb02');
+          if (projectId === 'X25-RB08') setActiveView('project-rb08');
+        }} />;
       case 'pitch':
         return <PitchSubmission />;
       case 'portfolio':
-        return <Portfolio />;
+        return <Portfolio onOpenProjectDashboard={(projectId) => {
+          if (projectId === 'X25-RB02') setActiveView('project-rb02');
+          else if (projectId === 'X25-RB05') setActiveView('project-rb05');
+          else if (projectId === 'X25-RB08') setActiveView('project-rb08');
+        }} />;
       case 'analytics':
         return <Analytics />;
       case 'collaborate':
         return <Collaborate />;
+      case 'project-rb02':
+        return <ModulizerDashboard onBack={() => setActiveView('portfolio')} />;
+      case 'project-rb05':
+        return <MassTimberDashboard onBack={() => setActiveView('portfolio')} />;
+      case 'project-rb08':
+        return <Phase1Dashboard onBack={() => setActiveView('portfolio')} />;
       default:
         return <ResearchMap />;
     }
