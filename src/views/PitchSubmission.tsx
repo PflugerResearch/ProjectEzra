@@ -6,13 +6,13 @@ import {
   Building,
   Target,
   Users,
-  Calendar,
   CheckCircle,
   Lightbulb,
   Sparkles,
   Send,
   AlertCircle
 } from 'lucide-react';
+import { ChatPanel } from '../components/Chat/ChatPanel';
 
 interface FormData {
   projectIdentification: string;
@@ -85,31 +85,30 @@ const PitchSubmission: React.FC = () => {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-2">Project Identification</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <h2 className="text-xl font-bold text-white mb-2">Project Identification</h2>
+              <p className="text-gray-400 mb-4 text-sm">
                 Identify the current or future project you want to explore
               </p>
               <textarea
                 value={formData.projectIdentification}
                 onChange={(e) => handleInputChange('projectIdentification', e.target.value)}
-                className="w-full p-4 border rounded-lg dark:bg-gray-800 dark:border-gray-700 h-32"
+                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
                 placeholder="E.g., Kennedy Elementary School renovation focusing on experiential learning spaces..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Research Category</label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <label className="block text-sm font-medium text-gray-300 mb-2">Research Category</label>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {categories.map(cat => (
                   <motion.button
                     key={cat}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => handleInputChange('category', cat)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
+                    className={`p-3 rounded-lg text-sm transition-all ${
                       formData.category === cat
-                        ? 'border-research-sky bg-research-sky/10'
-                        : 'border-gray-300 dark:border-gray-600 hover:border-research-sky/50'
+                        ? 'bg-white text-black'
+                        : 'bg-gray-800 text-gray-400 hover:text-white border border-gray-700'
                     }`}
                   >
                     {cat}
@@ -130,14 +129,14 @@ const PitchSubmission: React.FC = () => {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-2">Research Question</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <h2 className="text-xl font-bold text-white mb-2">Research Question</h2>
+              <p className="text-gray-400 mb-4 text-sm">
                 What is your research question under Experiential Learning?
               </p>
 
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-4">
-                <AlertCircle className="inline w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" />
-                <span className="text-sm text-blue-600 dark:text-blue-400">
+              <div className="bg-blue-900/30 border border-blue-800 p-3 rounded-lg mb-4">
+                <AlertCircle className="inline w-4 h-4 text-blue-400 mr-2" />
+                <span className="text-sm text-blue-400">
                   Frame your question as "How does X affect Y?" to ensure it's measurable and focused
                 </span>
               </div>
@@ -145,25 +144,25 @@ const PitchSubmission: React.FC = () => {
               <textarea
                 value={formData.researchQuestion}
                 onChange={(e) => handleInputChange('researchQuestion', e.target.value)}
-                className="w-full p-4 border rounded-lg dark:bg-gray-800 dark:border-gray-700 h-32"
+                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
                 placeholder="E.g., How does biophilic design in elementary classrooms affect student attention span and emotional regulation?"
               />
             </div>
 
-            <div className="p-6 bg-gradient-to-r from-research-sky/10 to-research-purple/10 rounded-lg">
-              <h3 className="font-semibold mb-2">Research Question Components</h3>
+            <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
+              <h3 className="font-medium text-white mb-3">Research Question Components</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span>Independent Variable (what you're changing)</span>
+                  <span className="text-gray-300">Independent Variable (what you're changing)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span>Dependent Variable (what you're measuring)</span>
+                  <span className="text-gray-300">Dependent Variable (what you're measuring)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span>Connection to Experiential Learning</span>
+                  <span className="text-gray-300">Connection to Experiential Learning</span>
                 </li>
               </ul>
             </div>
@@ -180,28 +179,28 @@ const PitchSubmission: React.FC = () => {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-2">Exploration Plan</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <h2 className="text-xl font-bold text-white mb-2">Exploration Plan</h2>
+              <p className="text-gray-400 mb-4 text-sm">
                 Describe your methodology, timeline, and resources needed
               </p>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Methodology</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Methodology</label>
                   <textarea
                     value={formData.explorationPlan}
                     onChange={(e) => handleInputChange('explorationPlan', e.target.value)}
-                    className="w-full p-4 border rounded-lg dark:bg-gray-800 dark:border-gray-700 h-24"
+                    className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-24 focus:outline-none focus:ring-1 focus:ring-white"
                     placeholder="E.g., Literature review of 5+ sources, post-occupancy evaluation survey, case study analysis..."
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Timeline</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Timeline</label>
                   <select
                     value={formData.timeline}
                     onChange={(e) => handleInputChange('timeline', e.target.value)}
-                    className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white"
                   >
                     <option value="">Select timeline</option>
                     <option value="simple">Simple & Quick (20-60 hours)</option>
@@ -211,12 +210,12 @@ const PitchSubmission: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Resources Needed</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Resources Needed</label>
                   <input
                     type="text"
                     value={formData.resources}
                     onChange={(e) => handleInputChange('resources', e.target.value)}
-                    className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-white"
                     placeholder="E.g., Survey tools, site visits, publication costs..."
                   />
                 </div>
@@ -235,20 +234,20 @@ const PitchSubmission: React.FC = () => {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-2">Partners & Support</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <h2 className="text-xl font-bold text-white mb-2">Partners & Support</h2>
+              <p className="text-gray-400 mb-4 text-sm">
                 Identify Pfluger partners and supporting sources
               </p>
 
               <textarea
                 value={formData.partners}
                 onChange={(e) => handleInputChange('partners', e.target.value)}
-                className="w-full p-4 border rounded-lg dark:bg-gray-800 dark:border-gray-700 h-32"
+                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
                 placeholder="E.g., Senior architects with K-12 expertise, UTSA faculty collaborators, Wood Works for mass timber research..."
               />
 
-              <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <p className="text-sm text-yellow-700 dark:text-yellow-400">
+              <div className="mt-4 p-3 bg-yellow-900/30 border border-yellow-800 rounded-lg">
+                <p className="text-sm text-yellow-400">
                   <Lightbulb className="inline w-4 h-4 mr-2" />
                   The GreenLight team can help identify partners if you don't have specific ones in mind
                 </p>
@@ -267,31 +266,33 @@ const PitchSubmission: React.FC = () => {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-2">Success Measurement</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <h2 className="text-xl font-bold text-white mb-2">Success Measurement</h2>
+              <p className="text-gray-400 mb-4 text-sm">
                 How will you measure success and demonstrate project integration?
               </p>
 
               <textarea
                 value={formData.successMeasurement}
                 onChange={(e) => handleInputChange('successMeasurement', e.target.value)}
-                className="w-full p-4 border rounded-lg dark:bg-gray-800 dark:border-gray-700 h-32"
+                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
                 placeholder="E.g., Publication in Texas Architect, integration into 2 active projects, 80% positive feedback from POE survey..."
               />
             </div>
 
-            <div className="p-6 bg-gradient-to-br from-research-olive/10 to-research-lime/10 rounded-lg">
-              <h3 className="font-semibold mb-3">Review Your Pitch</h3>
+            <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
+              <h3 className="font-medium text-white mb-3">Review Your Pitch</h3>
               <div className="space-y-2 text-sm">
                 <div>
-                  <span className="font-medium">Category:</span> {formData.category || 'Not selected'}
+                  <span className="font-medium text-gray-300">Category:</span>{' '}
+                  <span className="text-white">{formData.category || 'Not selected'}</span>
                 </div>
                 <div>
-                  <span className="font-medium">Timeline:</span> {formData.timeline || 'Not selected'}
+                  <span className="font-medium text-gray-300">Timeline:</span>{' '}
+                  <span className="text-white">{formData.timeline || 'Not selected'}</span>
                 </div>
                 <div>
-                  <span className="font-medium">Research Question:</span>
-                  <p className="mt-1 text-gray-600 dark:text-gray-400">
+                  <span className="font-medium text-gray-300">Research Question:</span>
+                  <p className="mt-1 text-gray-400">
                     {formData.researchQuestion || 'Not provided'}
                   </p>
                 </div>
@@ -306,112 +307,120 @@ const PitchSubmission: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="px-12 py-8">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-research-orange to-research-lime rounded-full mb-4">
-          <Sparkles className="w-8 h-8 text-white" />
-        </div>
-        <h1 className="text-3xl font-bold mb-2">Submit Research Pitch</h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Transform your research idea into architectural reality
-        </p>
-      </motion.div>
+      <div className="mb-8">
+        <h1 className="text-5xl font-bold text-white mb-2">Pitch</h1>
+        <p className="text-gray-400">Submit your research idea</p>
+      </div>
 
-      {/* Progress Steps */}
-      <div className="flex justify-between mb-8">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
-          const isActive = currentStep === step.number;
-          const isCompleted = currentStep > step.number;
+      <div className="flex gap-8">
+        {/* Left column - Form (2/3) */}
+        <div className="flex-1 lg:w-2/3">
+          {/* Progress Steps */}
+          <div className="flex justify-between mb-8">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isActive = currentStep === step.number;
+              const isCompleted = currentStep > step.number;
 
-          return (
-            <div key={step.number} className="flex items-center flex-1">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-all ${
-                  isActive
-                    ? 'bg-gradient-to-br from-research-sky to-research-blue shadow-lg'
-                    : isCompleted
-                    ? 'bg-green-500'
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
+              return (
+                <div key={step.number} className="flex items-center flex-1">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all ${
+                      isActive
+                        ? 'bg-white'
+                        : isCompleted
+                        ? 'bg-green-500'
+                        : 'bg-gray-700'
+                    }`}
+                  >
+                    {isCompleted ? (
+                      <CheckCircle className="w-5 h-5 text-white" />
+                    ) : (
+                      <Icon className={`w-5 h-5 ${isActive ? 'text-black' : 'text-gray-500'}`} />
+                    )}
+                  </motion.div>
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`flex-1 h-0.5 mx-2 transition-all ${
+                        currentStep > step.number ? 'bg-green-500' : 'bg-gray-700'
+                      }`}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Step Title */}
+          <div className="mb-6">
+            <p className="text-sm text-gray-500">
+              Step {currentStep} of {steps.length}
+            </p>
+            <h2 className="text-xl font-semibold text-white">{steps[currentStep - 1].title}</h2>
+          </div>
+
+          {/* Form Content */}
+          <div className="bg-card border border-card rounded-xl p-6 mb-6">
+            <AnimatePresence mode="wait">
+              {renderStepContent()}
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex justify-between">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handlePrevious}
+              disabled={currentStep === 1}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                currentStep === 1
+                  ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                  : 'bg-gray-800 text-white hover:bg-gray-700'
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4" />
+              Previous
+            </motion.button>
+
+            {currentStep === steps.length ? (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleSubmit}
+                className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium"
               >
-                {isCompleted ? (
-                  <CheckCircle className="w-6 h-6 text-white" />
-                ) : (
-                  <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-500'}`} />
-                )}
-              </motion.div>
-              {index < steps.length - 1 && (
-                <div
-                  className={`flex-1 h-1 mx-2 transition-all ${
-                    currentStep > step.number ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
-                  }`}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
+                Submit Pitch
+                <Send className="w-4 h-4" />
+              </motion.button>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleNext}
+                className="flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-lg text-sm font-medium"
+              >
+                Next
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            )}
+          </div>
+        </div>
 
-      {/* Step Title */}
-      <div className="text-center mb-6">
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          Step {currentStep} of {steps.length}
-        </p>
-        <h2 className="text-xl font-semibold">{steps[currentStep - 1].title}</h2>
-      </div>
-
-      {/* Form Content */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-6">
-        <AnimatePresence mode="wait">
-          {renderStepContent()}
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className="flex justify-between">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handlePrevious}
-          disabled={currentStep === 1}
-          className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-            currentStep === 1
-              ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
-              : 'bg-white dark:bg-gray-800 hover:shadow-lg'
-          }`}
-        >
-          <ChevronLeft className="w-5 h-5" />
-          Previous
-        </motion.button>
-
-        {currentStep === steps.length ? (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleSubmit}
-            className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-research-sky to-research-blue text-white rounded-lg font-medium shadow-lg"
-          >
-            Submit Pitch
-            <Send className="w-5 h-5" />
-          </motion.button>
-        ) : (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleNext}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-research-sky to-research-blue text-white rounded-lg font-medium shadow-lg"
-          >
-            Next
-            <ChevronRight className="w-5 h-5" />
-          </motion.button>
-        )}
+        {/* Right column - Chat (1/3) - stays fixed */}
+        <div className="hidden lg:block lg:w-1/3 shrink-0">
+          <div className="fixed top-24 right-12 w-[calc((100vw-6rem-2rem)*0.333)] h-[calc(100vh-120px)]">
+            <ChatPanel
+              title="Ask"
+              subtitle="Pitch assistant"
+              placeholder="Ask about research ideas..."
+              initialMessage="Hello! I can help you develop your research pitch. What's the topic you're exploring?"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
