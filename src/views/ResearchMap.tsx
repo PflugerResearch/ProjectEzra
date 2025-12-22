@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Layers, X, Calendar, BarChart3, ExternalLink } from 'lucide-react';
+import { Search, X, Calendar, BarChart3, ExternalLink, MapPin } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
 import { useProjects } from '../context/ProjectsContext';
 import type { ResearchProject } from '../data/loadProjects';
@@ -24,7 +24,6 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
   const markers = useRef<mapboxgl.Marker[]>([]);
   const initialized = useRef(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedProject, setSelectedProject] = useState<ResearchProject | null>(null);
 
   // Extract category colors from theme
@@ -32,6 +31,30 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
     acc[key] = value.color;
     return acc;
   }, {} as Record<string, string>);
+
+  // Group projects by office
+  const projectsByOffice = useMemo(() => {
+    const filtered = researchProjects.filter(project => {
+      const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           project.researcher.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesSearch;
+    });
+
+    const grouped: Record<string, ResearchProject[]> = {};
+    filtered.forEach(project => {
+      const office = project.office || 'Other';
+      if (!grouped[office]) grouped[office] = [];
+      grouped[office].push(project);
+    });
+
+    // Sort offices alphabetically
+    const sorted: Record<string, ResearchProject[]> = {};
+    Object.keys(grouped).sort().forEach(key => {
+      sorted[key] = grouped[key];
+    });
+
+    return sorted;
+  }, [researchProjects, searchTerm]);
 
   useEffect(() => {
     if (!mapContainer.current || initialized.current || loading) return;
@@ -98,7 +121,7 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
       }).setHTML(`
         <div style="text-align: center; padding: 4px;">
           <strong style="color: ${color};">
-            ${isConfidential ? '🔒 CONFIDENTIAL' : project.title}
+            ${isConfidential ? 'CONFIDENTIAL' : project.title}
           </strong><br/>
           <span style="font-size: 11px; color: #999;">${project.id}</span>
         </div>
@@ -125,33 +148,30 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
     };
   }, [researchProjects, categoryColors, componentThemes]);
 
-  const filteredProjects = researchProjects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.researcher.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
   return (
-    <div className="relative h-[calc(100vh-6rem)] rounded-xl overflow-hidden">
+    <div className="relative h-[calc(100vh-5rem)]">
       {/* Map Container */}
       <div ref={mapContainer} className="absolute inset-0 z-0" />
 
-      {/* Sidebar */}
+      {/* Floating Glassmorphism Sidebar */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="absolute top-0 left-0 bottom-0 z-10 bg-dark-card/95 backdrop-blur-xl border-r border-neon-red-500/20 shadow-2xl w-80 flex flex-col"
+        className="absolute top-6 left-6 bottom-6 z-10 w-80 flex flex-col rounded-2xl overflow-hidden"
+        style={{
+          background: 'rgba(24, 16, 25, 0.85)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
+        }}
       >
         {/* Header */}
-        <div className="p-4 border-b border-neon-red-500/20">
-          <h2 className="text-lg font-bold text-white">Research Campus</h2>
-          <p className="text-xs text-gray-500 mt-1">3D Interactive Map</p>
+        <div className="p-5">
+          <h2 className="text-xl font-bold text-white">Research Campus</h2>
+          <p className="text-sm text-gray-500 mt-1">Projects by office</p>
         </div>
 
-        {/* Search and Filter */}
-        <div className="p-4 space-y-4 border-b border-neon-red-500/20">
-          {/* Search Input */}
+        {/* Search */}
+        <div className="px-5 pb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
             <input
@@ -159,93 +179,51 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-3 py-2 rounded-lg border border-dark-border bg-dark-bg text-white placeholder:text-gray-500 focus:border-neon-red-500/50 focus:outline-none"
+              className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-white/20 focus:outline-none transition-colors"
             />
           </div>
-
-          {/* Category Filter */}
-          <div>
-            <label className="text-sm font-medium text-gray-400 mb-1 block uppercase tracking-wide">
-              Filter by Category
-            </label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-dark-border bg-dark-bg text-white focus:border-neon-red-500/50 focus:outline-none"
-            >
-              <option value="all">All Categories</option>
-              <option value="psychology">Psychology</option>
-              <option value="health-safety">Health & Safety</option>
-              <option value="sustainability">Sustainability</option>
-              <option value="immersive">Immersive Learning</option>
-              <option value="campus-life">Campus Life</option>
-              <option value="fine-arts">Fine Arts</option>
-            </select>
-          </div>
         </div>
 
-        {/* Project List */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="divide-y divide-dark-border/30">
-            {filteredProjects.map(project => {
-              const isConfidential = ['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(project.id);
-              const markerColor = isConfidential ? '#666666' : categoryColors[project.category];
-              return (
-                <motion.div
-                  key={project.id}
-                  whileHover={{ backgroundColor: 'rgba(255, 59, 74, 0.05)' }}
-                  className="px-4 py-3 cursor-pointer transition-all group"
-                  onClick={() => {
-                    setSelectedProject(project);
-                    map.current?.flyTo({
-                      center: [project.position[1], project.position[0]],
-                      zoom: 11,
-                      pitch: 45,
-                      duration: 2000
-                    });
-                  }}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      {isConfidential && (
-                        <span className="text-xs text-gray-500 mb-1 block">🔒 CONFIDENTIAL</span>
-                      )}
-                      <h3 className={`font-semibold text-sm group-hover:text-neon-red-500 transition-colors ${
-                        isConfidential ? 'text-gray-400' : 'text-white'
-                      }`}>
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-gray-500">{project.researcher}</p>
-                    </div>
-                    <div
-                      className="w-3 h-3 rounded-full flex-shrink-0 mt-1"
-                      style={{
-                        backgroundColor: markerColor,
-                        boxShadow: 'inset 0 -1px 2px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.1)'
-                      }}
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+        {/* Project List by Office */}
+        <div className="flex-1 overflow-y-auto px-5 pb-5">
+          <div className="space-y-6">
+            {Object.entries(projectsByOffice).map(([office, projects]) => (
+              <div key={office}>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-3">{office}</p>
+                <div className="space-y-2">
+                  {projects.map(project => {
+                    const isConfidential = ['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(project.id);
+                    const markerColor = isConfidential ? '#666666' : categoryColors[project.category];
 
-        {/* Legend */}
-        <div className="border-t border-neon-red-500/20 p-4 bg-dark-card/95">
-          <h3 className="text-sm font-bold mb-3 flex items-center gap-2 text-white">
-            <Layers className="w-4 h-4 text-neon-red-500" />
-            Map Legend
-          </h3>
-          <div className="space-y-2">
-            <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Categories</p>
-            {Object.entries(categoryColors).map(([category, color]) => (
-              <div key={category} className="flex items-center gap-2 text-xs text-gray-400">
-                <div
-                  className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: color }}
-                />
-                <span className="capitalize">{category.replace('-', ' ')}</span>
+                    return (
+                      <motion.div
+                        key={project.id}
+                        whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                        className="flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all"
+                        onClick={() => {
+                          setSelectedProject(project);
+                          map.current?.flyTo({
+                            center: [project.position[1], project.position[0]],
+                            zoom: 11,
+                            pitch: 45,
+                            duration: 2000
+                          });
+                        }}
+                      >
+                        <div
+                          className="w-3 h-3 rounded-full shrink-0"
+                          style={{ backgroundColor: markerColor }}
+                        />
+                        <div className="min-w-0">
+                          <p className={`text-sm font-medium truncate ${isConfidential ? 'text-gray-500' : 'text-white'}`}>
+                            {isConfidential ? 'Confidential' : project.title}
+                          </p>
+                          <p className="text-xs text-gray-500 truncate">{project.researcher}</p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             ))}
           </div>
@@ -256,29 +234,24 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            initial={{ x: -400 }}
-            animate={{ x: 0 }}
-            exit={{ x: -400 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className={`absolute left-0 top-0 bottom-0 z-20 w-96 bg-dark-card/95 backdrop-blur-xl shadow-2xl overflow-y-auto ${
-              ['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(selectedProject.id)
-                ? 'border-r-2 border-gray-600/50'
-                : 'border-r border-neon-red-500/20'
-            }`}
+            className="absolute top-6 left-[22rem] bottom-6 z-20 w-96 rounded-2xl overflow-hidden"
+            style={{
+              background: 'rgba(24, 16, 25, 0.9)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
           >
             {/* Header */}
-            <div className={`sticky top-0 bg-dark-card/95 backdrop-blur-xl p-4 flex items-start justify-between ${
-              ['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(selectedProject.id)
-                ? 'border-b-2 border-gray-600/50'
-                : 'border-b border-neon-red-500/20'
-            }`}>
-              <div className="flex-1">
+            <div className="p-5 flex items-start justify-between border-b border-white/10">
+              <div className="flex-1 min-w-0">
                 {['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(selectedProject.id) && (
-                  <div className="flex items-center gap-2 mb-2 text-gray-400">
-                    <span className="text-xs uppercase tracking-wider">🔒 Confidential</span>
-                  </div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Confidential</p>
                 )}
-                <h2 className={`text-xl font-bold mb-1 ${
+                <h2 className={`text-xl font-bold truncate ${
                   ['X25-RB09', 'X25-RB10', 'X25-RB11'].includes(selectedProject.id)
                     ? 'text-gray-400'
                     : 'text-white'
@@ -287,48 +260,56 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-2 hover:bg-neon-red-500/20 rounded-lg transition-colors text-gray-400 hover:text-white"
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-5 space-y-5 overflow-y-auto max-h-[calc(100%-5rem)]">
               {/* Researcher */}
               <div>
-                <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-2">Researcher</h3>
-                <p className="text-white font-medium">{selectedProject.researcher}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Researcher</p>
+                <p className="text-white">{selectedProject.researcher}</p>
               </div>
+
+              {/* Office */}
+              {selectedProject.office && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-gray-500" />
+                  <p className="text-sm text-gray-400">{selectedProject.office}</p>
+                </div>
+              )}
 
               {/* Phase */}
               <div>
-                <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-2">Phase</h3>
-                <span className="inline-block px-3 py-1 bg-neon-red-500/10 border border-neon-red-500/20 rounded-full text-sm text-neon-red-500">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Phase</p>
+                <span className="inline-block px-3 py-1 bg-white/10 rounded-full text-sm text-white">
                   {selectedProject.phase}
                 </span>
               </div>
 
               {/* Description */}
               <div>
-                <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-2">Description</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">{selectedProject.description}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Description</p>
+                <p className="text-sm text-gray-300 leading-relaxed">{selectedProject.description}</p>
               </div>
 
               {/* Timeline */}
               {(selectedProject.startDate || selectedProject.completionDate) && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-3">Timeline</h3>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Timeline</p>
                   <div className="space-y-2">
                     {selectedProject.startDate && (
                       <div className="flex items-center gap-2 text-sm">
-                        <Calendar className="w-4 h-4 text-neon-red-500" />
+                        <Calendar className="w-4 h-4 text-gray-500" />
                         <span className="text-gray-400">Started:</span>
                         <span className="text-white">{selectedProject.startDate}</span>
                       </div>
                     )}
                     {selectedProject.completionDate && (
                       <div className="flex items-center gap-2 text-sm">
-                        <Calendar className="w-4 h-4 text-neon-red-400" />
+                        <Calendar className="w-4 h-4 text-gray-500" />
                         <span className="text-gray-400">Completed:</span>
                         <span className="text-white">{selectedProject.completionDate}</span>
                       </div>
@@ -340,12 +321,12 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
               {/* Partners */}
               {selectedProject.partners && selectedProject.partners.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-gray-500 mb-3">Research Partners</h3>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Partners</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.partners.map(partner => (
                       <span
                         key={partner}
-                        className="px-3 py-1 bg-neon-red-500/10 border border-neon-red-500/20 text-neon-red-500 rounded-full text-sm"
+                        className="px-3 py-1 bg-white/10 text-sm text-gray-300 rounded-full"
                       >
                         {partner}
                       </span>
@@ -354,17 +335,17 @@ const ResearchMap: React.FC<ResearchMapProps> = ({ onOpenProjectDashboard }) => 
                 </div>
               )}
 
-              {/* View Dashboard Button - Only for projects with dashboards */}
+              {/* View Dashboard Button */}
               {PROJECTS_WITH_DASHBOARDS.includes(selectedProject.id) && onOpenProjectDashboard && (
                 <motion.button
                   onClick={() => onOpenProjectDashboard(selectedProject.id)}
-                  className="w-full mt-4 py-3 px-4 bg-gradient-to-r from-neon-red-500 to-neon-red-600 hover:from-neon-red-600 hover:to-neon-red-700 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-neon-red-500/25"
+                  className="w-full py-3 px-4 bg-white text-black font-medium rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <BarChart3 className="w-5 h-5" />
-                  View Interactive Dashboard
-                  <ExternalLink className="w-4 h-4 ml-1" />
+                  View Dashboard
+                  <ExternalLink className="w-4 h-4" />
                 </motion.button>
               )}
             </div>

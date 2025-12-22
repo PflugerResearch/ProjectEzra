@@ -12,6 +12,7 @@ export interface ResearchProject {
   startDate?: string;
   completionDate?: string;
   image?: string;
+  office?: string;
 }
 
 interface CSVRow {
@@ -26,6 +27,7 @@ interface CSVRow {
   partners: string;
   startDate: string;
   completionDate: string;
+  office: string;
 }
 
 export async function loadProjects(): Promise<ResearchProject[]> {
@@ -56,7 +58,8 @@ export async function loadProjects(): Promise<ResearchProject[]> {
               startDate: row.startDate || undefined,
               completionDate: row.completionDate || undefined,
               // Generate placeholder image based on category
-              image: `https://images.unsplash.com/photo-${getCategoryImageId(row.category)}?w=800`
+              image: `https://images.unsplash.com/photo-${getCategoryImageId(row.category)}?w=800`,
+              office: row.office || undefined
             };
           });
 
