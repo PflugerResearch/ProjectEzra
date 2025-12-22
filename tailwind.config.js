@@ -37,10 +37,10 @@ export default {
         },
         'neon-glow': '#00A9E0',  // Sky Blue
 
-        // Dark theme colors (Material Design recommended)
-        'dark-bg': '#121212',
-        'dark-card': '#1e1e1e',
-        'dark-border': '#2a2a2a',
+        // Dark theme colors (Custom purple/plum)
+        'dark-bg': '#181019',
+        'dark-card': '#221a28',
+        'dark-border': '#2d2435',
 
         // Semantic colors
         border: "hsl(var(--border))",
@@ -83,7 +83,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'system-ui', 'sans-serif'],
+        display: ['"SF Pro Display"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        text: ['"SF Pro Text"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        mono: ['"SF Mono"', 'ui-monospace', 'Menlo', 'Monaco', '"Cascadia Code"', '"Courier New"', 'monospace'],
       },
       keyframes: {
         "accordion-down": {

@@ -167,11 +167,11 @@ export const STATUS_COLORS = {
   }
 }
 
-// Dark theme configuration (Material Design recommended)
+// Dark theme configuration (Custom dark purple/plum)
 export const DARK_THEME = {
-  background: '#121212',  // Material Design dark surface
-  card: '#1e1e1e',
-  border: '#2a2a2a',
+  background: '#181019',  // Deep purple/plum dark surface
+  card: '#221a28',        // Slightly lighter purple for cards
+  border: '#2d2435',      // Purple-tinted border
   text: {
     primary: APP_COLORS.primary.white,
     secondary: APP_COLORS.primary.lightGray,
@@ -232,6 +232,50 @@ export const colorUtils = {
   }
 }
 
+// Typography - SF Pro Font Stack
+export const TYPOGRAPHY = {
+  fontFamily: {
+    // SF Pro stack with fallbacks for different platforms
+    sans: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, -apple-system, sans-serif',
+    // Display font for headings (SF Pro Display)
+    display: '"SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    // Text font for body (SF Pro Text)
+    text: '"SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    // Monospace for code
+    mono: '"SF Mono", ui-monospace, Menlo, Monaco, "Cascadia Code", "Courier New", monospace'
+  },
+  fontSize: {
+    xs: '0.75rem',      // 12px
+    sm: '0.875rem',     // 14px
+    base: '1rem',       // 16px
+    lg: '1.125rem',     // 18px
+    xl: '1.25rem',      // 20px
+    '2xl': '1.5rem',    // 24px
+    '3xl': '1.875rem',  // 30px
+    '4xl': '2.25rem',   // 36px
+    '5xl': '3rem',      // 48px
+    '6xl': '3.75rem',   // 60px
+  },
+  fontWeight: {
+    light: 300,
+    regular: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    heavy: 800,
+  },
+  lineHeight: {
+    tight: 1.2,
+    normal: 1.5,
+    relaxed: 1.75,
+  },
+  letterSpacing: {
+    tight: '-0.02em',
+    normal: '0',
+    wide: '0.02em',
+  }
+}
+
 // Theme context
 type ThemeContextType = {
   colors: typeof APP_COLORS
@@ -239,6 +283,7 @@ type ThemeContextType = {
   statusColors: typeof STATUS_COLORS
   darkTheme: typeof DARK_THEME
   componentThemes: typeof COMPONENT_THEMES
+  typography: typeof TYPOGRAPHY
   utils: typeof colorUtils
   getResearchCategoryColor: typeof getResearchCategoryColor
   getResearchCategoryIcon: typeof getResearchCategoryIcon
@@ -283,6 +328,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       statusColors: STATUS_COLORS,
       darkTheme: DARK_THEME,
       componentThemes: COMPONENT_THEMES,
+      typography: TYPOGRAPHY,
       utils: colorUtils,
       getResearchCategoryColor,
       getResearchCategoryIcon,

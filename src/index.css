@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    /* Dark mode by default with neon red accent */
-    --background: 0 0% 7%;
+    /* Dark purple/plum theme */
+    --background: 293 22% 8%;        /* #181019 - Deep purple background */
     --foreground: 0 0% 95%;
-    --card: 0 0% 10%;
+    --card: 274 21% 13%;              /* #221a28 - Slightly lighter purple */
     --card-foreground: 0 0% 95%;
-    --popover: 0 0% 10%;
+    --popover: 274 21% 13%;
     --popover-foreground: 0 0% 95%;
     --primary: 0 84% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 15%;
+    --secondary: 272 19% 17%;         /* #2d2435 - Purple-tinted secondary */
     --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 20%;
+    --muted: 270 15% 20%;
     --muted-foreground: 0 0% 60%;
     --accent: 0 84% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
+    --border: 272 19% 17%;            /* #2d2435 - Purple-tinted borders */
+    --input: 274 21% 13%;
     --ring: 0 84% 60%;
     --radius: 0.75rem;
 
@@ -39,7 +39,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
