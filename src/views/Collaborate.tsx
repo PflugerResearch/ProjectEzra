@@ -45,7 +45,7 @@ const Collaborate: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="mb-12"
       >
-        <h1 className="text-5xl font-bold text-white mb-2">Connect</h1>
+        <h1 className="text-5xl font-bold text-white mb-2">Let's Connect</h1>
         <p className="text-gray-400">
           Interested in partnering on research or learning more about our work?
         </p>
@@ -60,8 +60,6 @@ const Collaborate: React.FC = () => {
           className="lg:col-span-2"
         >
           <div>
-            <h2 className="text-2xl font-bold text-white mb-8">Get in Touch</h2>
-
             {isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -180,11 +178,31 @@ const Collaborate: React.FC = () => {
           transition={{ delay: 0.2 }}
           className="space-y-12"
         >
-          {/* Research & Benchmarking */}
+          {/* Partnership Opportunities */}
           <div>
             <h2 className="text-xl font-bold text-white mb-4">
-              Research & Benchmarking
+              Partnership Opportunities
             </h2>
+            <ul className="space-y-2">
+              {partnershipItems.map((item, index) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + index * 0.05 }}
+                  className="text-sm text-gray-400"
+                >
+                  {item}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Research & Benchmarking */}
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4">
+              Research & Benchmarking
+            </h3>
             <p className="text-gray-400 text-sm mb-6">
               Our team explores innovative approaches to educational architecture,
               focusing on student well-being, sustainability, and learning outcomes.
@@ -211,26 +229,6 @@ const Collaborate: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
-
-          {/* Partnership Opportunities */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">
-              Partnership Opportunities
-            </h3>
-            <ul className="space-y-2">
-              {partnershipItems.map((item, index) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + index * 0.05 }}
-                  className="text-sm text-gray-400"
-                >
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
           </div>
         </motion.div>
       </div>
