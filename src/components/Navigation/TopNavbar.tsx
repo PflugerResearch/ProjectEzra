@@ -125,13 +125,13 @@ const NAV_SECTIONS: NavSection[] = [
   }
 ];
 
-const DASHBOARD_SECTION: NavSection = {
-  id: 'dashboard',
-  label: 'dashboard',
-  view: 'dashboard',
+const REPO_SECTION: NavSection = {
+  id: 'the-repo',
+  label: 'the repo',
+  view: 'the-repo',
   subItems: [
     { label: 'The Repo', view: 'the-repo' },
-    'My Projects',
+    'My Research',
     { label: 'Schedule', view: 'schedule' },
     { label: 'Contacts', view: 'contacts' }
   ]
@@ -150,7 +150,7 @@ export function TopNavbar({ onNavigate, onLogoClick }: TopNavbarProps) {
   };
 
   const visibleSections = isAuthenticated
-    ? [...NAV_SECTIONS.slice(0, 2), DASHBOARD_SECTION, ...NAV_SECTIONS.slice(2)]
+    ? [...NAV_SECTIONS.slice(0, 2), REPO_SECTION, ...NAV_SECTIONS.slice(2)]
     : NAV_SECTIONS.filter(s => s.id !== 'pitch');
 
   const isExpanded = hoveredId !== null;
