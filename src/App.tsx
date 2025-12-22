@@ -17,6 +17,11 @@ import PitchSubmission from './views/PitchSubmission';
 import Portfolio from './views/Portfolio';
 import Analytics from './views/Analytics';
 import Collaborate from './views/Collaborate';
+import AboutRB from './views/AboutRB';
+import AboutProcess from './views/AboutProcess';
+import AboutAI from './views/AboutAI';
+import AboutTools from './views/AboutTools';
+import AboutSources from './views/AboutSources';
 import { ModulizerDashboard, Phase1Dashboard, MassTimberDashboard } from './views/projects';
 
 function AppContent() {
@@ -41,6 +46,10 @@ function AppContent() {
         }} />;
       case 'pitch':
         return <PitchSubmission />;
+      case 'pitch-list':
+        return <PitchSubmission initialViewMode="my-pitches" />;
+      case 'pitch-new':
+        return <PitchSubmission initialViewMode="new" />;
       case 'portfolio':
         return <Portfolio onOpenProjectDashboard={(id) => {
           if (id === 'X25-RB02') setView('project-rb02');
@@ -51,6 +60,17 @@ function AppContent() {
         return <Analytics />;
       case 'collaborate':
         return <Collaborate />;
+      case 'about':
+      case 'about-rb':
+        return <AboutRB />;
+      case 'about-process':
+        return <AboutProcess />;
+      case 'about-ai':
+        return <AboutAI />;
+      case 'about-tools':
+        return <AboutTools />;
+      case 'about-sources':
+        return <AboutSources />;
       case 'project-rb02':
         return <ModulizerDashboard onBack={() => setView('portfolio')} />;
       case 'project-rb05':

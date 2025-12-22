@@ -11,9 +11,17 @@ export type ViewType =
   | 'contacts'
   | 'map'
   | 'pitch'
+  | 'pitch-list'
+  | 'pitch-new'
   | 'portfolio'
   | 'analytics'
   | 'collaborate'
+  | 'about'
+  | 'about-rb'
+  | 'about-process'
+  | 'about-ai'
+  | 'about-tools'
+  | 'about-sources'
   | 'project-rb02'
   | 'project-rb05'
   | 'project-rb08';
@@ -21,6 +29,7 @@ export type ViewType =
 interface SubItem {
   label: string;
   view?: ViewType;
+  href?: string;
 }
 
 interface NavSection {
@@ -35,6 +44,42 @@ interface TopNavbarProps {
   onLogoClick: () => void;
 }
 
+// Work items organized by year
+const WORK_BY_YEAR = [
+  {
+    year: '2024',
+    projects: [
+      { id: 'X24-RB01', title: 'Sanctuary Spaces' }
+    ]
+  },
+  {
+    year: '2025',
+    projects: [
+      { id: 'X25-RB01', title: 'Sanctuary Spaces' },
+      { id: 'X25-RB02', title: 'Modulizer' },
+      { id: 'X25-RB03', title: 'Material Studies' },
+      { id: 'X25-RB05', title: 'Mass Timber' },
+      { id: 'X25-RB08', title: 'Phase 1' }
+    ]
+  },
+  {
+    year: '2026',
+    projects: [
+      { id: 'X26-RB01', title: 'Future Research' }
+    ]
+  }
+];
+
+const EXPLORE_ITEMS = [
+  'Mass Timber',
+  'Immersive Learning',
+  'Post Occ',
+  'Tech',
+  'Artificial Intelligence',
+  'Region Intelligence',
+  'ArchVis'
+];
+
 const NAV_SECTIONS: NavSection[] = [
   {
     id: 'campus',
@@ -43,36 +88,40 @@ const NAV_SECTIONS: NavSection[] = [
     subItems: ['austin', 'san antonio', 'dallas', 'houston', 'corpus christi']
   },
   {
-    id: 'work',
-    label: 'work',
+    id: 'explore',
+    label: 'explore',
     view: 'portfolio',
-    subItems: ['2025', '2026']
+    subItems: [] // Special handling for this section
   },
   {
     id: 'pitch',
     label: 'pitch',
     view: 'pitch',
-    subItems: ['Lets GO!']
-  },
-  {
-    id: 'explore',
-    label: 'explore',
-    view: 'project-rb02',
     subItems: [
-      'Mass Timber',
-      'Immersive Learning',
-      'Post Occ',
-      'Tech',
-      'Artificial Intelligence',
-      'Region Intelligence',
-      'ArchVis'
+      { label: "Let's Pitch!", view: 'pitch-new' },
+      { label: 'My Pitches', view: 'pitch-list' }
     ]
   },
   {
     id: 'connect',
     label: 'connect',
     view: 'collaborate',
-    subItems: ['research', 'work', 'confidential']
+    subItems: [
+      { label: 'research', view: 'collaborate' },
+      { label: 'work', href: 'https://pflugerarchitects.com' }
+    ]
+  },
+  {
+    id: 'about',
+    label: 'about',
+    view: 'about',
+    subItems: [
+      { label: 'Research & Benchmarking', view: 'about-rb' },
+      { label: 'Our Process', view: 'about-process' },
+      { label: 'Our Tools', view: 'about-tools' },
+      { label: 'Use of AI', view: 'about-ai' },
+      { label: 'Sources & Citations', view: 'about-sources' }
+    ]
   }
 ];
 
@@ -192,32 +241,106 @@ export function TopNavbar({ onNavigate, onLogoClick }: TopNavbarProps) {
               className="overflow-hidden border-t border-card"
             >
               <div className="px-12 py-8">
-                {/* Section title */}
-                <p className="text-xs text-gray-500 mb-4 tracking-wide">
-                  {activeSection.label}
-                </p>
+                {/* Special two-column layout for explore */}
+                {activeSection.id === 'explore' ? (
+                  <div className="flex gap-24">
+                    {/* Left column - Explore items (big bold) */}
+                    <div className="w-80">
+                      <p className="text-xs text-gray-500 mb-4 tracking-wide">explore</p>
+                      <div className="flex flex-col gap-1">
+                        {EXPLORE_ITEMS.map((item, i) => (
+                          <motion.button
+                            key={item}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.03 }}
+                            onClick={() => onNavigate('portfolio')}
+                            className="text-2xl font-bold text-white hover:text-gray-300 transition-colors text-left py-1"
+                          >
+                            {item}
+                          </motion.button>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Big bold items */}
-                <div className="flex flex-col gap-1">
-                  {activeSection.subItems.map((item, i) => {
-                    const isSubItem = typeof item === 'object';
-                    const label = isSubItem ? item.label : item;
-                    const targetView = isSubItem && item.view ? item.view : activeSection.view;
+                    {/* Right column - Work by year */}
+                    <div className="flex-1">
+                      <p className="text-xs text-gray-500 mb-4 tracking-wide">work</p>
+                      <div className="space-y-4">
+                        {WORK_BY_YEAR.map((yearGroup, yi) => (
+                          <motion.div
+                            key={yearGroup.year}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: yi * 0.05 }}
+                          >
+                            <p className="text-sm text-gray-400 mb-1">{yearGroup.year}</p>
+                            <div className="space-y-0.5 pl-3 border-l border-gray-700">
+                              {yearGroup.projects.map((project) => (
+                                <button
+                                  key={project.id}
+                                  onClick={() => onNavigate('portfolio')}
+                                  className="block text-sm text-gray-400 hover:text-white transition-colors py-0.5"
+                                >
+                                  <span className="text-gray-600">{project.id}</span>
+                                  <span className="mx-2">-</span>
+                                  <span>{project.title}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {/* Section title */}
+                    <p className="text-xs text-gray-500 mb-4 tracking-wide">
+                      {activeSection.label}
+                    </p>
 
-                    return (
-                      <motion.button
-                        key={label}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.03 }}
-                        onClick={() => onNavigate(targetView)}
-                        className="text-2xl font-bold text-white hover:text-gray-300 transition-colors text-left py-1"
-                      >
-                        {label}
-                      </motion.button>
-                    );
-                  })}
-                </div>
+                    {/* Big bold items */}
+                    <div className="flex flex-col gap-1">
+                      {activeSection.subItems.map((item, i) => {
+                        const isSubItem = typeof item === 'object';
+                        const label = isSubItem ? item.label : item;
+                        const targetView = isSubItem && item.view ? item.view : activeSection.view;
+                        const href = isSubItem ? item.href : undefined;
+
+                        if (href) {
+                          return (
+                            <motion.a
+                              key={label}
+                              href={href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.03 }}
+                              className="text-2xl font-bold text-white hover:text-gray-300 transition-colors text-left py-1"
+                            >
+                              {label}
+                            </motion.a>
+                          );
+                        }
+
+                        return (
+                          <motion.button
+                            key={label}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.03 }}
+                            onClick={() => onNavigate(targetView)}
+                            className="text-2xl font-bold text-white hover:text-gray-300 transition-colors text-left py-1"
+                          >
+                            {label}
+                          </motion.button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           )}

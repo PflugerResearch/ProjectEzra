@@ -8,9 +8,12 @@ import {
   Users,
   CheckCircle,
   Lightbulb,
-  Sparkles,
   Send,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  MessageSquare,
+  Edit3,
+  Zap
 } from 'lucide-react';
 import { ChatPanel } from '../components/Chat/ChatPanel';
 
@@ -25,7 +28,69 @@ interface FormData {
   resources: string;
 }
 
-const PitchSubmission: React.FC = () => {
+type PitchStatus = 'pending' | 'revise' | 'greenlit';
+
+interface ReviewComment {
+  author: string;
+  date: string;
+  message: string;
+  isReviewer: boolean;
+}
+
+interface SubmittedPitch {
+  id: string;
+  title: string;
+  category: string;
+  submittedDate: string;
+  status: PitchStatus;
+  comments: ReviewComment[];
+}
+
+const MY_PITCHES: SubmittedPitch[] = [
+  {
+    id: 'P-2025-001',
+    title: 'Biophilic Design Impact on Student Focus',
+    category: 'Psychology',
+    submittedDate: '2025-01-15',
+    status: 'greenlit',
+    comments: [
+      { author: 'GreenLight Team', date: '2025-01-18', message: 'Great research question! We love the focus on measurable outcomes. Green Lit!', isReviewer: true }
+    ]
+  },
+  {
+    id: 'P-2025-002',
+    title: 'Mass Timber Acoustic Performance',
+    category: 'Sustainability',
+    submittedDate: '2025-02-01',
+    status: 'revise',
+    comments: [
+      { author: 'GreenLight Team', date: '2025-02-05', message: 'Interesting topic! Can you clarify the measurement methodology? How will you collect acoustic data?', isReviewer: true },
+      { author: 'You', date: '2025-02-07', message: 'Updated methodology to include SPL measurements at 5 locations per space, pre and post occupancy.', isReviewer: false }
+    ]
+  },
+  {
+    id: 'P-2025-003',
+    title: 'Wayfinding in K-12 Campuses',
+    category: 'Campus Life',
+    submittedDate: '2025-02-10',
+    status: 'pending',
+    comments: []
+  }
+];
+
+const STATUS_CONFIG = {
+  pending: { label: 'Pending Review', color: 'text-yellow-400', bg: 'bg-yellow-900/30', border: 'border-yellow-800', icon: Clock },
+  revise: { label: 'Revise & Resubmit', color: 'text-blue-400', bg: 'bg-blue-900/30', border: 'border-blue-800', icon: Edit3 },
+  greenlit: { label: 'Green Lit!', color: 'text-green-400', bg: 'bg-green-900/30', border: 'border-green-800', icon: Zap }
+};
+
+interface PitchSubmissionProps {
+  initialViewMode?: 'my-pitches' | 'new';
+}
+
+const PitchSubmission: React.FC<PitchSubmissionProps> = ({ initialViewMode = 'my-pitches' }) => {
+  const [viewMode, setViewMode] = useState<'my-pitches' | 'new'>(initialViewMode);
+  const [expandedPitch, setExpandedPitch] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     projectIdentification: '',
@@ -306,18 +371,156 @@ const PitchSubmission: React.FC = () => {
     }
   };
 
+  const renderMyPitches = () => (
+    <div className="space-y-4">
+      {MY_PITCHES.map((pitch, index) => {
+        const isExpanded = expandedPitch === pitch.id;
+        const status = STATUS_CONFIG[pitch.status];
+        const StatusIcon = status.icon;
+
+        return (
+          <motion.div
+            key={pitch.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05 }}
+            className="bg-card border border-card rounded-xl overflow-hidden"
+          >
+            {/* Pitch Header */}
+            <button
+              onClick={() => setExpandedPitch(isExpanded ? null : pitch.id)}
+              className="w-full p-4 flex items-center gap-4 hover:bg-gray-800/30 transition-colors"
+            >
+              <motion.div
+                animate={{ rotate: isExpanded ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ChevronRight className="w-4 h-4 text-gray-500" />
+              </motion.div>
+
+              <div className="flex-1 text-left">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-gray-500">{pitch.id}</span>
+                  <span className="text-white font-medium">{pitch.title}</span>
+                </div>
+                <div className="flex items-center gap-3 mt-1">
+                  <span className="text-xs text-gray-500">{pitch.category}</span>
+                  <span className="text-xs text-gray-600">Submitted {pitch.submittedDate}</span>
+                </div>
+              </div>
+
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${status.bg} ${status.border} border`}>
+                <StatusIcon className={`w-3 h-3 ${status.color}`} />
+                <span className={status.color}>{status.label}</span>
+              </div>
+            </button>
+
+            {/* Expanded Content - Review Thread */}
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 pb-4 pt-2 border-t border-gray-800 ml-8">
+                    {pitch.comments.length === 0 ? (
+                      <p className="text-sm text-gray-500 italic">Awaiting review from GreenLight team...</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {pitch.comments.map((comment, i) => (
+                          <div key={i} className={`flex gap-3 ${!comment.isReviewer ? 'flex-row-reverse' : ''}`}>
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+                              comment.isReviewer ? 'bg-green-900/50' : 'bg-gray-700'
+                            }`}>
+                              {comment.isReviewer ? (
+                                <Zap className="w-4 h-4 text-green-400" />
+                              ) : (
+                                <span className="text-xs text-white">You</span>
+                              )}
+                            </div>
+                            <div className={`flex-1 max-w-[80%] ${!comment.isReviewer ? 'text-right' : ''}`}>
+                              <div className={`inline-block rounded-xl p-3 ${
+                                comment.isReviewer ? 'bg-gray-800' : 'bg-white text-black'
+                              }`}>
+                                <p className={`text-sm ${comment.isReviewer ? 'text-gray-300' : 'text-black'}`}>
+                                  {comment.message}
+                                </p>
+                              </div>
+                              <p className="text-xs text-gray-600 mt-1">{comment.date}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Reply input for revise status */}
+                    {pitch.status === 'revise' && (
+                      <div className="mt-4 pt-4 border-t border-gray-800">
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="Add a response..."
+                            className="flex-1 bg-gray-800 text-white placeholder-gray-500 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-white"
+                          />
+                          <button className="p-2 bg-white text-black rounded-full hover:bg-gray-100 transition-colors">
+                            <Send className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <div className="px-12 py-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-5xl font-bold text-white mb-2">Pitch</h1>
-        <p className="text-gray-400">Submit your research idea</p>
+        <p className="text-gray-400">Submit and track your research ideas</p>
       </div>
 
       <div className="flex gap-8">
-        {/* Left column - Form (2/3) */}
+        {/* Left column - Content (2/3) */}
         <div className="flex-1 lg:w-2/3">
-          {/* Progress Steps */}
+          {/* View Toggle */}
+          <div className="flex items-center gap-2 mb-6">
+            <button
+              onClick={() => setViewMode('my-pitches')}
+              className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                viewMode === 'my-pitches'
+                  ? 'bg-white text-black'
+                  : 'text-gray-400 hover:text-white border border-gray-700'
+              }`}
+            >
+              My Pitches
+            </button>
+            <button
+              onClick={() => setViewMode('new')}
+              className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                viewMode === 'new'
+                  ? 'bg-white text-black'
+                  : 'text-gray-400 hover:text-white border border-gray-700'
+              }`}
+            >
+              + New Pitch
+            </button>
+          </div>
+
+          {viewMode === 'my-pitches' ? (
+            renderMyPitches()
+          ) : (
+            <>
+              {/* Progress Steps */}
           <div className="flex justify-between mb-8">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -408,6 +611,8 @@ const PitchSubmission: React.FC = () => {
               </motion.button>
             )}
           </div>
+          </>
+          )}
         </div>
 
         {/* Right column - Chat (1/3) - stays fixed */}
