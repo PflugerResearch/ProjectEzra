@@ -3,32 +3,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight,
   ChevronLeft,
-  Building,
-  Target,
-  Users,
   CheckCircle,
-  Lightbulb,
   Send,
-  AlertCircle,
   Clock,
-  MessageSquare,
   Edit3,
-  Zap
+  Zap,
+  Lightbulb,
+  Sparkles,
+  Check,
+  ArrowLeft
 } from 'lucide-react';
-import { ChatPanel } from '../components/Chat/ChatPanel';
+import { PitchCard, type PitchData } from '../components/Pitch/PitchCard';
+import { PitchChatPanel } from '../components/Pitch/PitchChatPanel';
+import { ScheduleCard } from '../components/Pitch/ScheduleCard';
 
-interface FormData {
-  projectIdentification: string;
-  researchQuestion: string;
-  explorationPlan: string;
-  partners: string;
-  successMeasurement: string;
-  category: string;
-  timeline: string;
-  resources: string;
-}
-
+// Types
 type PitchStatus = 'pending' | 'revise' | 'greenlit';
+type PitchPath = 'choice' | 'greenlit' | 'builder';
 
 interface ReviewComment {
   author: string;
@@ -46,6 +37,60 @@ interface SubmittedPitch {
   comments: ReviewComment[];
 }
 
+interface GreenLitTopic {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  suggestedScope: 'simple' | 'medium' | 'complex';
+  suggestedMethods: string[];
+}
+
+// GreenLit pre-approved topics
+const GREENLIT_TOPICS: GreenLitTopic[] = [
+  {
+    id: 'GL-001',
+    title: 'Post-Occupancy Evaluation Framework',
+    description: 'Develop a standardized POE survey template for K-12 educational facilities that measures student comfort, teacher satisfaction, and learning environment effectiveness.',
+    category: 'Campus Life',
+    suggestedScope: 'medium',
+    suggestedMethods: ['Survey/Post-Occupancy Design', 'Literature Review']
+  },
+  {
+    id: 'GL-002',
+    title: 'Biophilic Design Impact Study',
+    description: 'Research the measurable effects of biophilic design elements (natural light, plants, natural materials) on student focus and well-being in classroom settings.',
+    category: 'Psychology',
+    suggestedScope: 'complex',
+    suggestedMethods: ['Case Study Analysis', 'Survey/Post-Occupancy Design']
+  },
+  {
+    id: 'GL-003',
+    title: 'Flexible Learning Space Configurations',
+    description: 'Document and analyze different furniture configurations and their impact on collaborative learning in elementary school classrooms.',
+    category: 'Immersive Learning',
+    suggestedScope: 'simple',
+    suggestedMethods: ['Infographic Creation', 'Literature Review']
+  },
+  {
+    id: 'GL-004',
+    title: 'Mass Timber in Educational Buildings',
+    description: 'Create a comprehensive resource on mass timber applications, benefits, and case studies specific to Texas educational facilities.',
+    category: 'Sustainability',
+    suggestedScope: 'medium',
+    suggestedMethods: ['Annotated Bibliography/Resources', 'Case Study Analysis']
+  },
+  {
+    id: 'GL-005',
+    title: 'Acoustic Performance Standards',
+    description: 'Research and document best practices for acoustic design in music education spaces and fine arts facilities.',
+    category: 'Fine Arts',
+    suggestedScope: 'medium',
+    suggestedMethods: ['Literature Review', 'Expert Interview']
+  }
+];
+
+// Existing pitches data
 const MY_PITCHES: SubmittedPitch[] = [
   {
     id: 'P-2025-001',
@@ -84,295 +129,271 @@ const STATUS_CONFIG = {
   greenlit: { label: 'Green Lit!', color: 'text-green-400', bg: 'bg-green-900/30', border: 'border-green-800', icon: Zap }
 };
 
+const SCOPE_HOURS: Record<string, string> = {
+  simple: '20-60 hours',
+  medium: '60-120 hours',
+  complex: '120+ hours'
+};
+
 interface PitchSubmissionProps {
   initialViewMode?: 'my-pitches' | 'new';
 }
 
-const PitchSubmission: React.FC<PitchSubmissionProps> = ({ initialViewMode = 'my-pitches' }) => {
+const PitchSubmission: React.FC<PitchSubmissionProps> = ({ initialViewMode = 'new' }) => {
+  // View state
   const [viewMode, setViewMode] = useState<'my-pitches' | 'new'>(initialViewMode);
+  const [pitchPath, setPitchPath] = useState<PitchPath>('choice');
   const [expandedPitch, setExpandedPitch] = useState<string | null>(null);
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    projectIdentification: '',
-    researchQuestion: '',
-    explorationPlan: '',
-    partners: '',
-    successMeasurement: '',
-    category: '',
+
+  // GreenLit state
+  const [selectedGreenLitTopic, setSelectedGreenLitTopic] = useState<GreenLitTopic | null>(null);
+
+  // Pitch data (shared between GreenLit and Custom flows)
+  const [pitchData, setPitchData] = useState<PitchData>({
+    researchIdea: '',
+    alignment: '',
+    methodology: '',
+    scopeTier: '',
+    impact: '',
+    resources: '',
     timeline: '',
-    resources: ''
+    partners: ''
   });
 
-  const steps = [
-    { number: 1, title: 'Project Context', icon: Building },
-    { number: 2, title: 'Research Question', icon: Target },
-    { number: 3, title: 'Methodology', icon: Lightbulb },
-    { number: 4, title: 'Partners & Resources', icon: Users },
-    { number: 5, title: 'Success Metrics', icon: CheckCircle }
-  ];
-
-  const categories = [
-    'Campus Life',
-    'Fine Arts',
-    'Health & Safety',
-    'Immersive Learning',
-    'Psychology',
-    'Sustainability'
-  ];
-
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  // Handlers
+  const handleUpdateField = (field: keyof PitchData, value: string) => {
+    setPitchData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleNext = () => {
-    if (currentStep < steps.length) setCurrentStep(currentStep + 1);
+  const handleStartCustom = () => {
+    setPitchPath('builder');
+    setSelectedGreenLitTopic(null);
+    setPitchData({
+      researchIdea: '',
+      alignment: '',
+      methodology: '',
+      scopeTier: '',
+      impact: '',
+      resources: '',
+      timeline: '',
+      partners: ''
+    });
   };
 
-  const handlePrevious = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1);
+  const handleStartGreenLit = () => {
+    setPitchPath('greenlit');
+    setSelectedGreenLitTopic(null);
+    setPitchData({
+      researchIdea: '',
+      alignment: '',
+      methodology: '',
+      scopeTier: '',
+      impact: '',
+      resources: '',
+      timeline: '',
+      partners: ''
+    });
   };
 
-  const handleSubmit = () => {
-    console.log('Submitting pitch:', formData);
-    // Here you would typically send the data to your backend
-    alert('Pitch submitted successfully! The GreenLight team will review within 2 weeks.');
+  const handleSelectGreenLitTopic = (topic: GreenLitTopic) => {
+    setSelectedGreenLitTopic(topic);
+    // Pre-populate pitch data from the GreenLit topic
+    setPitchData({
+      researchIdea: topic.description,
+      alignment: 'thought-leadership',
+      methodology: topic.suggestedMethods[0] || '',
+      scopeTier: topic.suggestedScope,
+      impact: '',
+      resources: '',
+      timeline: '',
+      partners: ''
+    });
   };
 
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <motion.div
-            key="step1"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-xl font-bold text-white mb-2">Project Identification</h2>
-              <p className="text-gray-400 mb-4 text-sm">
-                Identify the current or future project you want to explore
-              </p>
-              <textarea
-                value={formData.projectIdentification}
-                onChange={(e) => handleInputChange('projectIdentification', e.target.value)}
-                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
-                placeholder="E.g., Kennedy Elementary School renovation focusing on experiential learning spaces..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Research Category</label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {categories.map(cat => (
-                  <motion.button
-                    key={cat}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleInputChange('category', cat)}
-                    className={`p-3 rounded-lg text-sm transition-all ${
-                      formData.category === cat
-                        ? 'bg-white text-black'
-                        : 'bg-gray-800 text-gray-400 hover:text-white border border-gray-700'
-                    }`}
-                  >
-                    {cat}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        );
-
-      case 2:
-        return (
-          <motion.div
-            key="step2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-xl font-bold text-white mb-2">Research Question</h2>
-              <p className="text-gray-400 mb-4 text-sm">
-                What is your research question under Experiential Learning?
-              </p>
-
-              <div className="bg-blue-900/30 border border-blue-800 p-3 rounded-lg mb-4">
-                <AlertCircle className="inline w-4 h-4 text-blue-400 mr-2" />
-                <span className="text-sm text-blue-400">
-                  Frame your question as "How does X affect Y?" to ensure it's measurable and focused
-                </span>
-              </div>
-
-              <textarea
-                value={formData.researchQuestion}
-                onChange={(e) => handleInputChange('researchQuestion', e.target.value)}
-                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
-                placeholder="E.g., How does biophilic design in elementary classrooms affect student attention span and emotional regulation?"
-              />
-            </div>
-
-            <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-              <h3 className="font-medium text-white mb-3">Research Question Components</h3>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span className="text-gray-300">Independent Variable (what you're changing)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span className="text-gray-300">Dependent Variable (what you're measuring)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5" />
-                  <span className="text-gray-300">Connection to Experiential Learning</span>
-                </li>
-              </ul>
-            </div>
-          </motion.div>
-        );
-
-      case 3:
-        return (
-          <motion.div
-            key="step3"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-xl font-bold text-white mb-2">Exploration Plan</h2>
-              <p className="text-gray-400 mb-4 text-sm">
-                Describe your methodology, timeline, and resources needed
-              </p>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Methodology</label>
-                  <textarea
-                    value={formData.explorationPlan}
-                    onChange={(e) => handleInputChange('explorationPlan', e.target.value)}
-                    className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-24 focus:outline-none focus:ring-1 focus:ring-white"
-                    placeholder="E.g., Literature review of 5+ sources, post-occupancy evaluation survey, case study analysis..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Timeline</label>
-                  <select
-                    value={formData.timeline}
-                    onChange={(e) => handleInputChange('timeline', e.target.value)}
-                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white"
-                  >
-                    <option value="">Select timeline</option>
-                    <option value="simple">Simple & Quick (20-60 hours)</option>
-                    <option value="medium">Medium Intensity (60-120 hours)</option>
-                    <option value="complex">Complex & Long-term (120+ hours)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Resources Needed</label>
-                  <input
-                    type="text"
-                    value={formData.resources}
-                    onChange={(e) => handleInputChange('resources', e.target.value)}
-                    className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-white"
-                    placeholder="E.g., Survey tools, site visits, publication costs..."
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        );
-
-      case 4:
-        return (
-          <motion.div
-            key="step4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-xl font-bold text-white mb-2">Partners & Support</h2>
-              <p className="text-gray-400 mb-4 text-sm">
-                Identify Pfluger partners and supporting sources
-              </p>
-
-              <textarea
-                value={formData.partners}
-                onChange={(e) => handleInputChange('partners', e.target.value)}
-                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
-                placeholder="E.g., Senior architects with K-12 expertise, UTSA faculty collaborators, Wood Works for mass timber research..."
-              />
-
-              <div className="mt-4 p-3 bg-yellow-900/30 border border-yellow-800 rounded-lg">
-                <p className="text-sm text-yellow-400">
-                  <Lightbulb className="inline w-4 h-4 mr-2" />
-                  The GreenLight team can help identify partners if you don't have specific ones in mind
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        );
-
-      case 5:
-        return (
-          <motion.div
-            key="step5"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-xl font-bold text-white mb-2">Success Measurement</h2>
-              <p className="text-gray-400 mb-4 text-sm">
-                How will you measure success and demonstrate project integration?
-              </p>
-
-              <textarea
-                value={formData.successMeasurement}
-                onChange={(e) => handleInputChange('successMeasurement', e.target.value)}
-                className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 h-32 focus:outline-none focus:ring-1 focus:ring-white"
-                placeholder="E.g., Publication in Texas Architect, integration into 2 active projects, 80% positive feedback from POE survey..."
-              />
-            </div>
-
-            <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-lg">
-              <h3 className="font-medium text-white mb-3">Review Your Pitch</h3>
-              <div className="space-y-2 text-sm">
-                <div>
-                  <span className="font-medium text-gray-300">Category:</span>{' '}
-                  <span className="text-white">{formData.category || 'Not selected'}</span>
-                </div>
-                <div>
-                  <span className="font-medium text-gray-300">Timeline:</span>{' '}
-                  <span className="text-white">{formData.timeline || 'Not selected'}</span>
-                </div>
-                <div>
-                  <span className="font-medium text-gray-300">Research Question:</span>
-                  <p className="mt-1 text-gray-400">
-                    {formData.researchQuestion || 'Not provided'}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        );
-
-      default:
-        return null;
+  const handleBack = () => {
+    if (pitchPath === 'builder' || pitchPath === 'greenlit') {
+      setPitchPath('choice');
+      setSelectedGreenLitTopic(null);
+    } else if (pitchPath === 'choice') {
+      setViewMode('my-pitches');
     }
   };
 
+  const handleSubmit = () => {
+    console.log('Submitting pitch:', {
+      isGreenLit: !!selectedGreenLitTopic,
+      greenLitTopic: selectedGreenLitTopic?.id,
+      pitchData
+    });
+    alert('Pitch submitted successfully! The GreenLight team will review within 2 weeks.');
+    setViewMode('my-pitches');
+    setPitchPath('choice');
+    setSelectedGreenLitTopic(null);
+    setPitchData({
+      researchIdea: '',
+      alignment: '',
+      methodology: '',
+      scopeTier: '',
+      impact: '',
+      resources: '',
+      timeline: '',
+      partners: ''
+    });
+  };
+
+  // Check if pitch is ready to submit (at least research idea and methodology)
+  const canSubmit = pitchData.researchIdea && pitchData.methodology;
+
+  // Render initial choice screen
+  const renderChoiceScreen = () => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="max-w-2xl mx-auto"
+    >
+      <div className="text-center mb-12">
+        <h2 className="text-2xl font-bold text-white mb-3">How would you like to pitch?</h2>
+        <p className="text-gray-400">Choose a path that fits your research idea</p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* GreenLit Option */}
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleStartGreenLit}
+          className="bg-card border border-card rounded-xl p-8 text-left hover:border-green-800 transition-all group"
+        >
+          <div className="w-12 h-12 bg-green-900/50 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-900/70 transition-colors">
+            <Zap className="w-6 h-6 text-green-400" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">Choose a GreenLit Topic</h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Select from pre-approved research topics already worked out by the R&B team.
+          </p>
+          <div className="flex items-center gap-2 text-green-400 text-sm">
+            <Sparkles className="w-4 h-4" />
+            <span>Fast-track approval</span>
+          </div>
+        </motion.button>
+
+        {/* Custom Option */}
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleStartCustom}
+          className="bg-card border border-card rounded-xl p-8 text-left hover:border-gray-600 transition-all group"
+        >
+          <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-6 group-hover:bg-gray-700 transition-colors">
+            <Lightbulb className="w-6 h-6 text-white" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">Pitch Your Own Idea</h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Have a unique research idea? Build your pitch through conversation with AI.
+          </p>
+          <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <CheckCircle className="w-4 h-4" />
+            <span>AI-assisted development</span>
+          </div>
+        </motion.button>
+      </div>
+    </motion.div>
+  );
+
+  // Render GreenLit topic list (left panel)
+  const renderGreenLitList = () => (
+    <div className="bg-card border border-card rounded-2xl h-full flex flex-col overflow-hidden">
+      <div className="p-4 border-b border-gray-800 shrink-0">
+        <h2 className="text-lg font-bold text-white">GreenLit Topics</h2>
+        <p className="text-sm text-gray-500">Select a pre-approved research topic</p>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {GREENLIT_TOPICS.map((topic) => {
+          const isSelected = selectedGreenLitTopic?.id === topic.id;
+          return (
+            <button
+              key={topic.id}
+              onClick={() => handleSelectGreenLitTopic(topic)}
+              className={`w-full text-left p-4 rounded-xl transition-all ${
+                isSelected
+                  ? 'bg-green-900/30 border border-green-700'
+                  : 'bg-gray-800/50 border border-transparent hover:border-gray-700'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className={`font-medium ${isSelected ? 'text-green-400' : 'text-white'}`}>
+                  {topic.title}
+                </h3>
+                <span className="text-xs text-gray-500">-</span>
+                <span className="text-xs text-gray-400 capitalize">{topic.suggestedScope}</span>
+                {isSelected && (
+                  <Check className="w-4 h-4 text-green-400 ml-auto" />
+                )}
+              </div>
+              <p className="text-xs text-gray-500 line-clamp-2">{topic.description}</p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  // Render the pitch builder (unified layout for both GreenLit and Custom)
+  const renderPitchBuilder = () => {
+    const isGreenLitFlow = pitchPath === 'greenlit';
+
+    return (
+      <div className="flex gap-6 h-full overflow-hidden">
+        {/* Left: GreenLit List OR Chat Panel */}
+        <div className="flex-1 min-w-0 h-full">
+          {isGreenLitFlow ? renderGreenLitList() : (
+            <PitchChatPanel
+              pitchData={pitchData}
+              onUpdateField={handleUpdateField}
+              isGreenLit={false}
+            />
+          )}
+        </div>
+
+        {/* Right: Schedule + Pitch Card (vstack) */}
+        <div className="w-96 shrink-0 flex flex-col gap-4 h-full overflow-hidden">
+          <ScheduleCard proposedScope={pitchData.scopeTier as 'simple' | 'medium' | 'complex' | ''} />
+
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <PitchCard
+              data={pitchData}
+              onUpdate={handleUpdateField}
+              isGreenLit={isGreenLitFlow && !!selectedGreenLitTopic}
+              greenLitTitle={selectedGreenLitTopic?.title}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <motion.button
+            whileHover={{ scale: canSubmit ? 1.02 : 1 }}
+            whileTap={{ scale: canSubmit ? 0.98 : 1 }}
+            onClick={handleSubmit}
+            disabled={!canSubmit}
+            className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shrink-0 ${
+              canSubmit
+                ? 'bg-white text-black hover:bg-gray-100'
+                : 'bg-gray-800 text-gray-500 cursor-not-allowed'
+            }`}
+          >
+            <Send className="w-4 h-4" />
+            Submit Pitch
+          </motion.button>
+
+        </div>
+      </div>
+    );
+  };
+
+  // Render My Pitches view
   const renderMyPitches = () => (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-3xl">
       {MY_PITCHES.map((pitch, index) => {
         const isExpanded = expandedPitch === pitch.id;
         const status = STATUS_CONFIG[pitch.status];
@@ -481,151 +502,63 @@ const PitchSubmission: React.FC<PitchSubmissionProps> = ({ initialViewMode = 'my
     </div>
   );
 
+  // Determine what content to render
+  const renderContent = () => {
+    if (viewMode === 'my-pitches') {
+      return renderMyPitches();
+    }
+
+    switch (pitchPath) {
+      case 'choice':
+        return renderChoiceScreen();
+      case 'greenlit':
+      case 'builder':
+        return renderPitchBuilder();
+      default:
+        return null;
+    }
+  };
+
+  const isBuilderView = pitchPath === 'builder' || pitchPath === 'greenlit';
+
   return (
-    <div className="px-12 py-8">
+    <div className={`px-12 py-8 ${isBuilderView ? 'h-screen overflow-hidden flex flex-col' : ''}`}>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-5xl font-bold text-white mb-2">Pitch</h1>
-        <p className="text-gray-400">Submit and track your research ideas</p>
+      <div className="flex items-center gap-4 mb-8 shrink-0">
+        {/* Back button */}
+        {(viewMode === 'new' && pitchPath !== 'choice') && (
+          <motion.button
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleBack}
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 text-white hover:bg-gray-700 transition-all"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </motion.button>
+        )}
+
+        <div>
+          <h1 className="text-5xl font-bold text-white mb-2">Pitch</h1>
+          <p className="text-gray-400">
+            {viewMode === 'my-pitches'
+              ? 'Track your submitted research ideas'
+              : 'Submit a new research idea'}
+          </p>
+        </div>
       </div>
 
-      <div className="flex gap-8">
-        {/* Left column - Content (2/3) */}
-        <div className="flex-1 lg:w-2/3">
-          {/* View Toggle */}
-          <div className="flex items-center gap-2 mb-6">
-            <button
-              onClick={() => setViewMode('my-pitches')}
-              className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                viewMode === 'my-pitches'
-                  ? 'bg-white text-black'
-                  : 'text-gray-400 hover:text-white border border-gray-700'
-              }`}
-            >
-              My Pitches
-            </button>
-            <button
-              onClick={() => setViewMode('new')}
-              className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                viewMode === 'new'
-                  ? 'bg-white text-black'
-                  : 'text-gray-400 hover:text-white border border-gray-700'
-              }`}
-            >
-              + New Pitch
-            </button>
-          </div>
-
-          {viewMode === 'my-pitches' ? (
-            renderMyPitches()
-          ) : (
-            <>
-              {/* Progress Steps */}
-          <div className="flex justify-between mb-8">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const isActive = currentStep === step.number;
-              const isCompleted = currentStep > step.number;
-
-              return (
-                <div key={step.number} className="flex items-center flex-1">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all ${
-                      isActive
-                        ? 'bg-white'
-                        : isCompleted
-                        ? 'bg-green-500'
-                        : 'bg-gray-700'
-                    }`}
-                  >
-                    {isCompleted ? (
-                      <CheckCircle className="w-5 h-5 text-white" />
-                    ) : (
-                      <Icon className={`w-5 h-5 ${isActive ? 'text-black' : 'text-gray-500'}`} />
-                    )}
-                  </motion.div>
-                  {index < steps.length - 1 && (
-                    <div
-                      className={`flex-1 h-0.5 mx-2 transition-all ${
-                        currentStep > step.number ? 'bg-green-500' : 'bg-gray-700'
-                      }`}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Step Title */}
-          <div className="mb-6">
-            <p className="text-sm text-gray-500">
-              Step {currentStep} of {steps.length}
-            </p>
-            <h2 className="text-xl font-semibold text-white">{steps[currentStep - 1].title}</h2>
-          </div>
-
-          {/* Form Content */}
-          <div className="bg-card border border-card rounded-xl p-6 mb-6">
-            <AnimatePresence mode="wait">
-              {renderStepContent()}
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex justify-between">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={handlePrevious}
-              disabled={currentStep === 1}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                currentStep === 1
-                  ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-800 text-white hover:bg-gray-700'
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4" />
-              Previous
-            </motion.button>
-
-            {currentStep === steps.length ? (
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleSubmit}
-                className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium"
-              >
-                Submit Pitch
-                <Send className="w-4 h-4" />
-              </motion.button>
-            ) : (
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleNext}
-                className="flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-lg text-sm font-medium"
-              >
-                Next
-                <ChevronRight className="w-4 h-4" />
-              </motion.button>
-            )}
-          </div>
-          </>
-          )}
-        </div>
-
-        {/* Right column - Chat (1/3) - stays fixed */}
-        <div className="hidden lg:block lg:w-1/3 shrink-0">
-          <div className="fixed top-24 right-12 w-[calc((100vw-6rem-2rem)*0.333)] h-[calc(100vh-120px)]">
-            <ChatPanel
-              title="Ask"
-              subtitle="Pitch assistant"
-              placeholder="Ask about research ideas..."
-              initialMessage="Hello! I can help you develop your research pitch. What's the topic you're exploring?"
-            />
-          </div>
-        </div>
+      {/* Main Content */}
+      <div className={isBuilderView ? 'flex-1 min-h-0 overflow-hidden flex flex-col' : ''}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pitchPath}
+            className={isBuilderView ? 'h-full' : ''}
+          >
+            {renderContent()}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
