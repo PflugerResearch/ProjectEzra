@@ -23,6 +23,7 @@ export type ViewType =
   | 'about-tools'
   | 'about-sources'
   | 'project-rb02'
+  | 'project-rb02-blocks'
   | 'project-rb05'
   | 'project-rb08';
 

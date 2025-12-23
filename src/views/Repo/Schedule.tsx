@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Flag, FileText, Presentation, CheckCircle, Play, Users, Calendar, BarChart3, GanttChart } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import * as d3 from 'd3';
-import { useProjects } from '../context/ProjectsContext';
+import { useProjects } from '../../context/ProjectsContext';
 
 // ============================================
 // TYPES

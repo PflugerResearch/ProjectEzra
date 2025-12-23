@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { loadProjects } from '../data/loadProjects';
 import type { ResearchProject } from '../data/loadProjects';
 

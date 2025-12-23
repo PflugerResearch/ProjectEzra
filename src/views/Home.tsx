@@ -5,7 +5,7 @@ interface HomeProps {
   onNavigate: (sectionId: string) => void;
 }
 
-export default function Home({ onNavigate }: HomeProps) {
+export default function Home({ onNavigate: _onNavigate }: HomeProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

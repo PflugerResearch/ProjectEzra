@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, GraduationCap, BookOpen, Mail, Phone, Globe, ChevronRight } from 'lucide-react';
-import { ChatPanel } from '../components/Chat/ChatPanel';
+import { ChatPanel } from '../../components/Chat/ChatPanel';
 
 interface Contact {
   id: string;

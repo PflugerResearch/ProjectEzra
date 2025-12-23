@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { createContext, useContext, useEffect, type ReactNode } from 'react'
 import { Brain, Heart, Sprout, Monitor, Home, Palette } from 'lucide-react'
 
 // Pfluger Brand Colors (matching ProjectPrism)

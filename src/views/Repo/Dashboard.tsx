@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useProjects } from '../context/ProjectsContext';
+import { useProjects } from '../../context/ProjectsContext';
 
 // Calendar events data
 const CALENDAR_EVENTS: Record<number, string[]> = {
@@ -27,7 +27,7 @@ interface DashboardProps {
   onNavigate: (view: string) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onNavigate: _onNavigate }) => {
   const { projects, loading } = useProjects();
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [projectFilter, setProjectFilter] = useState<'in-progress' | 'completed' | 'future'>('in-progress');

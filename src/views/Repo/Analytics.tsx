@@ -18,8 +18,7 @@ import {
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
-  Radar,
-  Treemap
+  Radar
 } from 'recharts';
 import {
   TrendingUp,
@@ -30,8 +29,7 @@ import {
   Clock,
   Target,
   Activity,
-  Download,
-  Filter
+  Download
 } from 'lucide-react';
 
 // Sample data based on R&B framework
@@ -79,7 +77,7 @@ const projectPhases = [
 ];
 
 const Analytics: React.FC = () => {
-  const [selectedTimeRange, setSelectedTimeRange] = useState('6months');
+  const [_selectedTimeRange, _setSelectedTimeRange] = useState('6months');
 
   const stats = [
     {

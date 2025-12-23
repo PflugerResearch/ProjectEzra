@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Check, X, Sparkles } from 'lucide-react';
 import type { PitchData } from './PitchCard';
@@ -25,7 +25,7 @@ interface PitchChatPanelProps {
 const getAIResponse = (
   userMessage: string,
   pitchData: PitchData,
-  messageHistory: ChatMessage[]
+  _messageHistory: ChatMessage[]
 ): { content: string; suggestion?: ChatMessage['suggestion'] } => {
   const lowerMessage = userMessage.toLowerCase();
 

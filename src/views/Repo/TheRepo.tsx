@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Sparkles, Search, FolderOpen, Users, TrendingUp, Plus, MessageSquare, Trash2 } from 'lucide-react';
-import { useProjects } from '../context/ProjectsContext';
+import { useProjects } from '../../context/ProjectsContext';
 
 interface TheRepoProps {
   onNavigate: (view: string) => void;
@@ -29,7 +29,7 @@ const QUICK_PROMPTS = [
   { icon: TrendingUp, label: 'Recent work', prompt: 'What are the most recent completed projects?' },
 ];
 
-const TheRepo: React.FC<TheRepoProps> = ({ onNavigate }) => {
+const TheRepo: React.FC<TheRepoProps> = ({ onNavigate: _onNavigate }) => {
   const { projects } = useProjects();
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);

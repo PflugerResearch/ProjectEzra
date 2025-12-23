@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight,
-  ChevronLeft,
   CheckCircle,
   Send,
   Clock,
@@ -13,9 +12,9 @@ import {
   Check,
   ArrowLeft
 } from 'lucide-react';
-import { PitchCard, type PitchData } from '../components/Pitch/PitchCard';
-import { PitchChatPanel } from '../components/Pitch/PitchChatPanel';
-import { ScheduleCard } from '../components/Pitch/ScheduleCard';
+import { PitchCard, type PitchData } from '../../components/Pitch/PitchCard';
+import { PitchChatPanel } from '../../components/Pitch/PitchChatPanel';
+import { ScheduleCard } from '../../components/Pitch/ScheduleCard';
 
 // Types
 type PitchStatus = 'pending' | 'revise' | 'greenlit';
@@ -127,12 +126,6 @@ const STATUS_CONFIG = {
   pending: { label: 'Pending Review', color: 'text-yellow-400', bg: 'bg-yellow-900/30', border: 'border-yellow-800', icon: Clock },
   revise: { label: 'Revise & Resubmit', color: 'text-blue-400', bg: 'bg-blue-900/30', border: 'border-blue-800', icon: Edit3 },
   greenlit: { label: 'Green Lit!', color: 'text-green-400', bg: 'bg-green-900/30', border: 'border-green-800', icon: Zap }
-};
-
-const SCOPE_HOURS: Record<string, string> = {
-  simple: '20-60 hours',
-  medium: '60-120 hours',
-  complex: '120+ hours'
 };
 
 interface PitchSubmissionProps {

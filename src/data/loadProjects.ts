@@ -65,7 +65,7 @@ export async function loadProjects(): Promise<ResearchProject[]> {
 
           resolve(projects);
         },
-        error: (error) => {
+        error: (error: Error) => {
           console.error('Error parsing CSV:', error);
           reject(error);
         }
