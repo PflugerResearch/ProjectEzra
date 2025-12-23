@@ -246,9 +246,11 @@ export function CaseStudyCardBlock({ data }: CaseStudyCardBlockProps) {
 
   return (
     <>
-      {/* Horizontal scroll container */}
+      {/* Horizontal scroll container - extends to right edge for peek effect */}
       <div className="relative">
-        <div className="flex gap-6 overflow-x-auto pb-4 pr-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+        {/* Gradient fade on right edge to hint at more content */}
+        <div className="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none" />
+        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent pr-24">
           {studies.map((study, index) => (
             <motion.div
               key={study.id}

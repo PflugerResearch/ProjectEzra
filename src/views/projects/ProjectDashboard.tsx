@@ -10,7 +10,7 @@ interface ProjectDashboardProps {
 
 export default function ProjectDashboard({ config, onBack }: ProjectDashboardProps) {
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-clip">
       {/* Header */}
       <header className="border-b border-white/10 sticky top-0 z-10 bg-background/60 backdrop-blur-md">
         <div className="relative max-w-5xl mx-auto px-12 py-6">
@@ -45,6 +45,8 @@ export default function ProjectDashboard({ config, onBack }: ProjectDashboardPro
         {config.blocks.map((block) => {
           // Full-bleed blocks render without container constraints
           const isFullBleed = block.type === 'image-gallery';
+          // Extended blocks need overflow visible for peek effect
+          const isExtended = block.type === 'case-study-card';
 
           if (isFullBleed) {
             return (
@@ -56,6 +58,23 @@ export default function ProjectDashboard({ config, onBack }: ProjectDashboardPro
                   </div>
                 )}
                 <BlockRenderer block={block} />
+              </div>
+            );
+          }
+
+          if (isExtended) {
+            return (
+              <div key={block.id} className="mb-8">
+                {(block.title || block.description) && (
+                  <div className="max-w-5xl mx-auto px-12 mb-6">
+                    {block.title && <h3 className="text-xl font-bold text-white mb-1">{block.title}</h3>}
+                    {block.description && <p className="text-gray-500">{block.description}</p>}
+                  </div>
+                )}
+                {/* Left-aligned with padding, extends to right edge */}
+                <div className="pl-12 lg:pl-[calc((100vw-64rem)/2+3rem)]">
+                  <BlockRenderer block={block} />
+                </div>
               </div>
             );
           }
