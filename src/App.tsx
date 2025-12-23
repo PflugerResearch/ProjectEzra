@@ -22,11 +22,16 @@ import AboutProcess from './views/About/AboutProcess';
 import AboutAI from './views/About/AboutAI';
 import AboutTools from './views/About/AboutTools';
 import AboutSources from './views/About/AboutSources';
-import { ModulizerDashboard, Phase1Dashboard, MassTimberDashboard, ProjectDashboard } from './views/projects';
+import { ProjectDashboard } from './views/projects';
+import { sanctuaryConfig } from './data/projects/X25RB01-sanctuary/project/sanctuaryConfig';
 import { modulizer2Config } from './data/projects/X25RB02-modulizer2/project/modulizer2Config';
+import { modulizer1Config } from './data/projects/X25RB08-modulizer1/project/modulizer1Config';
+import { massTimberConfig } from './data/projects/X25RB05-masstimber/project/massTimberConfig';
+import { modulizer3Config } from './data/projects/X25RB13-modulizer3/project/modulizer3Config';
+import { timberlyneConfig } from './data/projects/X25RB06-timberlyne/project/timberlyneConfig';
 
 // Project overlay types
-type ProjectOverlay = 'project-rb02' | 'project-rb02-blocks' | 'project-rb05' | 'project-rb08' | null;
+type ProjectOverlay = 'project-rb01' | 'project-rb02' | 'project-rb05' | 'project-rb06' | 'project-rb08' | 'project-rb13' | null;
 
 function AppContent() {
   const [view, setView] = useState<ViewType>('home');
@@ -39,10 +44,12 @@ function AppContent() {
   };
 
   const openProject = (projectId: string) => {
-    if (projectId === 'X25-RB02') setProjectOverlay('project-rb02');
-    else if (projectId === 'X25-RB02-blocks') setProjectOverlay('project-rb02-blocks');
+    if (projectId === 'X25-RB01') setProjectOverlay('project-rb01');
+    else if (projectId === 'X25-RB02') setProjectOverlay('project-rb02');
     else if (projectId === 'X25-RB05') setProjectOverlay('project-rb05');
+    else if (projectId === 'X25-RB06') setProjectOverlay('project-rb06');
     else if (projectId === 'X25-RB08') setProjectOverlay('project-rb08');
+    else if (projectId === 'X25-RB13') setProjectOverlay('project-rb13');
   };
 
   const closeProject = () => {
@@ -105,14 +112,18 @@ function AppContent() {
 
   const renderProjectOverlay = () => {
     switch (projectOverlay) {
+      case 'project-rb01':
+        return <ProjectDashboard config={sanctuaryConfig} onBack={closeProject} />;
       case 'project-rb02':
-        return <ModulizerDashboard onBack={closeProject} />;
-      case 'project-rb02-blocks':
         return <ProjectDashboard config={modulizer2Config} onBack={closeProject} />;
       case 'project-rb05':
-        return <MassTimberDashboard onBack={closeProject} />;
+        return <ProjectDashboard config={massTimberConfig} onBack={closeProject} />;
       case 'project-rb08':
-        return <Phase1Dashboard onBack={closeProject} />;
+        return <ProjectDashboard config={modulizer1Config} onBack={closeProject} />;
+      case 'project-rb06':
+        return <ProjectDashboard config={timberlyneConfig} onBack={closeProject} />;
+      case 'project-rb13':
+        return <ProjectDashboard config={modulizer3Config} onBack={closeProject} />;
       default:
         return null;
     }

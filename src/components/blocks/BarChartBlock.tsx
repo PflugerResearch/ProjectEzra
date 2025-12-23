@@ -161,7 +161,7 @@ interface GroupedBarProps {
   unit: string;
 }
 
-function GroupedBar({ groups, unit }: GroupedBarProps) {
+function GroupedBar({ groups, unit: _unit }: GroupedBarProps) {
   const height = 48;
   const radius = height / 2;
   const [hoveredGroupIndex, setHoveredGroupIndex] = useState<number | null>(null);
@@ -205,7 +205,7 @@ function GroupedBar({ groups, unit }: GroupedBarProps) {
           className="absolute left-0 right-0 flex"
           style={{ height, borderRadius: radius, overflow: 'hidden' }}
         >
-          {groups.map((group, groupIndex) => {
+          {groups.map((_group, groupIndex) => {
             const data = groupData[groupIndex];
             const isExpanded = hoveredGroupIndex === groupIndex;
             const isOtherHovered = hoveredGroupIndex !== null && hoveredGroupIndex !== groupIndex;

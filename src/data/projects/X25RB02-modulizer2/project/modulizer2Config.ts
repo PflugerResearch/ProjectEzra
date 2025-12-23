@@ -40,11 +40,11 @@ CTE Application: Balance transparency with thermal performance
       },
     },
 
-    // Key Findings Section
+    // Insights Section
     {
       type: 'section',
-      id: 'section-findings',
-      data: { title: 'Key Findings' },
+      id: 'section-insights',
+      data: { title: 'Insights' },
     },
     {
       type: 'text-content',
@@ -228,10 +228,10 @@ The analysis demonstrates that thoughtful massing decisions in early design can 
       description: 'Wind direction and speed analysis by season',
       data: {
         images: [
-          { src: '/images/projects/X25-RB02/winter-wind-rose.png', alt: 'Winter Wind Rose', caption: 'Winter' },
-          { src: '/images/projects/X25-RB02/spring-wind-rose.png', alt: 'Spring Wind Rose', caption: 'Spring' },
-          { src: '/images/projects/X25-RB02/summer-wind-rose.png', alt: 'Summer Wind Rose', caption: 'Summer' },
-          { src: '/images/projects/X25-RB02/fall-wind-rose.png', alt: 'Fall Wind Rose', caption: 'Fall' },
+          { src: '/images/projects/X25RB02-modulizer2/winter-wind-rose.png', alt: 'Winter Wind Rose', caption: 'Winter' },
+          { src: '/images/projects/X25RB02-modulizer2/spring-wind-rose.png', alt: 'Spring Wind Rose', caption: 'Spring' },
+          { src: '/images/projects/X25RB02-modulizer2/summer-wind-rose.png', alt: 'Summer Wind Rose', caption: 'Summer' },
+          { src: '/images/projects/X25RB02-modulizer2/fall-wind-rose.png', alt: 'Fall Wind Rose', caption: 'Fall' },
         ],
         columns: 4,
       },
@@ -250,11 +250,11 @@ The analysis demonstrates that thoughtful massing decisions in early design can 
       description: 'Thermal and daylighting simulation outputs',
       data: {
         images: [
-          { src: '/images/projects/X25-RB02/simulation-01.png', alt: 'Simulation Diagram 1' },
-          { src: '/images/projects/X25-RB02/simulation-02.png', alt: 'Simulation Diagram 2' },
-          { src: '/images/projects/X25-RB02/simulation-03.png', alt: 'Simulation Diagram 3' },
-          { src: '/images/projects/X25-RB02/simulation-04.png', alt: 'Simulation Diagram 4' },
-          { src: '/images/projects/X25-RB02/simulation-05.png', alt: 'Simulation Diagram 5' },
+          { src: '/images/projects/X25RB02-modulizer2/simulation-01.png', alt: 'Simulation Diagram 1' },
+          { src: '/images/projects/X25RB02-modulizer2/simulation-02.png', alt: 'Simulation Diagram 2' },
+          { src: '/images/projects/X25RB02-modulizer2/simulation-03.png', alt: 'Simulation Diagram 3' },
+          { src: '/images/projects/X25RB02-modulizer2/simulation-04.png', alt: 'Simulation Diagram 4' },
+          { src: '/images/projects/X25RB02-modulizer2/simulation-05.png', alt: 'Simulation Diagram 5' },
         ],
         columns: 3,
       },

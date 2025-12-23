@@ -13,25 +13,24 @@ export default function ProjectDashboard({ config, onBack }: ProjectDashboardPro
     <div className="min-h-screen overflow-x-hidden">
       {/* Header */}
       <header className="border-b border-white/10 sticky top-0 z-10 bg-background/60 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-12 py-6">
+        <div className="relative max-w-5xl mx-auto px-12 py-6">
+          {/* Back button in margin */}
+          {onBack && (
+            <motion.button
+              onClick={onBack}
+              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-xl transition-colors"
+              whileHover={{ x: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-400" />
+            </motion.button>
+          )}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {onBack && (
-                <motion.button
-                  onClick={onBack}
-                  className="p-2 hover:bg-white/10 rounded-xl transition-colors"
-                  whileHover={{ x: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ArrowLeft className="w-5 h-5 text-gray-400" />
-                </motion.button>
-              )}
-              <div>
-                <h1 className="text-4xl font-bold text-white tracking-tight font-mono">
-                  {config.code}
-                </h1>
-                <p className="text-xl text-gray-300 mt-1">{config.title}</p>
-              </div>
+            <div>
+              <h1 className="text-4xl font-bold text-white tracking-tight font-mono">
+                {config.code}
+              </h1>
+              <p className="text-xl text-gray-300 mt-1">{config.title}</p>
             </div>
             <div className="text-right">
               <p className="text-sm text-gray-500">Researcher</p>

@@ -1,4 +1,4 @@
-import type { BlockConfig, StatGridData, BarChartData, KeyFindingsData, ComparisonTableData, TimelineData, TextContentData, SectionData, ImageGalleryData, SourcesData } from './types';
+import type { BlockConfig, StatGridData, BarChartData, KeyFindingsData, ComparisonTableData, TimelineData, TextContentData, SectionData, ImageGalleryData, SourcesData, ToolComparisonData, CaseStudyCardData, WorkflowStepsData, DonutChartData, ScenarioBarChartData, CostBuilderData, SurveyRatingData, FeedbackSummaryData, QuotesData } from './types';
 import { StatGridBlock } from './StatGridBlock';
 import { BarChartBlock } from './BarChartBlock';
 import { KeyFindingsBlock } from './KeyFindingsBlock';
@@ -8,6 +8,15 @@ import { TextContentBlock } from './TextContentBlock';
 import { SectionBlock } from './SectionBlock';
 import { ImageGalleryBlock } from './ImageGalleryBlock';
 import { SourcesBlock } from './SourcesBlock';
+import { ToolComparisonBlock } from './ToolComparisonBlock';
+import { CaseStudyCardBlock } from './CaseStudyCardBlock';
+import { WorkflowStepsBlock } from './WorkflowStepsBlock';
+import { DonutChartBlock } from './DonutChartBlock';
+import { ScenarioBarChartBlock } from './ScenarioBarChartBlock';
+import { CostBuilderBlock } from './CostBuilderBlock';
+import { SurveyRatingBlock } from './SurveyRatingBlock';
+import { FeedbackSummaryBlock } from './FeedbackSummaryBlock';
+import { QuotesBlock } from './QuotesBlock';
 
 interface BlockRendererProps {
   block: BlockConfig;
@@ -36,6 +45,24 @@ export function BlockRenderer({ block }: BlockRendererProps) {
         return <ImageGalleryBlock data={data as ImageGalleryData} />;
       case 'sources':
         return <SourcesBlock data={data as SourcesData} />;
+      case 'tool-comparison':
+        return <ToolComparisonBlock data={data as ToolComparisonData} />;
+      case 'case-study-card':
+        return <CaseStudyCardBlock data={data as CaseStudyCardData} />;
+      case 'workflow-steps':
+        return <WorkflowStepsBlock data={data as WorkflowStepsData} />;
+      case 'donut-chart':
+        return <DonutChartBlock data={data as DonutChartData} />;
+      case 'scenario-bar-chart':
+        return <ScenarioBarChartBlock data={data as ScenarioBarChartData} />;
+      case 'cost-builder':
+        return <CostBuilderBlock data={data as CostBuilderData} />;
+      case 'survey-rating':
+        return <SurveyRatingBlock data={data as SurveyRatingData} />;
+      case 'feedback-summary':
+        return <FeedbackSummaryBlock data={data as FeedbackSummaryData} />;
+      case 'quotes':
+        return <QuotesBlock data={data as QuotesData} />;
       default:
         return (
           <div className="p-4 bg-card border border-card rounded-xl text-gray-400 text-sm">

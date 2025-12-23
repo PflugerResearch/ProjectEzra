@@ -39,7 +39,15 @@ export type BlockType =
   | 'text-content'
   | 'timeline'
   | 'key-findings'
-  | 'sources';
+  | 'sources'
+  | 'tool-comparison'
+  | 'case-study-card'
+  | 'workflow-steps'
+  | 'scenario-bar-chart'
+  | 'cost-builder'
+  | 'survey-rating'
+  | 'feedback-summary'
+  | 'quotes';
 
 export interface SectionData {
   title: string;
@@ -171,4 +179,138 @@ export interface Source {
 
 export interface SourcesData {
   sources: Source[];
+}
+
+// Tool Comparison Block
+export interface Tool {
+  name: string;
+  rating: number; // 0-100 for ring fill
+  color: string;
+  price: string;
+  category: string;
+  description?: string;
+  pros?: string[];
+  cons?: string[];
+}
+
+export interface ToolComparisonData {
+  tools: Tool[];
+  columns?: 2 | 3 | 4;
+}
+
+// Case Study Card Block
+export interface CaseStudy {
+  id: string;
+  title: string;
+  subtitle: string;
+  image?: string;
+  tags: string[];
+  description: string;
+  metrics?: { label: string; value: string }[];
+  strategies?: { name: string; description?: string; impact: string }[];
+  awards?: string[];
+  // Extended fields
+  location?: string;
+  architect?: string;
+  year?: number;
+  siteArea?: string;
+  conditionedArea?: string;
+  stories?: number;
+  buildingType?: string[];
+  team?: { role: string; company: string }[];
+}
+
+export interface CaseStudyCardData {
+  studies: CaseStudy[];
+  columns?: 2 | 3;
+}
+
+// Workflow Steps Block
+export interface WorkflowStep {
+  number: number;
+  title: string;
+  status: 'complete' | 'active' | 'pending';
+  findings?: string[];
+  deliverables?: string[];
+  interventions?: { action: string; impact: string }[];
+  outcomes?: string[];
+}
+
+export interface WorkflowStepsData {
+  steps: WorkflowStep[];
+}
+
+// Scenario Bar Chart Block - for cost scenario comparisons
+export interface ScenarioItem {
+  name: string;
+  total: number;
+  costPerSF: number;
+}
+
+export interface ScenarioBarChartData {
+  scenarios: ScenarioItem[];
+  baseTotal: number;
+  unit?: string;
+}
+
+// Cost Builder Block - interactive alternate selector
+export interface CostAlternate {
+  id: number;
+  description: string;
+  amount: number;
+  type: 'add' | 'deduct';
+}
+
+export interface CostBuilderData {
+  alternates: CostAlternate[];
+  baseTotal: number;
+  area: number;
+}
+
+// Survey Rating Block - for displaying 1-5 rating distributions
+export interface RatingDistribution {
+  rating: number; // 1-5
+  count: number;
+  label?: string; // e.g., "Very Excited", "Somewhat Displeased"
+}
+
+export interface SurveyRatingData {
+  title: string;
+  totalResponses: number;
+  ratings: RatingDistribution[];
+  averageRating?: number;
+  color?: string;
+}
+
+// Feedback Summary Block - yay/nay themes with activity rings
+export interface FeedbackTheme {
+  theme: string;
+  mentions: number;
+  description?: string;
+}
+
+export interface FeedbackSummaryData {
+  positives: {
+    title?: string;
+    score: number; // 0-100 for activity ring
+    themes: FeedbackTheme[];
+  };
+  concerns: {
+    title?: string;
+    score: number; // 0-100 for activity ring
+    themes: FeedbackTheme[];
+  };
+}
+
+// Quotes Block - survey testimonials/quotes
+export interface Quote {
+  text: string;
+  source?: string; // e.g., "Page 16"
+  rating?: number; // 1-5
+  author?: string;
+}
+
+export interface QuotesData {
+  quotes: Quote[];
+  columns?: 1 | 2 | 3;
 }
