@@ -1,217 +1,317 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Award, ArrowRight, Users, Building } from 'lucide-react';
-import type { CaseStudyCardData } from './types';
+import { X, Award, ArrowRight, Users, Building, MapPin, Calendar } from 'lucide-react';
+import type { CaseStudyCardData, CaseStudy } from './types';
 
 interface CaseStudyCardBlockProps {
   data: CaseStudyCardData;
 }
 
-export function CaseStudyCardBlock({ data }: CaseStudyCardBlockProps) {
-  const { studies, columns = 2 } = data;
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+function CaseStudyModal({ study, onClose }: { study: CaseStudy; onClose: () => void }) {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
-  const gridCols = {
-    2: 'grid-cols-1 lg:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-  };
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
 
   return (
-    <div className={`grid ${gridCols[columns]} gap-4`}>
-      {studies.map((study, index) => {
-        const isExpanded = expandedId === study.id;
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
 
-        return (
-          <motion.div
-            key={study.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            className="bg-card border border-card rounded-2xl overflow-hidden"
-          >
-            {/* Header with optional image */}
-            <div
-              className="relative h-32 bg-gradient-to-br from-white/5 to-white/10 cursor-pointer"
-              onClick={() => setExpandedId(isExpanded ? null : study.id)}
-            >
-              {study.image && (
-                <img
-                  src={study.image}
-                  alt={study.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-50"
-                />
+      {/* Modal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+        className="relative w-full max-w-4xl max-h-[90vh] bg-[#1a1a1a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 bg-black/40 hover:bg-black/60 rounded-full transition-colors"
+        >
+          <X className="w-5 h-5 text-white" />
+        </button>
+
+        {/* Scrollable content */}
+        <div className="overflow-y-auto max-h-[90vh]">
+          {/* Hero image */}
+          <div className="relative h-64 bg-gradient-to-br from-white/5 to-white/10">
+            {study.image && (
+              <img
+                src={study.image}
+                alt={study.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent" />
+          </div>
+
+          {/* Content */}
+          <div className="px-8 pb-8 -mt-16 relative">
+            {/* Header */}
+            <div className="mb-6">
+              {study.year && (
+                <p className="text-sky-400 text-sm font-medium mb-2">{study.year}</p>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+              <h2 className="text-3xl font-bold text-white mb-2">{study.title}</h2>
+              <p className="text-lg text-gray-400">{study.subtitle}</p>
+            </div>
 
-              {/* Awards badge */}
-              {study.awards && study.awards.length > 0 && (
-                <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 bg-amber-500/20 rounded-full">
-                  <Award className="w-3 h-3 text-amber-400" />
-                  <span className="text-xs font-medium text-amber-400">{study.awards.length}</span>
+            {/* Quick facts bar */}
+            <div className="flex flex-wrap gap-6 py-4 mb-6 border-y border-white/10">
+              {study.location && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-300">{study.location}</span>
+                </div>
+              )}
+              {study.architect && (
+                <div className="flex items-center gap-2">
+                  <Building className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-300">{study.architect}</span>
+                </div>
+              )}
+              {study.year && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-300">Completed {study.year}</span>
                 </div>
               )}
             </div>
 
-            {/* Content */}
-            <div
-              className="p-5 cursor-pointer"
-              onClick={() => setExpandedId(isExpanded ? null : study.id)}
-            >
-              <h3 className="text-lg font-semibold text-white mb-1">{study.title}</h3>
-              <p className="text-sm text-gray-500 mb-3">{study.subtitle}</p>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {study.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-3">
-                {study.tags.slice(0, 3).map((tag, i) => (
-                  <span
-                    key={i}
-                    className="px-2 py-0.5 bg-white/5 rounded text-xs text-gray-400"
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {study.tags.length > 3 && (
-                  <span className="px-2 py-0.5 text-xs text-gray-500">
-                    +{study.tags.length - 3} more
-                  </span>
+            {/* Two column layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main content - 2 cols */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* Description */}
+                <div>
+                  <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-3">
+                    Overview
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed">{study.description}</p>
+                </div>
+
+                {/* Building Features */}
+                {study.buildingType && study.buildingType.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-3">
+                      Building Specifications
+                    </h3>
+                    <div className="space-y-2">
+                      {study.buildingType.map((type, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 p-3 bg-white/5 rounded-xl"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-2 flex-shrink-0" />
+                          <span className="text-sm text-gray-300">{type}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Strategies */}
+                {study.strategies && study.strategies.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-3">
+                      Key Strategies & Impact
+                    </h3>
+                    <div className="space-y-3">
+                      {study.strategies.map((strategy, i) => (
+                        <div
+                          key={i}
+                          className="p-4 bg-gradient-to-r from-white/5 to-transparent rounded-xl border-l-2 border-emerald-500"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-medium text-white">{strategy.name}</span>
+                            <span className="flex items-center gap-1.5 px-2 py-1 bg-emerald-500/20 rounded-full text-xs font-medium text-emerald-400">
+                              <ArrowRight className="w-3 h-3" />
+                              {strategy.impact}
+                            </span>
+                          </div>
+                          {strategy.description && (
+                            <p className="text-sm text-gray-500">{strategy.description}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
 
-              {/* Expand indicator */}
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>{isExpanded ? 'Hide details' : 'View details'}</span>
-                <motion.div
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </motion.div>
+              {/* Sidebar - 1 col */}
+              <div className="space-y-6">
+                {/* Metrics */}
+                {study.metrics && study.metrics.length > 0 && (
+                  <div className="p-5 bg-white/5 rounded-2xl">
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+                      Key Metrics
+                    </h3>
+                    <div className="space-y-4">
+                      {study.metrics.map((metric, i) => (
+                        <div key={i}>
+                          <p className="text-2xl font-bold text-white">{metric.value}</p>
+                          <p className="text-xs text-gray-500">{metric.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Project Team */}
+                {study.team && study.team.length > 0 && (
+                  <div className="p-5 bg-white/5 rounded-2xl">
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+                      <Users className="w-4 h-4 inline mr-2" />
+                      Project Team
+                    </h3>
+                    <div className="space-y-3">
+                      {study.team.map((member, i) => (
+                        <div key={i}>
+                          <p className="text-xs text-gray-500">{member.role}</p>
+                          <p className="text-sm text-white">{member.company}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Awards */}
+                {study.awards && study.awards.length > 0 && (
+                  <div className="p-5 bg-gradient-to-br from-amber-500/10 to-transparent rounded-2xl border border-amber-500/20">
+                    <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-4">
+                      <Award className="w-4 h-4 inline mr-2" />
+                      Awards
+                    </h3>
+                    <div className="space-y-2">
+                      {study.awards.map((award, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-amber-200/80"
+                        >
+                          <Award className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-amber-400" />
+                          {award}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
-            {/* Expanded content */}
-            <AnimatePresence>
-              {isExpanded && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="px-5 pb-5 border-t border-card pt-4 space-y-4">
-                    {/* Description */}
-                    <p className="text-sm text-gray-400">{study.description}</p>
+export function CaseStudyCardBlock({ data }: CaseStudyCardBlockProps) {
+  const { studies } = data;
+  const [selectedStudy, setSelectedStudy] = useState<CaseStudy | null>(null);
 
-                    {/* Metrics */}
-                    {study.metrics && study.metrics.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                          Key Metrics
-                        </p>
-                        <div className="grid grid-cols-3 gap-2">
-                          {study.metrics.map((metric, i) => (
-                            <div key={i} className="p-2 bg-white/5 rounded-lg text-center">
-                              <p className="text-lg font-bold text-white">{metric.value}</p>
-                              <p className="text-xs text-gray-500">{metric.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+  return (
+    <>
+      {/* Horizontal scroll container */}
+      <div className="relative">
+        <div className="flex gap-6 overflow-x-auto pb-4 pr-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+          {studies.map((study, index) => (
+            <motion.div
+              key={study.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className="flex-shrink-0 w-72 snap-start text-center"
+            >
+              {/* Image area */}
+              <div
+                className="relative h-56 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl overflow-hidden cursor-pointer group mb-5"
+                onClick={() => setSelectedStudy(study)}
+              >
+                {study.image && (
+                  <img
+                    src={study.image}
+                    alt={study.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                )}
+              </div>
 
-                    {/* Building Type */}
-                    {study.buildingType && study.buildingType.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                          <Building className="w-3 h-3 inline mr-1" />
-                          Building Features
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {study.buildingType.map((type, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-1 bg-white/5 rounded text-xs text-gray-400"
-                            >
-                              {type}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+              {/* Content - minimal */}
+              <div className="space-y-2">
+                {/* Year - always show space for alignment */}
+                <p className={`text-sm h-5 ${study.year ? 'text-sky-400' : 'text-gray-700'}`}>
+                  {study.year || 'Research needed'}
+                </p>
+                <h3 className="text-xl font-semibold text-white">{study.title}</h3>
+                <p className="text-sm text-gray-500 line-clamp-2">{study.subtitle}</p>
 
-                    {/* Strategies */}
-                    {study.strategies && study.strategies.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                          Massing & Orientation Strategies
-                        </p>
-                        <div className="space-y-2">
-                          {study.strategies.map((strategy, i) => (
-                            <div
-                              key={i}
-                              className="p-3 bg-white/5 rounded-lg"
-                            >
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="text-sm font-medium text-white">{strategy.name}</span>
-                                <div className="flex items-center gap-1 text-emerald-400">
-                                  <ArrowRight className="w-3 h-3" />
-                                  <span className="text-xs">{strategy.impact}</span>
-                                </div>
-                              </div>
-                              {strategy.description && (
-                                <p className="text-xs text-gray-500">{strategy.description}</p>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                {/* Location - always show space for alignment */}
+                <p className={`text-sm h-5 ${study.location ? 'text-gray-400' : 'text-gray-700'}`}>
+                  {study.location || 'Location TBD'}
+                </p>
 
-                    {/* Project Team */}
-                    {study.team && study.team.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                          <Users className="w-3 h-3 inline mr-1" />
-                          Project Team
-                        </p>
-                        <div className="grid grid-cols-2 gap-2">
-                          {study.team.map((member, i) => (
-                            <div key={i} className="text-xs">
-                              <span className="text-gray-500">{member.role}:</span>{' '}
-                              <span className="text-gray-400">{member.company}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                {/* Button */}
+                <div className="pt-3">
+                  <button
+                    onClick={() => setSelectedStudy(study)}
+                    className="px-5 py-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-full transition-colors"
+                  >
+                    Learn more
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
-                    {/* Awards */}
-                    {study.awards && study.awards.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                          Awards
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {study.awards.map((award, i) => (
-                            <span
-                              key={i}
-                              className="flex items-center gap-1 px-2 py-1 bg-amber-500/10 rounded text-xs text-amber-400"
-                            >
-                              <Award className="w-3 h-3" />
-                              {award}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        );
-      })}
-    </div>
+      {/* Modal - rendered via portal to escape overflow containers */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {selectedStudy && (
+            <CaseStudyModal
+              study={selectedStudy}
+              onClose={() => setSelectedStudy(null)}
+            />
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 }

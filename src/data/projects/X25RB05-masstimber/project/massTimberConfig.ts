@@ -78,26 +78,6 @@ The study examines CLT (Cross-Laminated Timber) and Glulam structural systems, i
       },
     },
 
-    // Interior Renderings
-    {
-      type: 'section',
-      id: 'section-interiors',
-      data: { title: 'Interior Renderings' },
-    },
-    {
-      type: 'image-gallery',
-      id: 'interior-images',
-      data: {
-        images: [
-          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-ar4gh64CWpwVrL6hoZuX-INT - LOBBY 01 - OPTION 2 GRAPHICS PANEL.png', alt: 'Interior Lobby', caption: 'Lobby Interior' },
-          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-TbBGsma0JAA6JCymud14-LOBBY02.png', alt: 'Lobby View 2', caption: 'Lobby' },
-          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-kjStbNcg3g1RTofNif87-GYM01.png', alt: 'Gymnasium View 1', caption: 'Gymnasium' },
-          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-udVdq9MQ5sPA3hQnlDGK-GYM02.png', alt: 'Gymnasium View 2', caption: 'Gymnasium Interior' },
-        ],
-        columns: 2,
-      },
-    },
-
     // Budget Breakdown Section
     {
       type: 'section',
@@ -177,6 +157,26 @@ The study examines CLT (Cross-Laminated Timber) and Glulam structural systems, i
       },
     },
 
+    // Interior Renderings
+    {
+      type: 'section',
+      id: 'section-interiors',
+      data: { title: 'Interior Renderings' },
+    },
+    {
+      type: 'image-gallery',
+      id: 'interior-images',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-ar4gh64CWpwVrL6hoZuX-INT - LOBBY 01 - OPTION 2 GRAPHICS PANEL.png', alt: 'Interior Lobby', caption: 'Lobby Interior' },
+          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-TbBGsma0JAA6JCymud14-LOBBY02.png', alt: 'Lobby View 2', caption: 'Lobby' },
+          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-kjStbNcg3g1RTofNif87-GYM01.png', alt: 'Gymnasium View 1', caption: 'Gymnasium' },
+          { src: '/images/projects/X25RB05-masstimber/magnifics_upscale-udVdq9MQ5sPA3hQnlDGK-GYM02.png', alt: 'Gymnasium View 2', caption: 'Gymnasium Interior' },
+        ],
+        columns: 2,
+      },
+    },
+
     // Alternate Builder Section
     {
       type: 'section',
@@ -226,6 +226,26 @@ The study examines CLT (Cross-Laminated Timber) and Glulam structural systems, i
           { label: 'Alt 3', values: ['Remove CLT from Gym Roof', 'Deduct', '-$504,838'], highlight: true },
           { label: 'Alt 4', values: ['Remove Gym Roof CLT and Glulam Beams', 'Deduct', '-$1,192,757'], highlight: true },
         ],
+      },
+    },
+
+    // Site Photos Section
+    {
+      type: 'section',
+      id: 'section-site',
+      data: { title: 'Site Photos' },
+    },
+    {
+      type: 'image-gallery',
+      id: 'site-photos',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB05-masstimber/IMG_1018.JPG', alt: 'Site Photo 1' },
+          { src: '/images/projects/X25RB05-masstimber/IMG_1019.JPG', alt: 'Site Photo 2' },
+          { src: '/images/projects/X25RB05-masstimber/IMG_1020.JPG', alt: 'Site Photo 3' },
+          { src: '/images/projects/X25RB05-masstimber/PFISDCounselingTeam (1).jpg', alt: 'PFISD Counseling Team' },
+        ],
+        columns: 2,
       },
     },
 

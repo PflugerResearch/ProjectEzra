@@ -101,7 +101,7 @@ export const modulizer1Config: ProjectConfig = {
     {
       type: 'section',
       id: 'section-tools',
-      data: { title: 'Modeling Tools' },
+      data: { title: 'Modeling Tools', sources: [1, 2, 3] },
     },
     {
       type: 'tool-comparison',
@@ -159,7 +159,7 @@ export const modulizer1Config: ProjectConfig = {
     {
       type: 'section',
       id: 'section-precedents',
-      data: { title: 'Precedent Studies' },
+      data: { title: 'Precedent Studies', sources: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13] },
     },
     {
       type: 'case-study-card',
@@ -215,50 +215,105 @@ export const modulizer1Config: ProjectConfig = {
           },
           {
             id: 'lewis',
-            title: 'John Lewis Elementary',
-            subtitle: 'Washington, D.C. - Perkins Eastman',
-            tags: ['Education', 'COTE 2025', 'Net Zero'],
-            description: 'Flipped and rotated building to orient along east-west axis, achieving 9% reduction in energy consumption through orientation alone.',
+            title: 'John Lewis Elementary School',
+            subtitle: 'District of Columbia Public Schools',
+            location: 'Washington, D.C.',
+            architect: 'Perkins Eastman',
+            year: 2021,
+            siteArea: '162,948 SF',
+            conditionedArea: '88,588 SF',
+            stories: 2,
+            tags: ['Education', 'COTE 2025', 'PV Panels', 'Geothermal'],
+            description: 'Project team flipped the design previously done during the feasibility study and rotated it 90 degrees so that the building is oriented along an east-west axis. This decision alone resulted in a 9% reduction in energy consumption.',
+            buildingType: ['PV Panels on roof', 'Geothermal well field'],
             metrics: [
-              { label: 'Size', value: '88,588 SF' },
+              { label: 'Site Area', value: '162,948 SF' },
+              { label: 'Building Area', value: '88,588 SF' },
               { label: 'Stories', value: '2' },
-              { label: 'Year', value: '2021' },
             ],
             strategies: [
-              { name: '90 Degree Rotation', impact: '9% energy reduction' },
+              { name: 'Massing Optimization', description: 'Flipped and rotated design 90 degrees for east-west orientation', impact: '9% energy reduction' },
             ],
-            awards: ['AIA COTE Top Ten 2025', '2023 American Architecture Award', 'Planet Positive Award'],
+            team: [
+              { role: 'General Contractor', company: 'Gilbane/Saxon JV' },
+              { role: 'MEP Engineer', company: 'CMTA' },
+              { role: 'Structural Engineer', company: 'Yun Associates' },
+              { role: 'Landscape Architect', company: 'Natural Resources Design' },
+              { role: 'Sustainability', company: 'Perkins Eastman' },
+              { role: 'Energy Modeling', company: 'CMTA' },
+            ],
+            awards: ['AIA COTE Top Ten 2025', '2023 American Architecture Award', '2023 Planet Positive Award'],
           },
           {
             id: 'coliseum',
-            title: 'Coliseum Place',
-            subtitle: 'Oakland, California - David Baker Architects',
-            tags: ['Housing', 'COTE', 'Affordable'],
-            description: 'Simple massing combined with solar orientation response achieved ambitious energy-consumption-reduction goals.',
+            title: 'Coliseum Place Affordable Family Housing',
+            subtitle: '59 Affordable Apartment Units',
+            location: 'Oakland, California',
+            architect: 'David Baker Architects',
+            year: 2021,
+            siteArea: '20,290 SF',
+            conditionedArea: '71,512 SF',
+            tags: ['Housing', 'COTE', 'Affordable', 'Net Zero'],
+            description: 'The design combines simple massing and solar orientation response as the basis for ambitious energy-consumption-reduction goals. Features a protective solar screen along south facade and PV canopy achieving 100% common load offset.',
+            buildingType: ['Simple Massing', 'Protective Solar Screen on south facade', 'PV Canopy', 'Decentralized water heating'],
             metrics: [
-              { label: 'Size', value: '71,512 SF' },
-              { label: 'EUI', value: '15' },
-              { label: 'Year', value: '2021' },
+              { label: 'EUI', value: '15 kBtu/sf' },
+              { label: 'PV Array', value: '98 kW' },
+              { label: 'Waste Diversion', value: '81%' },
             ],
             strategies: [
-              { name: 'Simple Massing', impact: 'Energy goals achieved' },
-              { name: 'Solar Screen', impact: 'Reduced cooling' },
+              { name: 'Simple Massing', description: 'Clean building form optimized for solar response', impact: 'Reduced complexity' },
+              { name: 'South Facade Solar Screen', description: 'Protective shading along primary solar exposure', impact: 'Reduced cooling' },
+              { name: 'PV Canopy', description: '98 kW array offsetting 100% of common loads', impact: '100% offset' },
+              { name: 'Decentralized Hot Water', description: 'Residential heat pump water heaters remove major inefficiency', impact: 'Improved efficiency' },
             ],
-            awards: ['AIA COTE'],
+            awards: ['AIA COTE Top Ten'],
           },
           {
             id: 'westwood',
             title: 'Westwood Hills Nature Center',
-            subtitle: 'St. Louis Park, MN - HGA',
-            tags: ['Civic', 'COTE', 'Zero Energy'],
-            description: 'Orientation and shading optimized for passive heating, cooling, and daylighting achieving 100% zero energy.',
+            subtitle: 'Net Zero Nature Center',
+            location: 'St. Louis Park, Minnesota',
+            architect: 'HGA',
+            year: 2020,
+            siteArea: '167,088 SF',
+            conditionedArea: '13,565 SF',
+            tags: ['Nature Center', 'COTE', 'Zero Energy', 'Geothermal'],
+            description: 'The envelope, orientation, and shading were optimized for efficiency to take advantage of existing site resources - sun and wind - and maximize use of passive heating, cooling, and daylighting. Achieved 100% renewable energy and provides educational opportunities for visitors.',
+            buildingType: ['Photovoltaic array', 'Geothermal well field', 'Radiant floor heating', 'LED lighting'],
             metrics: [
-              { label: 'Size', value: '13,565 SF' },
               { label: 'Renewable', value: '100%' },
-              { label: 'Year', value: '2020' },
+              { label: 'Carbon Reduction', value: '100%' },
+              { label: 'Stormwater Managed', value: '81.6%' },
             ],
             strategies: [
-              { name: 'Envelope Optimization', impact: '100% zero energy' },
+              { name: 'Envelope Optimization', description: 'Optimized for passive heating, cooling, and daylighting using sun and wind', impact: '100% zero energy' },
+              { name: 'Geothermal + Radiant Floor', description: 'Well field supplements all-electric boilers as heat source', impact: 'Maximum efficiency' },
+              { name: 'WeatherShift Modeling', description: 'Used future weather data projections in energy model', impact: 'Future-proof design' },
+            ],
+            awards: ['AIA COTE Top Ten'],
+          },
+          {
+            id: 'olver',
+            title: 'John W. Olver Transit Center',
+            subtitle: 'Net Zero Transit Hub',
+            location: 'Greenfield, Massachusetts',
+            architect: 'Charles Rose Architects',
+            year: 2014,
+            siteArea: '81,400 SF',
+            conditionedArea: '24,000 SF',
+            tags: ['Transit', 'COTE', 'Zero Energy', 'Geothermal'],
+            description: 'The design strategy utilized energy modeling, including sunpath diagrams to develop the building form. The second story cantilevers over the waiting area, providing shade and reducing summer solar heat gains. Achieved 100% renewable energy offset.',
+            buildingType: ['7,300 SF PV array', '22 geothermal wells', 'On-site wood-pellet boiler', 'FSC certified wood'],
+            metrics: [
+              { label: 'EUI', value: '21.3 kBtu/sf' },
+              { label: 'Renewable', value: '100%' },
+              { label: 'Water Reduction', value: '85%' },
+            ],
+            strategies: [
+              { name: 'Cantilevered Massing', description: 'Second story cantilevers to shade waiting area below', impact: 'Reduced heat gain' },
+              { name: 'Sunpath-Driven Form', description: 'Building form developed using energy modeling and sunpath diagrams', impact: 'Optimized orientation' },
+              { name: 'Multi-Source Renewable', description: 'PV, geothermal, and wood-pellet boiler for 100% renewable energy', impact: '95.5% carbon reduction' },
             ],
             awards: ['AIA COTE Top Ten'],
           },
@@ -271,7 +326,19 @@ export const modulizer1Config: ProjectConfig = {
     {
       type: 'section',
       id: 'section-casestudy',
-      data: { title: 'Kennedy Elementary Case Study' },
+      data: { title: 'Optimizing Kennedy Elementary' },
+    },
+    {
+      type: 'image-gallery',
+      id: 'kennedy-renderings',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB08-modulizer1/OptionA_WoodStone_Final.png', alt: 'Kennedy Elementary Exterior', caption: 'Exterior Rendering' },
+          { src: '/images/projects/X25RB08-modulizer1/Courtyard_Final.jpg', alt: 'Kennedy Elementary Courtyard', caption: 'Courtyard View' },
+          { src: '/images/projects/X25RB08-modulizer1/Kenedy Library 2 Final.png', alt: 'Kennedy Elementary Library', caption: 'Library Interior' },
+        ],
+        columns: 3,
+      },
     },
     {
       type: 'text-content',
@@ -280,7 +347,41 @@ export const modulizer1Config: ProjectConfig = {
         content: `**Project:** Kennedy Elementary
 **Focus:** SD/DD interventions focusing on reducing heat gain, glare, and improving seasonal daylighting
 
-Heat maps were delivered at 9am, 12pm, and 5pm across all seasons (Spring, Summer, Fall, Winter) to guide design decisions.`,
+Applying the lessons learned from COTE award-winning precedents, this case study demonstrates how early-stage energy modeling can directly inform design decisions. Using Sefaira, we conducted iterative daylight and glare analysis to identify problem areas and test solutions before construction.`,
+      },
+    },
+    {
+      type: 'text-content',
+      id: 'casestudy-methodology',
+      title: 'Methodology',
+      data: {
+        content: `**Simulation Schedule:**
+Heat maps were generated at three critical times of day (9am, 12pm, 5pm) across all four seasons (Spring, Summer, Fall, Winter) to capture the full range of solar conditions the building will experience.
+
+**Areas of Focus:**
+- South-facing collaboration spaces and classrooms
+- North-facing collaboration spaces and classrooms
+- Central library and common spaces
+
+**Analysis Parameters:**
+- Illuminance levels (footcandles)
+- Glare potential
+- Solar heat gain
+- Visible Light Transmittance (VLT) performance`,
+      },
+    },
+    {
+      type: 'text-content',
+      id: 'casestudy-problem',
+      title: 'Problem Identification',
+      data: {
+        content: `The base model simulation revealed several issues requiring intervention:
+
+**Overlit Spaces:** Collaboration areas showed footcandle readings in the 75+ fc range - well above the 30-50 fc target for educational spaces. This indicated potential glare issues and excessive solar heat gain.
+
+**Seasonal Variability:** Significant illuminance swings were observed between seasons, with summer conditions creating the most extreme overlit conditions.
+
+**Insufficient Shading:** Despite deep overhangs in the initial design, the glazing choices allowed too much direct sunlight penetration, particularly on south-facing facades.`,
       },
     },
     {
@@ -332,6 +433,55 @@ Heat maps were delivered at 9am, 12pm, and 5pm across all seasons (Spring, Summe
         ],
       },
     },
+    {
+      type: 'text-content',
+      id: 'daylight-analysis-title',
+      title: 'Daylight Analysis Results',
+      data: {
+        content: `The following analysis shows the June 21st 12pm daylight simulation comparing baseline conditions against iterative modifications including overhang extensions, VLT adjustments, and blind integration.`,
+      },
+    },
+    {
+      type: 'image-gallery',
+      id: 'daylight-analysis-overview',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB08-modulizer1/Daylight analysis overview.jpg', alt: 'Daylight Analysis Overview', caption: 'Analysis Overview' },
+          { src: '/images/projects/X25RB08-modulizer1/ANALYSIS CHART.jpg', alt: 'Analysis Chart', caption: 'Comparison Chart' },
+        ],
+        columns: 2,
+      },
+    },
+    {
+      type: 'image-gallery',
+      id: 'daylight-iterations',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB08-modulizer1/June 21 12pm.png', alt: 'June 21 12pm Baseline', caption: 'Baseline - June 21 12pm' },
+          { src: '/images/projects/X25RB08-modulizer1/June 21 12pm_mod overhang.png', alt: 'Modified Overhang', caption: 'Modified Overhang' },
+          { src: '/images/projects/X25RB08-modulizer1/June 21 12pm_mod VLT.png', alt: 'Modified VLT', caption: 'Modified VLT' },
+          { src: '/images/projects/X25RB08-modulizer1/June 21 12pm_mod VLT + blinds.png', alt: 'Modified VLT + Blinds', caption: 'Modified VLT + Blinds' },
+        ],
+        columns: 4,
+      },
+    },
+    {
+      type: 'text-content',
+      id: 'daylight-results',
+      title: 'Intervention Results',
+      data: {
+        content: `**Iteration 1 - Modified Overhang:**
+Extended overhangs in problematic areas reduced direct solar penetration but did not fully address glare in collaboration spaces.
+
+**Iteration 2 - Modified VLT:**
+Decreased Visible Light Transmittance by 50% in high-glare zones and 10% in moderate zones. This significantly reduced footcandle readings while maintaining adequate daylight levels.
+
+**Iteration 3 - VLT + Blinds Integration:**
+Combined VLT modifications with automated blind systems for dynamic response to changing solar conditions. This achieved target footcandle readings (30-50 fc) across all analyzed spaces.
+
+**Key Takeaway:** A layered approach combining passive strategies (overhangs, glazing selection) with active systems (automated blinds) provided the most effective solution for balancing daylight quality with glare control.`,
+      },
+    },
 
     // Conclusions Section
     {
@@ -368,11 +518,19 @@ Heat maps were delivered at 9am, 12pm, and 5pm across all seasons (Spring, Summe
       id: 'research-sources',
       data: {
         sources: [
-          { id: 1, title: 'AIA COTE Top Ten Database', author: 'AIA' },
-          { id: 2, title: 'Climate Studio Documentation', author: 'Solemma' },
-          { id: 3, title: 'Sefaira User Guide', author: 'Trimble' },
-          { id: 4, title: 'Ladybug Tools Documentation', author: 'Ladybug Tools LLC' },
-          { id: 5, title: 'ASHRAE 90.1-2019', author: 'ASHRAE' },
+          { id: 1, title: 'Sefaira Projects', author: 'Trimble SketchUp', url: 'https://sefaira.sketchup.com/page/projects' },
+          { id: 2, title: 'Autodesk Forma', author: 'Autodesk', url: 'https://app.autodeskforma.com' },
+          { id: 3, title: 'Climate Studio', author: 'Solemma LLC', url: 'https://www.solemma.com/climatestudio' },
+          { id: 4, title: 'Alice West Fleet Elementary School - AIA Design Excellence', author: 'AIA', url: 'https://www.aia.org/design-excellence/award-winners/alice-west-fleet-elementary-school' },
+          { id: 5, title: 'Alice West Fleet Elementary School', author: 'VMDO Architects', url: 'https://www.vmdo.com/alice-west-fleet-elementary-school.html' },
+          { id: 6, title: 'John Lewis Elementary School - AIA COTE', author: 'AIA', url: 'https://aia.secure-platform.com/a/gallery/rounds/723/details/59121' },
+          { id: 7, title: 'John Lewis Elementary School', author: 'Perkins Eastman', url: 'https://www.perkinseastman.com/projects/john-lewis-elementary-school/' },
+          { id: 8, title: 'Coliseum Place - AIA COTE', author: 'AIA', url: 'https://aia.secure-platform.com/a/gallery/rounds/723/details/61183' },
+          { id: 9, title: 'Coliseum Place', author: 'David Baker Architects', url: 'https://www.dbarchitect.com/projects/coliseum-place' },
+          { id: 10, title: 'John W. Olver Transit Center - AIA Design Excellence', author: 'AIA', url: 'https://www.aia.org/design-excellence/award-winners/john-w-olver-transit-center' },
+          { id: 11, title: 'John W. Olver Transit Center', author: 'Charles Rose Architects', url: 'https://www.charlesrosearchitects.com/projects/john-w-olver-transit-center/' },
+          { id: 12, title: 'Westwood Hills Nature Center - AIA Design Excellence', author: 'AIA', url: 'https://www.aia.org/design-excellence/award-winners/westwood-hills-nature-center' },
+          { id: 13, title: 'Westwood Hills Nature Center', author: 'HGA', url: 'https://hga.com/projects/westwood-hills-nature-center/' },
         ],
       },
     },

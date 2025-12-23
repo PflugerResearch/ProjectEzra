@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useProjects } from '../../context/ProjectsContext';
 
-const PROJECTS_WITH_DASHBOARDS = ['X25-RB01', 'X25-RB02', 'X25-RB05', 'X25-RB06', 'X25-RB08', 'X25-RB13'];
+const PROJECTS_WITH_DASHBOARDS = ['X25-RB00', 'X25-RB01', 'X25-RB02', 'X25-RB03', 'X25-RB05', 'X25-RB06', 'X25-RB08', 'X25-RB13'];
 
 interface PortfolioProps {
   onOpenProjectDashboard?: (projectId: string) => void;
