@@ -1,9 +1,9 @@
 import type { ProjectConfig } from '../../../../components/blocks/types';
 
 export const immersiveConfig: ProjectConfig = {
-  id: 'X25-RB00',
+  id: 'X24-RB01',
   title: 'Immersive Learning',
-  code: 'X25-RB00',
+  code: 'X24-RB01',
   subtitle: 'Exploring Immersive Technologies in Education',
   category: 'immersive',
   researcher: 'Alex Wickes',
@@ -75,16 +75,6 @@ As part of the GPISD initiative, this study examines the vision, implementation 
             src: '/images/projects/X25RB00-immersive/tmclark-eye.jpeg',
             alt: 'TMC - The Eye',
             caption: 'TMC - The Eye - Central viewing experience surrounded by immersion',
-          },
-          {
-            src: '/images/projects/X25RB00-immersive/tmclark-render-01.png',
-            alt: 'TM Clark Immersive Library - Ocean Theme',
-            caption: 'The Eye Below The Boats - Immersive ocean experience',
-          },
-          {
-            src: '/images/projects/X25RB00-immersive/tmclark-render-02.png',
-            alt: 'TM Clark Immersive Library - Forest Theme',
-            caption: 'Lab Entry - Transition into immersive space',
           },
           {
             src: '/images/projects/X25RB00-immersive/tmclark-render-03.jpeg',
@@ -574,74 +564,102 @@ Each layer has different options ranging from generalized/low-cost to specialize
       data: { title: 'Cost Analysis' },
     },
     {
-      type: 'comparison-table',
-      id: 'costs-table',
-      title: 'Vendor Cost Breakdown',
-      description: 'Midland IML project cost analysis',
-      data: {
-        headers: ['Vendor', 'Product', 'Device', 'Content', 'Architecture', 'Total'],
-        rows: [
-          { label: 'Elumenati', values: ['6.8m Panorama', '$100,900', '$7,600', '$80,000', '$188,500'], highlight: true },
-          { label: 'KidsJumpTech', values: ['Mobile Wall (x3)', '$38,820', '$0', '$750', '$39,570'], highlight: false },
-          { label: 'KidsJumpTech', values: ['Mobile Floor (x3)', '$44,505', '$0', '$750', '$45,255'], highlight: false },
-          { label: 'KidsJumpTech', values: ['Fixed Floor (x3)', '$20,997', '$0', '$15,000', '$35,997'], highlight: false },
-          { label: 'KidsJumpTech', values: ['Sandbox', '$16,999', '$0', '$2,000', '$18,999'], highlight: false },
-          { label: 'KidsJumpTech', values: ['Touch Table (x2)', '$15,398', '$0', '$2,000', '$17,398'], highlight: false },
-          { label: 'Play Lu', values: ['Single (x3)', '$120,000', '$22,800', '$3,000', '$142,800'], highlight: true },
-          { label: 'zSpace', values: ['10 Laptops', '$49,990', '$50,000', '$2,500', '$102,490'], highlight: false },
-          { label: 'Looking Glass', values: ['27" (x10)', '$100,000', '$0', '$5,000', '$105,000'], highlight: false },
-          { label: 'VXR Labs', values: ['50 Quest 3', '$41,875', '$0', '$12,000', '$53,875'], highlight: false },
-          { label: 'Quiver Vision', values: ['AR Worksheets', '$300', '$0', '$0', '$300'], highlight: false },
-        ],
-      },
-    },
-    {
       type: 'stat-grid',
       id: 'costs-summary',
-      title: 'Project Summary',
+      title: 'Vendor Landscape',
       data: {
         stats: [
-          { label: 'Total Project Budget', value: '$750,184', detail: 'All vendors combined' },
-          { label: 'Largest Investment', value: 'Elumenati', detail: '$188,500 for 6.8m Panorama' },
-          { label: 'Lowest Entry', value: 'Quiver Vision', detail: '$300 for AR Worksheets' },
-          { label: 'Vendors', value: '8', detail: 'Technology providers' },
+          { label: 'Vendors Analyzed', value: '8', detail: 'Technology providers' },
+          { label: 'Products Available', value: '20+', detail: 'Across all vendors' },
+          { label: 'Price Range', value: '$300-$189K', detail: 'Per unit cost' },
+          { label: 'Space Types', value: '4', detail: 'Device, Plane, Tactile, Panorama' },
         ],
         columns: 4,
       },
     },
-
-    // ===== 9. CASE STUDY: TM CLARK (Slides 56-69) =====
     {
-      type: 'section',
-      id: 'section-tmclark',
-      data: { title: 'Case Study: TM Clark Elementary' },
-    },
-    {
-      type: 'case-study-card',
-      id: 'tmclark-card',
+      type: 'product-options',
+      id: 'product-lines',
+      title: 'Product Lines',
+      description: 'Compare options within each product category',
       data: {
-        studies: [
+        lines: [
           {
-            id: 'tmclark',
-            title: 'TM Clark Elementary',
-            subtitle: 'GPISD Immersive Learning Pioneer',
-            tags: ['New Construction', 'K-5', 'GPISD'],
-            description: 'TM Clark Elementary serves as the flagship immersive learning implementation for GPISD. The design integrates multiple immersive technologies across the gymnasium and library spaces, creating a comprehensive learning environment.',
-            location: 'Grand Prairie, TX',
-            year: 2025,
-            metrics: [
-              { label: 'Spaces', value: 'Gymnasium + Library' },
-              { label: 'Panorama', value: "15' Immersive" },
-              { label: 'Audio', value: '5.1 Surround Sound' },
+            name: 'Panorama Domes',
+            subtitle: 'Elumenati',
+            image: '/images/projects/X25RB00-immersive/vendor-elumenati.jpeg',
+            options: [
+              { name: '6.8m', price: 189000, color: '#00A9E0', specs: [{ label: 'Diameter', value: '22.3 ft' }, { label: 'Audio', value: '5.1 surround' }, { label: 'Capacity', value: '25-30' }], costs: [{ label: 'Device', value: 54, color: '#00A9E0' }, { label: 'Architecture', value: 42, color: '#F2A900' }, { label: 'Content', value: 4, color: '#67823A' }] },
+              { name: '5.0m', price: 175000, color: '#3B82F6', specs: [{ label: 'Diameter', value: '16.4 ft' }, { label: 'Audio', value: '5.1 surround' }, { label: 'Capacity', value: '15-20' }], costs: [{ label: 'Device', value: 50, color: '#00A9E0' }, { label: 'Architecture', value: 46, color: '#F2A900' }, { label: 'Content', value: 4, color: '#67823A' }] },
+              { name: '4.5m', price: 174000, color: '#8B5CF6', specs: [{ label: 'Diameter', value: '14.8 ft' }, { label: 'Audio', value: '5.1 surround' }, { label: 'Capacity', value: '10-15' }], costs: [{ label: 'Device', value: 49, color: '#00A9E0' }, { label: 'Architecture', value: 46, color: '#F2A900' }, { label: 'Content', value: 5, color: '#67823A' }] },
             ],
-            strategies: [
-              { name: 'Gymnasium', description: 'Play Lu Duo system', impact: 'Active learning' },
-              { name: 'Immersive Library', description: 'Panorama with hands-on flex space', impact: 'Multi-modal learning' },
-              { name: 'Maker Labs', description: 'First and second floor labs', impact: 'STEM integration' },
+          },
+          {
+            name: 'Gym Systems',
+            subtitle: 'Play Lu',
+            image: '/images/projects/X25RB00-immersive/vendor-playlu.jpeg',
+            options: [
+              { name: 'Duo', price: 78000, color: '#9A3324', specs: [{ label: 'Sides', value: 'Dual' }, { label: 'Space', value: 'Full gym' }], costs: [{ label: 'Device', value: 84, color: '#00A9E0' }, { label: 'Content', value: 10, color: '#67823A' }, { label: 'Architecture', value: 6, color: '#F2A900' }] },
+              { name: 'Mobile', price: 49000, color: '#DC2626', specs: [{ label: 'Sides', value: 'Single' }, { label: 'Space', value: 'Portable' }], costs: [{ label: 'Device', value: 82, color: '#00A9E0' }, { label: 'Content', value: 16, color: '#67823A' }, { label: 'Architecture', value: 2, color: '#F2A900' }] },
+              { name: 'Single', price: 48000, color: '#F87171', specs: [{ label: 'Sides', value: 'Single' }, { label: 'Space', value: 'Half gym' }], costs: [{ label: 'Device', value: 73, color: '#00A9E0' }, { label: 'Content', value: 16, color: '#67823A' }, { label: 'Architecture', value: 11, color: '#F2A900' }] },
+            ],
+          },
+          {
+            name: 'Wall Projectors',
+            subtitle: 'Kids Jump Tech',
+            image: '/images/projects/X25RB00-immersive/vendor-kidsjump.jpeg',
+            options: [
+              { name: 'Fixed', price: 14000, color: '#67823A', specs: [{ label: 'Lumens', value: '5000lm' }, { label: 'Install', value: 'Permanent' }], costs: [{ label: 'Device', value: 64, color: '#00A9E0' }, { label: 'Architecture', value: 36, color: '#F2A900' }] },
+              { name: 'Mobile', price: 13000, color: '#84CC16', specs: [{ label: 'Lumens', value: '5000lm' }, { label: 'Install', value: 'Portable' }], costs: [{ label: 'Device', value: 98, color: '#00A9E0' }, { label: 'Architecture', value: 2, color: '#F2A900' }] },
+            ],
+          },
+          {
+            name: 'Floor Projectors',
+            subtitle: 'Kids Jump Tech',
+            image: '/images/projects/X25RB00-immersive/vendor-kidsjump.jpeg',
+            options: [
+              { name: 'Mobile', price: 15000, color: '#67823A', specs: [{ label: 'Lumens', value: '5000lm' }, { label: 'Install', value: 'Portable' }], costs: [{ label: 'Device', value: 98, color: '#00A9E0' }, { label: 'Architecture', value: 2, color: '#F2A900' }] },
+              { name: 'Fixed', price: 12000, color: '#84CC16', specs: [{ label: 'Lumens', value: '5200lm' }, { label: 'Install', value: 'Permanent' }], costs: [{ label: 'Device', value: 58, color: '#00A9E0' }, { label: 'Architecture', value: 42, color: '#F2A900' }] },
+            ],
+          },
+          {
+            name: 'Holographic Displays',
+            subtitle: 'Looking Glass',
+            image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
+            options: [
+              { name: '27"', price: 11000, color: '#F2A900', specs: [{ label: 'Resolution', value: '4K' }, { label: 'Views', value: '100+' }], costs: [{ label: 'Device', value: 95, color: '#00A9E0' }, { label: 'Architecture', value: 5, color: '#F2A900' }] },
+              { name: '16"', price: 4000, color: '#FBBF24', specs: [{ label: 'Resolution', value: '4K' }, { label: 'Views', value: '50+' }], costs: [{ label: 'Device', value: 86, color: '#00A9E0' }, { label: 'Architecture', value: 14, color: '#F2A900' }] },
+            ],
+          },
+          {
+            name: 'Tactile Systems',
+            subtitle: 'Kids Jump Tech',
+            image: '/images/projects/X25RB00-immersive/vendor-kidsjump.jpeg',
+            options: [
+              { name: 'Sandbox', price: 19000, color: '#67823A', specs: [{ label: 'Lumens', value: '6200lm' }, { label: 'Type', value: 'AR tactile' }], costs: [{ label: 'Device', value: 89, color: '#00A9E0' }, { label: 'Architecture', value: 11, color: '#F2A900' }] },
+              { name: 'Touch Table', price: 9000, color: '#84CC16', specs: [{ label: 'Size', value: '65"' }, { label: 'Type', value: '4K multi-touch' }], costs: [{ label: 'Device', value: 88, color: '#00A9E0' }, { label: 'Architecture', value: 12, color: '#F2A900' }] },
             ],
           },
         ],
-        columns: 1,
+        columns: 3,
+      },
+    },
+
+    // ===== 9. TM CLARK ELEMENTARY (Slides 56-69) =====
+    {
+      type: 'section',
+      id: 'section-tmclark',
+      data: { title: 'TM Clark Elementary' },
+    },
+    {
+      type: 'image-gallery',
+      id: 'tmclark-hero-renders',
+      data: {
+        images: [
+          { src: '/images/projects/X25RB00-immersive/tmclark-render-01.png', alt: 'TM Clark Immersive Library - Ocean View', caption: 'Immersive Library - Ocean Environment' },
+          { src: '/images/projects/X25RB00-immersive/tmclark-render-02.png', alt: 'TM Clark Immersive Library - Alternate View', caption: 'Immersive Library - Interactive Floor' },
+        ],
+        columns: 2,
       },
     },
     // TM Clark Library - Detailed Design

@@ -23,7 +23,7 @@ import AboutAI from './views/About/AboutAI';
 import AboutTools from './views/About/AboutTools';
 import AboutSources from './views/About/AboutSources';
 import { ProjectDashboard } from './views/projects';
-import { immersiveConfig } from './data/projects/X25RB00-immersive/project/immersiveConfig';
+import { immersiveConfig } from './data/projects/X24RB01-immersive/project/immersiveConfig';
 import { sanctuaryConfig } from './data/projects/X25RB01-sanctuary/project/sanctuaryConfig';
 import { modulizer2Config } from './data/projects/X25RB02-modulizer2/project/modulizer2Config';
 import { modulizer1Config } from './data/projects/X25RB08-modulizer1/project/modulizer1Config';
@@ -31,9 +31,10 @@ import { a4leConfig } from './data/projects/X25RB03-a4le/project/a4leConfig';
 import { massTimberConfig } from './data/projects/X25RB05-masstimber/project/massTimberConfig';
 import { modulizer3Config } from './data/projects/X25RB13-modulizer3/project/modulizer3Config';
 import { timberlyneConfig } from './data/projects/X25RB06-timberlyne/project/timberlyneConfig';
+import { showcaseConfig } from './data/projects/X00-block-showcase/project/showcaseConfig';
 
 // Project overlay types
-type ProjectOverlay = 'project-rb00' | 'project-rb01' | 'project-rb02' | 'project-rb03' | 'project-rb05' | 'project-rb06' | 'project-rb08' | 'project-rb13' | null;
+type ProjectOverlay = 'project-rb00' | 'project-rb01' | 'project-rb02' | 'project-rb03' | 'project-rb05' | 'project-rb06' | 'project-rb08' | 'project-rb13' | 'project-demo' | null;
 
 function AppContent() {
   const [view, setView] = useState<ViewType>('home');
@@ -46,7 +47,7 @@ function AppContent() {
   };
 
   const openProject = (projectId: string) => {
-    if (projectId === 'X25-RB00') setProjectOverlay('project-rb00');
+    if (projectId === 'X24-RB01') setProjectOverlay('project-rb00');
     else if (projectId === 'X25-RB01') setProjectOverlay('project-rb01');
     else if (projectId === 'X25-RB02') setProjectOverlay('project-rb02');
     else if (projectId === 'X25-RB03') setProjectOverlay('project-rb03');
@@ -54,6 +55,7 @@ function AppContent() {
     else if (projectId === 'X25-RB06') setProjectOverlay('project-rb06');
     else if (projectId === 'X25-RB08') setProjectOverlay('project-rb08');
     else if (projectId === 'X25-RB13') setProjectOverlay('project-rb13');
+    else if (projectId === 'X00-DEMO') setProjectOverlay('project-demo');
   };
 
   const closeProject = () => {
@@ -75,7 +77,7 @@ function AppContent() {
   const renderView = () => {
     switch (view) {
       case 'home':
-        return <Home onNavigate={() => {}} />;
+        return <Home onNavigate={() => {}} onOpenProject={openProject} />;
       case 'dashboard':
         return <Dashboard onNavigate={(v) => handleNavigate(v as ViewType)} />;
       case 'the-repo':
@@ -132,6 +134,8 @@ function AppContent() {
         return <ProjectDashboard config={timberlyneConfig} onBack={closeProject} />;
       case 'project-rb13':
         return <ProjectDashboard config={modulizer3Config} onBack={closeProject} />;
+      case 'project-demo':
+        return <ProjectDashboard config={showcaseConfig} onBack={closeProject} />;
       default:
         return null;
     }

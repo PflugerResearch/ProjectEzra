@@ -92,26 +92,90 @@ src/
 │   ├── System/
 │   │   ├── ThemeManager.tsx        # Theme colors & utilities
 │   │   └── AuthContext.tsx         # Authentication state
+│   ├── blocks/                     # Block system components
+│   │   ├── BlockRenderer.tsx       # Renders blocks by type
+│   │   ├── types.ts                # Block type definitions
+│   │   └── *Block.tsx              # Individual block components
 │   └── ui/                         # Radix UI components
 ├── views/
-│   ├── Home.tsx                    # Landing page
-│   ├── ResearchMap.tsx             # Interactive map
-│   ├── Portfolio.tsx               # Research gallery
-│   ├── Collaborate.tsx             # Contact page
-│   ├── Dashboard.tsx               # Internal hub
-│   ├── AboutRB.tsx                 # About R&B
-│   ├── AboutProcess.tsx            # Our process
-│   ├── AboutTools.tsx              # Software & custom tools
-│   ├── AboutAI.tsx                 # Use of AI
-│   └── AboutSources.tsx            # Sources & citations
+│   ├── Home.tsx                    # Landing page with carousel
+│   ├── Campus/ResearchMap.tsx      # Interactive map
+│   ├── Explore/Portfolio.tsx       # Research gallery by year
+│   ├── Connect/Collaborate.tsx     # Contact page
+│   ├── Repo/                       # Internal dashboard views
+│   ├── About/                      # About section views
+│   └── projects/
+│       └── ProjectDashboard.tsx    # Project detail overlay
 ├── data/
-│   └── loadProjects.ts             # CSV data loader
+│   ├── loadProjects.ts             # CSV data loader
+│   └── projects/                   # Project configurations
+│       ├── X24RB01-immersive/      # 2024 projects
+│       ├── X25RB01-sanctuary/      # 2025 projects
+│       └── X00-block-showcase/     # Block demo project
 ├── context/
 │   └── ProjectsContext.tsx         # Global project state
 public/
 └── data/
     └── research_projects.csv       # Research project data
 ```
+
+## Block System
+
+Project dashboards use a composable block system. Each project has a config file defining its content using typed blocks.
+
+### Available Blocks (21 types)
+
+| Block | Purpose |
+|-------|---------|
+| `section` | Section divider with title and optional source refs |
+| `text-content` | Markdown-like text with headers, bullets, bold |
+| `stat-grid` | Grid of key metrics with trends |
+| `key-findings` | Icon-based findings cards |
+| `bar-chart` | Horizontal bars (simple, grouped, multi-bar) |
+| `donut-chart` | Circular chart with center label |
+| `comparison-table` | Side-by-side feature comparison |
+| `image-gallery` | Responsive image grid with lightbox |
+| `timeline` | Project timeline (horizontal/vertical) |
+| `workflow-steps` | Process steps with findings/deliverables |
+| `case-study-card` | Scrollable project cards with detail modals |
+| `tool-comparison` | Rating rings with pros/cons |
+| `scenario-bar-chart` | Cost scenario comparison |
+| `cost-builder` | Interactive budget builder with toggles |
+| `survey-rating` | 1-5 star rating distribution |
+| `feedback-summary` | Positive/negative theme analysis |
+| `quotes` | Testimonial cards |
+| `activity-rings` | Apple-style concentric rings |
+| `product-options` | Product lines with pricing/specs |
+| `sources` | Citation list |
+
+### Creating a Project Dashboard
+
+1. Create folder: `src/data/projects/[ID]-[name]/project/`
+2. Create config: `[name]Config.ts`
+3. Define `ProjectConfig` with blocks array
+4. Import in `App.tsx` and add to `openProject()` switch
+5. Add to `PROJECTS_WITH_DASHBOARDS` in Portfolio.tsx
+
+### Block Showcase
+
+View all blocks in action: Open the X00-DEMO project from the Portfolio page.
+
+## Current Projects
+
+### 2024
+- **X24-RB01** - Immersive Learning (GPISD immersive technology research)
+
+### 2025
+- **X25-RB01** - Sanctuary Spaces (Psychology of sanctuary spaces in schools)
+- **X25-RB02** - Modulizer Part 2 (Flour Bluff CTE design iterations)
+- **X25-RB03** - A4LE Design Awards (Design award submissions)
+- **X25-RB05** - Mass Timber (Psychological effects of timber in buildings)
+- **X25-RB06** - Timberlyne Study (Mass timber design assist)
+- **X25-RB08** - Modulizer Part 1 (Energy and massing strategies)
+- **X25-RB13** - Modulizer Part 3 (Design concept survey analysis)
+
+### 2026
+- **X26-RB03** - Gyp Concrete (Material usage and life cycle impacts)
 
 ## Data Management
 

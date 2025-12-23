@@ -47,7 +47,9 @@ export type BlockType =
   | 'cost-builder'
   | 'survey-rating'
   | 'feedback-summary'
-  | 'quotes';
+  | 'quotes'
+  | 'activity-rings'
+  | 'product-options';
 
 export interface SectionData {
   title: string;
@@ -313,4 +315,52 @@ export interface Quote {
 export interface QuotesData {
   quotes: Quote[];
   columns?: 1 | 2 | 3;
+}
+
+// Activity Rings Block - Apple-style concentric rings in a grid
+export interface ActivityRing {
+  name: string;
+  value: number; // 0-100 for fill percentage
+  color: string;
+}
+
+export interface ActivityRingsItem {
+  title: string;
+  subtitle?: string;
+  centerValue: string;
+  centerLabel?: string;
+  rings: ActivityRing[]; // up to 3 rings
+}
+
+export interface ActivityRingsGroup {
+  vendor: string;
+  color: string;
+  items: ActivityRingsItem[];
+}
+
+export interface ActivityRingsData {
+  groups: ActivityRingsGroup[];
+  columns?: 2 | 3 | 4;
+}
+
+// Product Options Block - Compare products within a line
+export interface ProductOption {
+  name: string;
+  price: number;
+  color: string;
+  specs?: { label: string; value: string }[];
+  costs?: { label: string; value: number; color: string }[]; // Cost breakdown percentages
+}
+
+export interface ProductLine {
+  name: string;
+  subtitle?: string;
+  image?: string;
+  options: ProductOption[];
+}
+
+export interface ProductOptionsData {
+  lines: ProductLine[];
+  columns?: 2 | 3 | 4;
+  showSpecs?: boolean;
 }

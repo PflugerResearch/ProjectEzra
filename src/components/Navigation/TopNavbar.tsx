@@ -50,23 +50,25 @@ const WORK_BY_YEAR = [
   {
     year: '2024',
     projects: [
-      { id: 'X24-RB01', title: 'Sanctuary Spaces' }
+      { id: 'X24-RB01', title: 'Immersive Learning' }
     ]
   },
   {
     year: '2025',
     projects: [
       { id: 'X25-RB01', title: 'Sanctuary Spaces' },
-      { id: 'X25-RB02', title: 'Modulizer' },
-      { id: 'X25-RB03', title: 'Material Studies' },
+      { id: 'X25-RB02', title: 'Modulizer Part 2' },
+      { id: 'X25-RB03', title: 'A4LE Design Awards' },
       { id: 'X25-RB05', title: 'Mass Timber' },
-      { id: 'X25-RB08', title: 'Phase 1' }
+      { id: 'X25-RB06', title: 'Timberlyne Study' },
+      { id: 'X25-RB08', title: 'Modulizer Part 1' },
+      { id: 'X25-RB13', title: 'Modulizer Part 3' }
     ]
   },
   {
     year: '2026',
     projects: [
-      { id: 'X26-RB01', title: 'Future Research' }
+      { id: 'X26-RB03', title: 'Gyp Concrete' }
     ]
   }
 ];
@@ -74,11 +76,8 @@ const WORK_BY_YEAR = [
 const EXPLORE_ITEMS = [
   'Mass Timber',
   'Immersive Learning',
-  'Post Occ',
-  'Tech',
-  'Artificial Intelligence',
-  'Region Intelligence',
-  'ArchVis'
+  'Sanctuary Spaces',
+  'Modulizer Part 1'
 ];
 
 const NAV_SECTIONS: NavSection[] = [

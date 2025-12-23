@@ -1,5 +1,6 @@
 id,title,researcher,category,phase,description,latitude,longitude,partners,startDate,completionDate,office
-X25-RB00,Immersive Learning,Alex Wickes,immersive,Developmental,Exploring immersive technologies and their applications in educational environments,30.2672,-97.7431,,2025-01-01,,Austin
+X00-DEMO,Block Showcase,Development Team,documentation,Completed,A reference guide demonstrating all available block types in the project dashboard system,30.2672,-97.7431,,2024-01-01,2024-01-01,Austin
+X24-RB01,Immersive Learning,Alex Wickes,immersive,Developmental,Exploring immersive technologies and their applications in educational environments,30.2672,-97.7431,,2024-01-01,,Austin
 X25-RB01,Sanctuary Spaces,"Katherine Wiley, Braden Haley, Alex Wickes",psychology,Completed,Texas Architect article on interior design aspects that influence sanctuary-type spaces and student self-regulation in elementary schools,30.2672,-97.7431,Sunwest Publishing|Braden Haley,2025-01-15,2025-09-30,Austin
 X25-RB02,The Modulizer Part 2,"Agustin Gonzalez, Leah Vander Anden, Alex Wickes",sustainability,Developmental,Experimental design applying massing strategy findings to develop and test multiple design iterations for Flour Bluff CTE,27.67227,-97.27860,UTSA|Amanda|Laura Goff,2025-02-01,,Corpus Christi
 X25-RB03,A4LE Design Awards,Alex Wickes,immersive,Developmental,Research supporting A4LE design award submissions with sustainable components and educational design excellence,30.2672,-97.7431,A4LE,2025-01-01,,Austin

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import type { ProjectConfig } from '../../components/blocks/types';
 import { BlockRenderer } from '../../components/blocks';
 
@@ -12,18 +12,16 @@ export default function ProjectDashboard({ config, onBack }: ProjectDashboardPro
   return (
     <div className="min-h-screen overflow-x-clip">
       {/* Header */}
-      <header className="border-b border-white/10 sticky top-0 z-10 bg-background/60 backdrop-blur-md">
+      <header className="sticky top-0 z-10 bg-background/60 backdrop-blur-md">
         <div className="relative max-w-5xl mx-auto px-12 py-6">
           {/* Back button in margin */}
           {onBack && (
-            <motion.button
+            <button
               onClick={onBack}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 hover:bg-white/10 rounded-xl transition-colors"
-              whileHover={{ x: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="absolute -left-1.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-gray-400" />
-            </motion.button>
+              <ChevronLeft className="w-9 h-9" />
+            </button>
           )}
           <div className="flex items-center justify-between">
             <div>

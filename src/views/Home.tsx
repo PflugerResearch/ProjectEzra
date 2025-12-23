@@ -3,9 +3,10 @@ import { ImageCarousel } from '../components/Hero/ImageCarousel';
 
 interface HomeProps {
   onNavigate: (sectionId: string) => void;
+  onOpenProject?: (projectId: string) => void;
 }
 
-export default function Home({ onNavigate: _onNavigate }: HomeProps) {
+export default function Home({ onOpenProject }: HomeProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -17,7 +18,7 @@ export default function Home({ onNavigate: _onNavigate }: HomeProps) {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="w-full flex-1"
       >
-        <ImageCarousel />
+        <ImageCarousel onOpenProject={onOpenProject} />
       </motion.div>
 
       {/* Footer */}

@@ -1,4 +1,4 @@
-import type { BlockConfig, StatGridData, BarChartData, KeyFindingsData, ComparisonTableData, TimelineData, TextContentData, SectionData, ImageGalleryData, SourcesData, ToolComparisonData, CaseStudyCardData, WorkflowStepsData, DonutChartData, ScenarioBarChartData, CostBuilderData, SurveyRatingData, FeedbackSummaryData, QuotesData } from './types';
+import type { BlockConfig, StatGridData, BarChartData, KeyFindingsData, ComparisonTableData, TimelineData, TextContentData, SectionData, ImageGalleryData, SourcesData, ToolComparisonData, CaseStudyCardData, WorkflowStepsData, DonutChartData, ScenarioBarChartData, CostBuilderData, SurveyRatingData, FeedbackSummaryData, QuotesData, ActivityRingsData, ProductOptionsData } from './types';
 import { StatGridBlock } from './StatGridBlock';
 import { BarChartBlock } from './BarChartBlock';
 import { KeyFindingsBlock } from './KeyFindingsBlock';
@@ -17,6 +17,8 @@ import { CostBuilderBlock } from './CostBuilderBlock';
 import { SurveyRatingBlock } from './SurveyRatingBlock';
 import { FeedbackSummaryBlock } from './FeedbackSummaryBlock';
 import { QuotesBlock } from './QuotesBlock';
+import { ActivityRingsBlock } from './ActivityRingsBlock';
+import { ProductOptionsBlock } from './ProductOptionsBlock';
 
 interface BlockRendererProps {
   block: BlockConfig;
@@ -63,6 +65,10 @@ export function BlockRenderer({ block }: BlockRendererProps) {
         return <FeedbackSummaryBlock data={data as FeedbackSummaryData} />;
       case 'quotes':
         return <QuotesBlock data={data as QuotesData} />;
+      case 'activity-rings':
+        return <ActivityRingsBlock data={data as ActivityRingsData} />;
+      case 'product-options':
+        return <ProductOptionsBlock data={data as ProductOptionsData} />;
       default:
         return (
           <div className="p-4 bg-card border border-card rounded-xl text-gray-400 text-sm">

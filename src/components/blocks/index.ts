@@ -14,3 +14,5 @@ export { CostBuilderBlock } from './CostBuilderBlock';
 export { SurveyRatingBlock } from './SurveyRatingBlock';
 export { FeedbackSummaryBlock } from './FeedbackSummaryBlock';
 export { QuotesBlock } from './QuotesBlock';
+export { ActivityRingsBlock } from './ActivityRingsBlock';
+export { ProductOptionsBlock } from './ProductOptionsBlock';

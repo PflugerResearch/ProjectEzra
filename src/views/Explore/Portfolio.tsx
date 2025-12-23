@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useProjects } from '../../context/ProjectsContext';
 
-const PROJECTS_WITH_DASHBOARDS = ['X25-RB00', 'X25-RB01', 'X25-RB02', 'X25-RB03', 'X25-RB05', 'X25-RB06', 'X25-RB08', 'X25-RB13'];
+const PROJECTS_WITH_DASHBOARDS = ['X24-RB01', 'X25-RB01', 'X25-RB02', 'X25-RB03', 'X25-RB05', 'X25-RB06', 'X25-RB08', 'X25-RB13', 'X00-DEMO'];
 
 interface PortfolioProps {
   onOpenProjectDashboard?: (projectId: string) => void;
@@ -16,8 +16,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOpenProjectDashboard }) => {
     const grouped: { [year: string]: typeof projects } = {};
 
     projects.forEach(project => {
+      // Extract year directly from date string to avoid timezone issues
       const year = project.startDate
-        ? new Date(project.startDate).getFullYear().toString()
+        ? project.startDate.substring(0, 4)
         : 'Upcoming';
 
       if (!grouped[year]) {
