@@ -238,6 +238,110 @@ Each category has a dedicated color:
 - POE Dashboard (in development)
 - Region Intel (in development)
 
+## Production Roadmap
+
+### Critical Priority
+
+- [ ] **SSO Authentication** - Replace hardcoded credentials with Pfluger SSO
+  - Current: Hardcoded `apps@pflugerarchitects.com` / `123456` in `AuthContext.tsx`
+  - Integrate Microsoft Entra ID (Azure AD) for Pfluger accounts
+  - Add role-based permissions (Admin, Researcher, Viewer)
+  - Session management and token refresh
+
+- [ ] **Database Integration (Cloudflare D1)**
+  - Pitch submissions storage and retrieval
+  - User preferences and saved states
+  - Research hours tracking (currently mock data in `Schedule.tsx`)
+  - GreenLit topics management
+
+- [ ] **Form Backend & Notifications**
+  - Collaborate form: Connect to Zapier or Resend for email notifications
+  - Pitch submission: Store in D1, notify GreenLight team
+  - Email templates for submission confirmations
+  - Slack/Teams webhook for internal alerts
+
+### High Priority
+
+- [ ] **Claude AI Integration** - Replace mock chat in `TheRepo.tsx`
+  - Current: Rule-based pattern matching, no real AI
+  - Integrate Claude API for research assistant
+  - Context-aware responses using project data
+  - RAG with research documents
+
+- [ ] **Asset Management**
+  - Replace Unsplash placeholder images with real project photos
+  - Files affected: `ImageCarousel.tsx`, `loadProjects.ts`, project configs
+  - Set up Cloudflare R2 or similar for image hosting
+  - Add image upload for project managers
+
+- [ ] **OpenAsset Integration**
+  - Connect to Pfluger's OpenAsset DAM
+  - Pull project images automatically
+  - Sync with project metadata
+
+### Medium Priority
+
+- [ ] **Audit Project Sources**
+  - Verify all project configs have complete sources blocks
+  - Check URLs are valid and not broken
+  - Ensure APA formatting consistency
+  - Add missing citations for referenced content
+
+- [ ] **Data Tables & Grids**
+  - Add sortable/filterable data tables for project lists
+  - Export to CSV/Excel functionality
+  - Bulk operations for project management
+
+- [ ] **Real Hours Tracking**
+  - Replace mock data in `Schedule.tsx` (lines 70-84)
+  - Time entry interface for researchers
+  - Integration with project management tools
+  - Burndown charts and capacity planning
+
+- [ ] **Pitch System Enhancements**
+  - Replace hardcoded GreenLit topics with D1 data
+  - Replace MY_PITCHES mock data (lines 93-123)
+  - Pitch review workflow for admins
+  - Status updates and notifications
+
+- [ ] **Analytics Dashboard**
+  - Real metrics instead of placeholder stats
+  - Research impact tracking
+  - Publication and citation metrics
+  - Partner engagement analytics
+
+### Low Priority
+
+- [ ] **Remove Demo Content**
+  - Option to hide X00-DEMO from production
+  - Environment-based feature flags
+  - Separate dev/staging/prod configs
+
+- [ ] **Production Logging**
+  - Replace console.log/error with proper logging service
+  - Error tracking (Sentry or similar)
+  - Performance monitoring
+
+- [ ] **PWA Features**
+  - Offline support for field research
+  - Push notifications for updates
+  - Mobile-optimized views
+
+### Technical Debt
+
+| File | Issue | Line(s) |
+|------|-------|---------|
+| `AuthContext.tsx` | Hardcoded credentials | 17-19, 40 |
+| `TopNavbar.tsx` | Auto-login hardcoded | 148 |
+| `Collaborate.tsx` | Simulated form submission | 16-31 |
+| `PitchSubmission.tsx` | Console.log + alert() | 215-235 |
+| `PitchSubmission.tsx` | Hardcoded GreenLit topics | 49-90 |
+| `PitchSubmission.tsx` | Mock MY_PITCHES data | 93-123 |
+| `Schedule.tsx` | Mock hours data | 70-84 |
+| `TheRepo.tsx` | Mock AI responses | 89-140 |
+| `loadProjects.ts` | Unsplash placeholders | 60-61, 81-91 |
+| `ImageCarousel.tsx` | Unsplash hero images | 6, 12, 18, 24 |
+
 ## License
 
 Proprietary - Pfluger Architects
