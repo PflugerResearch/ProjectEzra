@@ -19,13 +19,13 @@ const SOFTWARE: Tool[] = [
     name: 'Custom Development',
     category: 'Intelligence Tools',
     description: 'In-house development of sector and topic intelligence tools, dashboards, and data modeling using modern web technologies.',
-    capabilities: ['React', 'Python', 'D3.js', 'Mapbox', 'REST APIs', 'Interactive dashboards', 'Data modeling']
+    capabilities: ['React', 'Agentic AI', 'D3.js', 'RAG Architecture', 'REST APIs', 'Interactive dashboards', 'Data modeling']
   },
   {
-    name: 'Revit',
+    name: 'Revit + Forma',
     category: 'BIM',
-    description: 'Building Information Modeling for architectural design and documentation.',
-    capabilities: ['3D modeling', 'Construction documentation', 'Clash detection', 'Scheduling']
+    description: 'Building Information Modeling for architectural design, documentation, and early-stage conceptual analysis.',
+    capabilities: ['3D modeling', 'Construction documentation', 'Conceptual massing', 'Environmental analysis']
   },
   {
     name: 'Rhino + Grasshopper',
@@ -34,22 +34,22 @@ const SOFTWARE: Tool[] = [
     capabilities: ['Parametric geometry', 'Data-driven design', 'Environmental analysis', 'Optimization']
   },
   {
-    name: 'Enscape',
-    category: 'Visualization',
-    description: 'Real-time rendering and virtual reality experiences.',
-    capabilities: ['Real-time rendering', 'VR walkthroughs', 'Material libraries', 'Sun studies']
+    name: 'Apple Vision Pro',
+    category: 'Immersive Visualization',
+    description: 'Spatial computing platform paired with custom applications to deliver augmented reality architectural experiences.',
+    capabilities: ['Augmented reality walkthroughs', 'Spatial design review', 'Mixed reality presentations', 'Immersive client experiences']
   },
   {
-    name: 'ArcGIS',
+    name: 'Mapbox + Geodata',
     category: 'GIS',
-    description: 'Geographic information systems for spatial analysis.',
-    capabilities: ['Site analysis', 'Demographic mapping', 'Spatial queries', 'Data visualization']
+    description: 'Custom mapping applications combining Mapbox with government and private geodata sources.',
+    capabilities: ['Interactive mapping', 'Demographic analysis', 'Site intelligence', 'Custom data overlays']
   },
   {
-    name: 'Qualtrics',
+    name: 'In-House Data Lake',
     category: 'Research',
-    description: 'Survey platform for post-occupancy and stakeholder research.',
-    capabilities: ['Survey design', 'Data collection', 'Statistical analysis', 'Reporting']
+    description: 'Centralized repository for aggregating and analyzing research data across projects.',
+    capabilities: ['Data aggregation', 'Cross-project analysis', 'Historical benchmarking', 'Custom reporting']
   }
 ];
 

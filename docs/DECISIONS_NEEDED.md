@@ -11,15 +11,50 @@ This document lists decisions that need to be made by stakeholders to move forwa
 
 | Abbrev | Name | Role |
 |--------|------|------|
+
+
 | CO | Christian Owens | Chief Design Officer (Board) |
 | LP | Lauren Paver | COO / co-CEO (Board) |
+| CC | Cody Cunningham | Chief Growth Officer (Board) |
+| TH | Terry Hoyle | CEO (Board)|
 | LF | Lisa Ftize | Finance Director |
 | CB | Craig Bogner | CIO/CTO (Innerium, outsourced) |
-| CC | Cody Cunningham | Chief Growth Officer (Board) |
-| CM | Chad Martin | Design Tech Director |
+
+| CM | Chad Martin | Architect Director |
 | TS | Tony Schmitz | Principal, Process Performance Director |
 | JS | Josh Sawyer | Principal, Educational Planning Director |
-| TH | Terry Hoyle | CEO |
+
+
+| AW | Alex Wickes | Associate Design Performacne Leader | 
+| LS | Logan Steitle|Associalte Visualization + Immersive Designer|
+| AN | Austin Nguyen |Associate Systems Administrator|
+| DC | Dennis Carrisalez |Systems Administrator, outsourced|
+---
+
+## Meetings
+
+### Wednesday (1/8) — Block 2: Software & Infrastructure
+**Attendees:** CO, CM, LP, LF
+**Agenda:**
+By LP
+12/17 Update: Expanding this discussion to include Chad Martin, as Architect Director, I want to ensure we've got his input as well. I will share the full list of software and license quantity for your review in advance.
+
+Thanks for the time to finalize our line of business app tech stack and spend for 2026. 
+Agenda:
+Review existing licensing needs
+Discuss trade-offs and finalize software procurement/budget for 2026
+**Status:** Scheduled
+**Outcome:** _TBD_
+
+### Thursday (1/9) — Blocks 3, 4 + Prime 1, 5
+**Attendees:** CO
+**Agenda:**
+- External launch (content, branding, marketing pipeline)
+- Internal launch (The Repo, pitch workflow)
+- Prime CO on Research Hours Policy (#1) and VP Codes (#5)
+
+**Status:** Scheduled
+**Outcome:** _TBD_
 
 ---
 
@@ -49,7 +84,7 @@ This document lists decisions that need to be made by stakeholders to move forwa
 - ~7 active researchers
 
 **2025 Research Hours (actual):** 726 total
-- Hours by researcher: 253, 199, 129, 72, 49, 23, 1
+- Hours by research project: 253, 199, 129, 72, 49, 23, 1
 - 7 researchers logged hours
 
 **2026 Research Hours (approved):** 2,000
@@ -57,7 +92,7 @@ This document lists decisions that need to be made by stakeholders to move forwa
 **Gap:** 2025 actual (726) was only 36% of 2026 target. Research is already being suppressed under current model.
 
 **Quote from PM** (when trying to allocate two staff to research, not even on project hours):
-> "Try to increase the efficiency of the process by removing 33% of the hours."
+> For a 200+ hour scope reduced to 140 hours "Try to increase the efficiency of the process by removing 33% of the hours."
 
 This is the reality: even when research is approved, PMs push back to cut hours. On-clock research will always lose to billable work.
 
@@ -157,207 +192,126 @@ Restore research OT eligibility. Use Ezra adoption as the pilot program.
 
 ---
 
-## 2. Infrastructure Platform (LF, LP, CB + Board?)
+## 2. Software & Infrastructure (CO, CM, LP + Board)
 
-**Decision Owner:** LF, LP, CB (budget approval may require shareholders/board)
-**Decision:** Where does Ezra's data live?
+**Decision Owner:** CO, CM, LP (board approval for new vendors/costs)
+**Decision:** Approve software stack, where data lives, and associated costs
 
-### Options
+### Database Platform Options
 
 | Platform | Pros | Cons |
 |----------|------|------|
-| Cloudflare D1/R2 | Fast, cheap, serverless, already used elsewhere | New vendor approval |
-| Bluehost (existing) | Already approved, MySQL/PHP | Legacy stack, no serverless |
-| Supabase | Modern, Postgres, real-time | New vendor approval |
-| OpenAsset | Already have DAM | Not a database platform |
-| Local drive | No approval needed | No web access, single point of failure |
+| Cloudflare D1/R2 | Fast, cheap, serverless, already used elsewhere | New vendor approval |  | ~$5-20 | Username/account |
+| Bluehost (existing) | Already approved, MySQL/PHP | Legacy stack, no serverless, no CLI | | Already paying | using HB email and domain@pfluger |
+| Supabase | Modern, Postgres, real-time | New vendor approval | | Free tier / ~$25 | Username/account |
+| OpenAsset | Already have DAM | Not a database platform || Included in license | Username/account |
+| Local Egnyte drive | No approval needed | No web access, single point of failure, $11,154/year |
 
-### Consequence of Delay
-
-Cannot finalize database schema. Cannot build persistence layer. Cannot store pitches, hours, preferences.
-
-### Recommendation
-
-Cloudflare D1/R2. Already proven in other projects. Minimal cost. No server management.
-
----
-
-## 3. API Vendor Approvals (CB)
-
-**Decision Owner:** CB
-**Decision:** Approve external API usage for Ezra
-
-### APIs Pending
+### APIs & Services
 
 | API / Service | Purpose | Monthly Cost | Approval Needed |
 |---------------|---------|--------------|-----------------|
-| Claude Teams | Standard + Premium seats, Claude Code | ~$30/user/mo | Username/account |
+| Claude Teams | Standard + Premium seats, Claude Code | ~$30-150/user/mo | Username/account |
 | Claude Developer API | AI assistant integration | ~$20-50 | Username/account |
-| OpenAsset API | Project image sync | Included in license | Username/account |
 | Vantage Point API | CRM / contact routing | Included in license | Username/account |
 | Mapbox API | Interactive maps | Free tier (50k loads/mo) | Username/account |
-| Cloudflare (D1/R2/Workers) | Database + storage + serverless | ~$5-20 | Username/account |
-| Supabase | Database alternative | Free tier / ~$25 | Username/account |
-| GitHub | Code repository, new username | Included / Free | Username/account |
+| GitHub | Code repository | Included / Free | Username/account |
 | Census API | Demographics / district data | Free | Username/account |
-| Bluehost | Existing hosting (MySQL/PHP) | Already paying | Access restoration |
+| Climate Studio | Building performance simulation in lue of Safira Sketchup $2000/yr | ~$2,500/year | TBD - pending |
+| Resend API | email automation API | Free Tier 3k emails/mo | Username/account |
+
+### ArchVis APIs & Services
+
+| API / Service | Purpose | Yearly Cost | Approval Needed |
+|---------------|---------|-------------|-----------------|
+| Magnific GUI | AI image upscaling | $468/yr ($39/mo) | TBD |
+| Magnific API | AI image upscaling (API) | $594/yr | TBD |
+| Google Gemini Ultimate | AI generation | $2,988/yr ($249/mo) | TBD |
+| MidJourney GUI | AI image generation | $360/yr ($30/mo) | TBD |
+| Veo 3 Fast API | AI video generation | $324/yr | TBD |
+| Veo 3 Standard API | AI video generation | $864/yr | TBD |
+| CapCut Pro | Video editing | $180/yr ($15/mo) | TBD |
+| Digital Model Assets | 3D asset budget | $1,200/yr ($100/mo) | dedicated Username/account |
+| Twinmotion | Real-time visualization | Free | team@pfluger |
+| Adobe Substance | Model creation, texturing | reduced from $4700 to $1400 | Designers pfluger email | 
+| Blender | 3D modeling | Free | — |
+| Unreal Engine | Real-time engine | Free | team@pfluger |
+| Apple Developer | App distribution Build to Apple Vision Pro | $99/yr | TBD |
+
+### Exec Summary Software List ~$12,000/yr for 2026, down from ~31,000
+
+Platform & Infrastructure
+- Cloudflare D1/R2 - Web app database + storage - ~$240/yr - TBD account
+- Supabase - Database alternative - Free tier / ~$300/yr - TBD account
+- Bluehost - Legacy hosting, domain - Already paying - domain@pfluger
+- GitHub - Code repository - Free - TBD account
+
+- Claude Teams - AI assistant seats - ~$360-1,800/user/yr - TBD account
+- Claude Developer API - AI integration - ~$240-600/yr - TBD account
+
+- Mapbox API - Interactive maps - Free (50k loads/mo) - TBD account
+- Vantage Point API - CRM routing - Included - TBD account
+- OpenAsset API - Image sync - Included - TBD account
+- Resend API - Email automation - Free (3k emails/mo) - TBD account
+- Census API - Demographics data - Free - TBD account
+- Local Egnyte drive MCP ($11,154/yr) - listed as con, not recommended
+- Climate Studio - Building performance simulation - $2,500/yr - TBD pending
+
+ArchVis - Production & AI
+- CapCut Pro - Video editing - $180/yr - TBD
+- Digital Model Assets - 3D asset budget - $1,200/yr - dedicated account
+- Adobe Substance - Texturing - $1,400/yr - Designers pfluger email
+- Apple Developer - Vision Pro distribution - $99/yr - TBD
+- Twinmotion - Real-time visualization - Free - team@pfluger
+- Blender - 3D modeling - Free - —
+- Unreal Engine - Real-time engine - Free - team@pfluger
+
+- MidJourney GUI - AI image generation - $360/yr - TBD
+- Magnific GUI - AI image upscaling - $468/yr - TBD
+- Google Gemini Ultimate GUI - AI generation - $2,988/yr - TBD
+
+- Magnific API - AI upscaling (API) - $594/yr - TBD
+- Veo 3 Fast API - AI video generation - $324/yr - TBD
+- Veo 3 Standard API - AI video generation - $864/yr - TBD
+
+**2026 Totals (estimated)**
+- New paid software: ~$11,577/yr
+- Existing/included: ~$0 additional
+- Free tier tools: $0
 
 ### Consequence of Delay
 
-- TheRepo (AI assistant) runs on mock responses only
-- Images remain Unsplash placeholders
+- Cannot finalize database schema or build persistence layer
+- Ezra (AI assistant) won't run, searching is all manual
+- Static project data, two sources of truth
 - Collaborate form doesn't route anywhere
 
 ### Recommendation
 
-Approve Claude API first. Highest user impact, lowest cost.
+Cloudflare D1/R2 for database. Claude API first for highest user impact.
 
 ---
 
-## 4. Public Launch Content (CO, CC)
+## 3. Public Launch (CO, CC)
 
 **Decision Owner:** CO, CC
-**Decision:** Approve public-facing content for Ezra launch
+**Decision:** Approve public-facing content, branding, and marketing pipeline
 
 ### What Needs Review
 
+**Content:**
 - [ ] Research project descriptions (12 projects)
 - [ ] About/Process/Tools page copy
 - [ ] Use of AI transparency statement
 - [ ] Map presentation of confidential projects (currently show as locked)
 
-### Consequence of Delay
-
-Cannot launch public map or portfolio. Research visibility remains internal only.
-
----
-
-## 5. Public Launch Branding (CC)
-
-**Decision Owner:** CC (new Marketing Director)
-**Decision:** Approve Ezra branding alignment with firm standards
-
-### What Needs Review
-
+**Branding:**
 - [ ] Color palette alignment (currently using Pfluger brand colors)
 - [ ] Typography consistency
 - [ ] Logo usage on platform
 - [ ] URL/domain decision (ezra.pfluger? research.pfluger?)
 
-### Consequence of Delay
-
-Cannot launch public-facing pages. Research team has no external showcase.
-
----
-
-## 6. Internal Launch (CO, CB)
-
-**Decision Owner:** CO, CB
-**Decision:** Approve internal dashboard for research team
-
-### What Needs Review
-
-- [ ] Dashboard functionality scope
-- [ ] TheRepo AI assistant approach
-- [ ] Pitch submission workflow
-- [ ] Analytics/metrics visibility
-
-### Consequence of Delay
-
-Research team continues using spreadsheets/email. No centralized project tracking.
-
----
-
-## 7. Timesheet Code Creation (LP, LF)
-
-**Decision Owner:** LP, LF
-**Decision:** Create a timesheet project code for Ezra/Research participation
-
-### The Problem
-
-- Alex controls projects in Vantage Point
-- But creating new project codes requires approval
-- Without a code, hours have nowhere to go
-- Even if OT is restored, researchers can't log time without a valid code
-
-### What's Needed
-
-| Code Type | Purpose | Approver |
-|-----------|---------|----------|
-| Research OT code | Track research overtime hours | ? |
-| Ezra training code | One-time training allocation | ? |
-| Ezra participation code | Ongoing tool usage | ? |
-
-### Consequence of No Code
-
-Researchers either:
-1. Don't use the tool (can't log time)
-2. Bury hours in project overhead (inaccurate tracking, PM friction)
-3. Log incorrectly (audit risk)
-
-### Dependency
-
-This blocks Decision #8 (Training + Participation). Can't allocate time to something that doesn't exist in the system.
-
----
-
-## 8. Training + Participation Time (CO, JS, CM, TS)
-
-**Decision Owner:** CO, JS, CM (software tools integration), TS (process)
-**Decision:** Where do training hours and ongoing participation hours live?
-
-### The Fork
-
-This decision branches entirely based on Decision #1 (Research OT Policy):
-
-#### Branch A: OT Restored
-
-| Concern | Resolution |
-|---------|------------|
-| Training time | Research OT hours - no project impact |
-| Participation time | Research OT hours - no project impact |
-| PM friction | Minimal - it's OT, not their budget |
-| Timesheet | Clean category: Research OT |
-| Incentive | Researchers want the hours (only OT available) |
-
-**Problems reduced but not eliminated:**
-- Still need department awareness
-- Still need basic onboarding materials
-- PMs need to know tool exists (for project benefit)
-
-#### Branch B: No OT (Current State)
-
-| Concern | Resolution |
-|---------|------------|
-| Training time | Competes with billable project hours |
-| Participation time | Competes with billable project hours EVERY WEEK |
-| PM friction | Constant - "why is my resource not billing?" |
-| Timesheet | Where does it go? Overhead? Which code? |
-| Incentive | None - researchers avoid it to protect billable % |
-
-**Ongoing friction points:**
-- Every hour of Ezra use requires implicit PM approval
-- Researchers avoid using tool to maintain billable ratios
-- Tool adoption fails regardless of quality
-- Investment in building Ezra wasted
-
-### The Real Question
-
-It's not "how do we allocate training time?"
-
-It's: **Does Ezra participation have a legitimate home in the timesheet, or does every use require justification?**
-
-If participation has no home, adoption is dead on arrival.
-
----
-
-## 9. Marketing & Publishing (CO, CC)
-
-**Decision Owner:** CO, CC
-**Decision:** Approve research publications and external marketing
-
-### What Needs Approval
-
+**Marketing Pipeline:**
 - [ ] Texas Architect submissions (e.g., X25-RB01 Sanctuary Spaces)
 - [ ] Conference presentations (A4LE LearningScapes, etc.)
 - [ ] External research shareouts
@@ -370,43 +324,89 @@ Research is completed but sits unpublished. Marketing integration unclear. No cl
 
 ### Consequence of Delay
 
+- Cannot launch public-facing pages
 - Research investment yields no external visibility
 - Firm differentiation doesn't happen
-- Thought leadership stays internal
+- Thought leadership stays internal with no internal awareness mechanism
 - Competitive advantage from research unrealized
 
 ---
 
-## 10. Prism SaaS / Subscription Model (TH, LP, PMs/Principals)
+## 4. Internal Launch (CO, CC, CB)
 
-**Decision Owner:** TH (CEO), LP, any PM or Principal (client-facing)
-**Decision:** Approve Prism as commercial SaaS product
+**Decision Owner:** CO, CB
+**Decision:** Approve internal dashboard for research team
 
-### What Needs Approval
+### What Needs Review
 
-- [ ] Subscription pricing model
-- [ ] Client partnership agreements
-- [ ] Licensing structure
-- [ ] Help desk / support infrastructure
-- [ ] Insurance / liability coverage
-- [ ] IP ownership clarity
-
-### The Problem
-
-Prism is built. Leadership wants it to be a full-fledged SaaS. But no infrastructure exists for:
-- Client support
-- Licensing
-- Partnerships
-- Insurance
-
-Any PM or Principal who talks to a client can create expectations the firm can't meet.
+- [ ] Dashboard functionality scope
+- [ ] Ezra AI assistant approach
+- [ ] Pitch submission workflow
+- [ ] Analytics/metrics visibility
 
 ### Consequence of Delay
 
-- Tool sits unused or under-utilized
-- No revenue from subscription model
-- Competitive advantage unrealized
-- Risk of client expectations without support structure
+Research team continues using spreadsheets/email. No centralized project tracking.
+
+---
+
+## 5. Vantage Point + Staff Assignment (LP, LF, JS, CO)
+
+**Decision Owner:** LP, LF (codes), JS (people leaders), CO (direction)
+**Decision:** Create VP codes AND establish communication chain for staff assignment
+
+### The Problem
+
+Two things need to happen:
+
+1. **VP codes must exist** - Without codes, hours have nowhere to go
+2. **Staff must be assigned** - Alex cannot talk to employees directly; someone must communicate through People Leaders → PMs
+
+As of 1/4 there is a new VP job structure for overhead. But creating new project codes requires approval, and assigning staff requires going through the proper chain.
+
+### VP Code Structure
+
+| Code Type | Purpose | Where It Lives |
+|-----------|---------|----------------|
+| R&B Training | One-time onboarding allocation | Sub-code under R&B General (overhead) |
+| X26-RBxx Project Numbers | Track research participation hours | Individual project codes |
+
+### Communication Chain for Staff Assignment
+
+```
+Leadership Decision (CO/JS)
+        ↓
+People Leaders (office leads, dept heads)
+        ↓
+Project Managers
+        ↓
+Staff assigned to R&B project numbers
+```
+
+**The gap:** Alex controls the R&B projects in VP but cannot directly assign or communicate with staff. Someone at leadership level must:
+1. Inform People Leaders that research participation is legitimate
+2. People Leaders tell PMs that staff can bill to R&B codes
+3. PMs actually assign people
+
+### Consequence of No Action
+
+Without codes:
+- Researchers can't log time
+- Hours get buried in project overhead (inaccurate, PM friction)
+- Audit risk from incorrect logging
+
+Without communication chain:
+- Staff don't know they can participate
+- PMs don't know research is approved use of time
+- Research stays siloed to those who already know
+
+### The Real Question
+
+It's not "how do we allocate training or research time?"
+
+It's: **Does R&B participation have a legitimate home in the timesheet, AND does anyone know about it?**
+
+If codes exist but no one knows, adoption fails. If people know but codes don't exist, they can't participate.
 
 ---
 
@@ -416,19 +416,21 @@ Any PM or Principal who talks to a client can create expectations the firm can't
 Research OT Policy (#1)
         |
         v
-Infrastructure Decision (#2) --> API Approvals (#3)
-        |                              |
-        v                              v
-Content/Brand Approval (#4, #5)   Internal Approval (#6)
-        |                              |
-        +--------- Training (#7) ------+
-                       |
-                       v
-                  LAUNCH
+Software & Infrastructure (#2)
+        |
+        +-----------------------+
+        |                       |
+        v                       v
+Public Launch (#3)      Internal Launch (#4)
+        |                       |
+        +-- VP + Staff (#5) ----+
+                |
+                v
+             LAUNCH
 ```
 
-**Minimum viable launch:** Decisions #4 + #5 (public only, no internal features)
-**Full launch:** All 7 decisions
+**Minimum viable launch:** Decision #3 (public only, no internal features)
+**Full launch:** All 5 decisions
 
 ---
 
@@ -445,16 +447,29 @@ Agenda: Review this document, make decisions, unblock January launch.
 
 ---
 
-## Summary by Person
+## Executive Summary: Action Items by Decision
 
-| Person | Decisions | Role |
-|--------|-----------|------|
-| CO | #1, #4, #6, #8, #9 | Chief Design Officer (Board) |
-| LP | #1, #2, #7 | COO / co-CEO (Board) |
-| LF | #1, #2, #7 | Finance Director |
-| CB | #2, #3, #6 | CIO/CTO (Innerium) |
-| CC | #4, #5, #9 | Chief Growth Officer (Board) |
-| CM | #8 | Design Tech Director (software tools) |
-| TS | #8 | Principal, Process Performance Director |
-| JS | #8 | Principal, Educational Planning Director |
-| TH | #10 | CEO |
+1. **Research Hours Policy** — Reverse "research on the clock" policy, restore OT eligibility
+   - CO (Chief Design Officer)
+   - LP (COO / co-CEO)
+   - LF (Finance Director)
+
+2. **Software & Infrastructure** — Approve database platform, APIs, and associated costs
+   - CO (Chief Design Officer) — direction
+   - CM (Design Tech Director) — technical
+   - LP (COO / co-CEO) — budget/board
+
+3. **Public Launch** — Approve content, branding, and marketing pipeline
+   - CO (Chief Design Officer)
+   - CC (Chief Growth Officer)
+
+4. **Internal Launch** — Approve dashboard functionality and TheRepo AI assistant
+   - CO (Chief Design Officer)
+   - CC (Chief Growth Officer)
+   - CB (CIO/CTO)
+
+5. **Vantage Point + Staff Assignment** — Create VP codes AND establish communication chain (Leadership → People Leaders → PMs → Staff)
+   - LP (COO / co-CEO) — code approval
+   - LF (Finance Director) — code approval
+   - CO (Chief Design Officer) — direction
+   - JS (Educational Planning Director) — people leader communication
