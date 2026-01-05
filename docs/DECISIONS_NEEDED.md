@@ -33,7 +33,7 @@ This document lists decisions that need to be made by stakeholders to move forwa
 
 ## Meetings
 
-### Wednesday (1/8) — Block 2: Software & Infrastructure
+### Wednesday (1/8) — R&B Block 2: Software & Infrastructure
 **Attendees:** CO, CM, LP, LF
 **Agenda:**
 By LP
@@ -46,7 +46,7 @@ Discuss trade-offs and finalize software procurement/budget for 2026
 **Status:** Scheduled
 **Outcome:** _TBD_
 
-### Thursday (1/9) — Blocks 3, 4 + Prime 1, 5
+### Thursday (1/9) — R&B Blocks 3, 4 + Prime 1, 5
 **Attendees:** CO
 **Agenda:**
 - External launch (content, branding, marketing pipeline)
@@ -55,6 +55,33 @@ Discuss trade-offs and finalize software procurement/budget for 2026
 
 **Status:** Scheduled
 **Outcome:** _TBD_
+
+
+### TBD - Project Vision (X25-RB09)
+**Messages**
+1/4
+Happy New year everyone, Cody Cunningham seeing a spot on the Calander next week, 1/13 3-4pm. It would be awesome to get this thing online and out to the teams to prep for Tasa Mid Winter as the info in it, is pretty useful. 
+Cody Cunningham removed Jacqueline Warner from the chat.
+Cody Cunningham removed Heather Blazi from the chat.
+Cody Cunningham added David Young to the chat.
+3-4 pm on the 13th is open but that is before their meeting with McAllen ISD at 4-5 pm, and the bond presentation to the board that evening at 5:30 pm. There would likely need to be an awareness to finish before 4 pm if possible.
+ **Status:** TBD
+**Outcome:** _TBD_
+
+### TBD - Project Prism (X25-RB10)
+**Messages**
+1/4
+Hello everyone, and Happy new year. Seeing some spots next week to set up a regroup on the cost estimator for 2026. Some items to revisit is our gameplan for LHISD, and the other ISDs it has been brought up to, and our relationship with Vermeulens/Alpha, subscription model, and the level of development we are comfortable with in 2026. Let me know yalls thoughts. Thanks!
+ **Status:** TBD
+**Outcome:** _TBD_
+ 
+### TBD - Turf Melting Analysis (X25-RB11)
+**Messages**
+1/4
+Hey all, Happy new years. Tony Schmitz did you have a time in mind to tackle this thing out? Let me know and I can refresh myself with the results of the options we explored. Thanks!
+ **Status:** TBD
+**Outcome:** _TBD_
+
 
 ---
 
