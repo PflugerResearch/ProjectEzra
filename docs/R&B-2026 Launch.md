@@ -11,29 +11,55 @@ This document lists decisions that need to be made by stakeholders to move forwa
 
 | Abbrev | Name | Role |
 |--------|------|------|
-
-
 | CO | Christian Owens | Chief Design Officer (Board) |
 | LP | Lauren Paver | COO / co-CEO (Board) |
 | CC | Cody Cunningham | Chief Growth Officer (Board) |
 | TH | Terry Hoyle | CEO (Board)|
 | LF | Lisa Ftize | Finance Director |
 | CB | Craig Bogner | CIO/CTO (Innerium, outsourced) |
+| DY | David Yound  | Communications and Engagement Manager Board|
 
 | CM | Chad Martin | Architect Director |
 | TS | Tony Schmitz | Principal, Process Performance Director |
 | JS | Josh Sawyer | Principal, Educational Planning Director |
 
-
 | AW | Alex Wickes | Associate Design Performacne Leader | 
-| LS | Logan Steitle|Associalte Visualization + Immersive Designer|
-| AN | Austin Nguyen |Associate Systems Administrator|
-| DC | Dennis Carrisalez |Systems Administrator, outsourced|
+| LS | Logan Steitle| Associalte Visualization + Immersive Designer|
+| AN | Austin Nguyen | Associate Systems Administrator|
+| DC | Dennis Carrisalez | Systems Administrator, outsourced|
+| CW | Casey Wilkinson | Marketing Specialist|
+| BS | Brenda Swirczynski | Education Facilities Planner |
+
+
+
+---
+## Application Action Items
+
+### Vision
+- SSO sign in
+- CC meeting
+
+### Prism
+- SaaS business model
+- Give Vermeulens access to log in
+
+### Ezra
+- Table schema for pitch
+- My Research page
+- AI RAG
+- Check block system and research .ts for accuracy
+- SSO sign in
+
+### Phoenix
+- Check how Phoenix is interfacing with the space library table - not loading
+
+
 ---
 
 ## Meetings
 
-### Wednesday (1/8) — R&B Block 2: Software & Infrastructure
+### Wednesday (1/8) 1pm-2pm — R&B Block 2: Software & Infrastructure
+**Messages**
 **Attendees:** CO, CM, LP, LF
 **Agenda:**
 By LP
@@ -46,18 +72,44 @@ Discuss trade-offs and finalize software procurement/budget for 2026
 **Status:** Scheduled
 **Outcome:** _TBD_
 
-### Thursday (1/9) — R&B Blocks 3, 4 + Prime 1, 5
+ ---
+ 
+### Thursday (1/9) 11am-noon — R&B Blocks 3, 4 + Prime 1, 5
+**Messages**
 **Attendees:** CO
 **Agenda:**
-- External launch (content, branding, marketing pipeline)
-- Internal launch (The Repo, pitch workflow)
-- Prime CO on Research Hours Policy (#1) and VP Codes (#5)
+
+**Set the date** (5 min)
+- Propose R&B launch end of January
+- Are we committed to this date? Will need unblocks to accomplish this.
+
+**Internal Launch** (10 min)
+- RB projects inner and outfacing need review
+- Ezra AI assistant and repo, pitch needs tech unblocks (reviewed with LP 1/7)
+- Who reviews? JS, CO, Me, BS, Others? Can we get tech unblocked?
+
+**External Launch** (10 min)
+- 2025 Content sign-off (12 projects, About/Process pages)
+- UI/Branding sign-off (colors, logo, URL)
+- Marketing pipeline (A4LE, not Texas Architect)?
+- Who does marketing? What resources do we have?
+
+**Research Hours** (10 min)
+- 726 logged vs 2,000 planned - current policy isn't working
+- $50k (OT) vs $255k (on-clock) for same output
+- Need OT eligibility restored to hit research targets
+- Can we restore OT? What's the chain of command to get people on projects?
+
+**VP Codes** (10 min)
+- Need codes created + communication chain activated
+- Who tells People Leaders, PMs, PAs it's legit?
 
 **Status:** Scheduled
 **Outcome:** _TBD_
 
+ ---
 
-### TBD - Project Vision (X25-RB09)
+### Thursday (1/9) 3pm-4pm - Vision: BD+I Dashboard
 **Messages**
 1/4
 Happy New year everyone, Cody Cunningham seeing a spot on the Calander next week, 1/13 3-4pm. It would be awesome to get this thing online and out to the teams to prep for Tasa Mid Winter as the info in it, is pretty useful. 
@@ -65,23 +117,96 @@ Cody Cunningham removed Jacqueline Warner from the chat.
 Cody Cunningham removed Heather Blazi from the chat.
 Cody Cunningham added David Young to the chat.
 3-4 pm on the 13th is open but that is before their meeting with McAllen ISD at 4-5 pm, and the bond presentation to the board that evening at 5:30 pm. There would likely need to be an awareness to finish before 4 pm if possible.
- **Status:** TBD
+
+CC: I have a window on Thursday if you're available to visit. 
+ 
+DY: I can’t see the initial part of this conversation. What is the conversation we are trying to arrange?
+ 
+Cody Cunningham changed the group name to Pfluger Vision (BD Tool).
+
+CC: Sorry David, I meant to include the previous thread.  This is our thread with Alex on the BD Dashboard Tool.  Just including you for future conversations as we plan the rollout.  I don't think it's quite ready to roll out (I still want to add the bond data from schoolbondfinder).  
+ 
+CC: I also want more eyes on it providing refinements, including you and Terry M., before we roll it out to MPs and PMs. 
+
+**Attendees:** CC, DY, CO
+**Agenda:**
+
+**Data currently in Vision:**
+- Districts: name, tier, tax rate, valuation, office controller, revenue totals
+- Schools: name, type, enrollment, principal, address, linked Pfluger projects
+- Projects: project number/name, yearly billed/spent/compensation
+- Activities: subject, type, date, owner, contacts, notes
+- Bond Elections: date, result, amount, purpose, votes
+- Census: population, income, home values, housing, commute, WFH
+- Client Contacts: name, title, email, phone, decision maker flag, notes
+- TASA Convention: attendees by district, cross-ref with known contacts, new prospects
+- Competition: architecture firms attending, BDC Giants sector rank + revenue, attendee counts
+- Firm Detail: who from each competitor is going (names, titles)
+
+**Bond Data Gap** (10 min)
+- Bond data already exists - what's missing that SchoolBondFinder has?
+- Who provides any additional data? CC or Alex?
+- Deadline to add it
+
+**Refinements List** (10 min)
+- CC/DY: Name specific changes needed
+- Prioritize: must-have vs nice-to-have
+- Deadlines to use for TASA Mid Winter
+
+**Tech Blockers** (5 min)
+- Database/API decisions from Wednesday must resolve first (Claude, DB, VP, etc)
+- Confirm board is aware this blocks rollout
+
+**Sign-Off Criteria** (5 min)
+- Define what "ready to roll out" looks like
+- Who gives final approval? CC? CO?
+
+**Rollout Plan** (5 min)
+- Target date for MPs/PMs
+- Delivery method: email, demo, training?
+- TASA Mid Winter prep timeline
+
+**Status:** Scheduled
+**AW Message (1/6):** Awesome all. Made it for Thurs 3-4. I have added an agenda to keep up on track. Please review and let me know if anything needs a massage. Thanks!
 **Outcome:** _TBD_
+
+ ---
 
 ### TBD - Project Prism (X25-RB10)
 **Messages**
-1/4
+1/4 AW:
 Hello everyone, and Happy new year. Seeing some spots next week to set up a regroup on the cost estimator for 2026. Some items to revisit is our gameplan for LHISD, and the other ISDs it has been brought up to, and our relationship with Vermeulens/Alpha, subscription model, and the level of development we are comfortable with in 2026. Let me know yalls thoughts. Thanks!
- **Status:** TBD
+
+1/6 Claire (Terry's secretary):
+Hey Alex - terry mentioned you're looking to get a meeting set up to touch base on cost mgmt tool?
+
+1/6 AW:
+Yes, would love to get something on the calendar ASAP with Terry and Tavo. A few things to cover:
+- District outreach status, Tavo mentioned there is a new one
+- SaaS Partnership/IP discussion with Vermeulens/Alpha
+- Development scope and comfort level
+Let me know what works for their schedules this week or early next.
+
+**Attendees:** Terry, Tavo, AW
+**Agenda:**
+- District outreach status (LHISD + new one Josh mentioned)
+- SaaS Partnership/IP with Vermeulens/Alpha
+- Development scope and comfort level for 2026
+
+**Status:** Scheduling
 **Outcome:** _TBD_
+ 
+ ---
  
 ### TBD - Turf Melting Analysis (X25-RB11)
 **Messages**
 1/4
 Hey all, Happy new years. Tony Schmitz did you have a time in mind to tackle this thing out? Let me know and I can refresh myself with the results of the options we explored. Thanks!
- **Status:** TBD
+ 
+**Attendees:** CO
+**Agenda:**
+**Status:** TBD
 **Outcome:** _TBD_
-
 
 ---
 
@@ -141,7 +266,7 @@ The 726 vs 2,000 gap shows people aren't doing it. And they won't.
 - Utilization target: 85% (34 billable hrs/week expected)
 - Research OT rate: $50/hr (1:1, not 1.5x)
 - Old policy: First 4 hrs/week research unpaid, paid after
-- Example: 1 person doing 6 hrs research/week
+- Example: 1 person doing 8 hrs research/week
 
 ---
 
@@ -151,9 +276,9 @@ The 726 vs 2,000 gap shows people aren't doing it. And they won't.
 |-----------|-------------|--------|
 | Revenue | 34 billable hrs × $150 (85% utilization) | +$5,100/week |
 | Base wages | 40 hrs × $50 | -$2,000/week |
-| Research OT | 2 hrs × $50 (first 4 unpaid) | -$100/week |
-| **Net** | | **+$3,000/week** |
-| **Annual** | × 52 weeks | **+$156,000/year** |
+| Research OT | 4 hrs × $50 (first 4 unpaid) | -$200/week |
+| **Net** | | **+$2,900/week** |
+| **Annual** | × 52 weeks | **+$150,800/year** |
 
 **Utilization:** 85% maintained (research is after hours)
 
@@ -163,22 +288,22 @@ The 726 vs 2,000 gap shows people aren't doing it. And they won't.
 
 | Component | Calculation | Amount |
 |-----------|-------------|--------|
-| Revenue | 28 billable hrs × $150 (6 hrs to research) | +$4,200/week |
+| Revenue | 27 billable hrs × $150 (8 hrs to research, 32 avail × 85%) | +$4,050/week |
 | Base wages | 40 hrs × $50 | -$2,000/week |
-| **Net** | | **+$2,200/week** |
-| **Annual** | × 52 weeks | **+$114,400/year** |
+| **Net** | | **+$2,050/week** |
+| **Annual** | × 52 weeks | **+$106,600/year** |
 
-**Utilization hit:** 85% target → 70% actual (6 hrs research out of 34 expected billable)
+**Utilization hit:** 85% target → 67.5% actual (8 hrs research out of 40)
 
 ---
 
-**Per Researcher (6 hrs research/week):**
+**Per Researcher (8 hrs research/week):**
 
 | | Option A (OT) | Option B (On Clock) | Difference |
 |-|---------------|---------------------|------------|
-| Weekly net | +$3,000 | +$2,200 | -$800/week |
-| Annual net | +$156,000 | +$114,400 | **-$41,600/year** |
-| Utilization | 85% (maintained) | 70% (15pt drop) | |
+| Weekly net | +$2,900 | +$2,050 | -$850/week |
+| Annual net | +$150,800 | +$106,600 | **-$44,200/year** |
+| Utilization | 85% (maintained) | 67.5% (17.5pt drop) | |
 
 ---
 
@@ -187,9 +312,11 @@ The 726 vs 2,000 gap shows people aren't doing it. And they won't.
 | | Option A (OT) | Option B (On Clock) |
 |-|---------------|---------------------|
 | Research hours | 2,000 | 2,000 |
-| OT cost | 667 hrs × $50 = $33,350 | $0 |
+| OT cost | 1,000 hrs × $50 = $50,000 (50% paid at 8hr/wk) | $0 |
 | Lost billing (at 85% util) | $0 | 2,000 × $150 × 85% = $255,000 |
-| **Total impact** | **-$33,350** | **-$255,000** |
+| **Total impact** | **-$50,000** | **-$255,000** |
+
+**The question: Do you want 2,000 research hours for $50k or $255k?**
 
 **2026 with 2,000 Research Hours - Compared to Baseline (No Research):**
 
@@ -198,14 +325,14 @@ To integrate 2,000 hours of research, there are two approaches:
 | | Option A: On Clock (New) | Option B: OT (Old) |
 |-|--------------------------|---------------------|
 | Lost revenue (at 85% util) | -$255,000 | $0 |
-| Overhead (OT) | $0 | -$33,350 |
-| **Impact** | **-$255,000 lost revenue** | **-$33,350 overhead** |
+| Overhead (OT) | $0 | -$50,000 |
+| **Impact** | **-$255,000 lost revenue** | **-$50,000 overhead** |
 
 **To get the same 2,000 hours of research:**
-- Option A (on clock): **$255,000 in lost revenue** + utilization drops 85% → 70%
-- Option B (OT): **$33,350 in overhead** + utilization maintained at 85%
+- Option A (on clock): **$255,000 in lost revenue** + utilization drops 85% → 67.5%
+- Option B (OT): **$50,000 in overhead** + utilization maintained at 85%
 
-**Option B delivers the same research output at 1/8th the cost, as overhead instead of lost revenue.**
+**Option B delivers the same research output at 1/5th the cost, as overhead instead of lost revenue.**
 
 ### Additional Consequences
 
@@ -238,8 +365,11 @@ Restore research OT eligibility. Use Ezra adoption as the pilot program.
 
 | API / Service | Purpose | Monthly Cost | Approval Needed |
 |---------------|---------|--------------|-----------------|
-| Claude Teams | Standard + Premium seats, Claude Code | ~$30-150/user/mo | Username/account |
-| Claude Developer API | AI assistant integration | ~$20-50 | Username/account |
+| Claude Max 5x | $100/mo, $1,200/yr per seat | Username/account |
+| Claude Teams | Std: $30/mo, $360/yr. Premium: $150/mo, $1,800/yr. (1 Std + 2 Premium = $330/mo, $3,960/yr) | Username/account |
+| Claude API - Opus 4.5 | ~1k msgs/mo (3K tk/msg), $35/mo, $420/yr | Username/account |
+| Claude API - Sonnet 4.5 | ~2k msgs/mo (3K tk/msg), $42/mo, $504/yr | Username/account |
+| Claude API - Haiku 4.5 | ~8k msgs/mo (3K tk/msg), $56/mo, $672/yr | Username/account |
 | Vantage Point API | CRM / contact routing | Included in license | Username/account |
 | Mapbox API | Interactive maps | Free tier (50k loads/mo) | Username/account |
 | GitHub | Code repository | Included / Free | Username/account |
@@ -252,12 +382,12 @@ Restore research OT eligibility. Use Ezra adoption as the pilot program.
 | API / Service | Purpose | Yearly Cost | Approval Needed |
 |---------------|---------|-------------|-----------------|
 | Magnific GUI | AI image upscaling | $468/yr ($39/mo) | TBD |
-| Magnific API | AI image upscaling (API) | $594/yr | TBD |
-| Google Gemini Ultimate | AI generation | $2,988/yr ($249/mo) | TBD |
+| Magnific API (Freepik) | ~500 upscales/mo, $55/mo, $660/yr | TBD |
+| Google Gemini GUI | Pro: 1k img, 3 vid, $20/mo, $240/yr. Ultimate: 1k img, 5 vid, $249/mo, $2,988/yr | TBD |
 | MidJourney GUI | AI image generation | $360/yr ($30/mo) | TBD |
-| Veo 3 Fast API | AI video generation | $324/yr | TBD |
-| Veo 3 Standard API | AI video generation | $864/yr | TBD |
-| CapCut Pro | Video editing | $180/yr ($15/mo) | TBD |
+| Veo 3 Fast API | ~50 vids/mo (4-sec), $30/mo, $360/yr | TBD |
+| Veo 3 Standard API | ~50 vids/mo (4-sec), $80/mo, $960/yr | TBD |
+| CapCut Pro | Video editing | $240/yr ($20/mo) | TBD |
 | Digital Model Assets | 3D asset budget | $1,200/yr ($100/mo) | dedicated Username/account |
 | Twinmotion | Real-time visualization | Free | team@pfluger |
 | Adobe Substance | Model creation, texturing | reduced from $4700 to $1400 | Designers pfluger email | 
@@ -265,57 +395,60 @@ Restore research OT eligibility. Use Ezra adoption as the pilot program.
 | Unreal Engine | Real-time engine | Free | team@pfluger |
 | Apple Developer | App distribution Build to Apple Vision Pro | $99/yr | TBD |
 
-### Exec Summary Software List ~$12,000/yr for 2026, down from ~31,000
+### Exec Summary Software List
 
 Platform & Infrastructure
-- Cloudflare D1/R2 - Web app database + storage - ~$240/yr - TBD account
-- Supabase - Database alternative - Free tier / ~$300/yr - TBD account
-- Bluehost - Legacy hosting, domain - Already paying - domain@pfluger
-- GitHub - Code repository - Free - TBD account
+- Cloudflare - Web app building - Free tier (5GB DB, 10GB storage), $0/mo, $0/yr - TBD account
+- Supabase - Database storage - Free (2 projects, 500MB each), $0/mo, $0/yr. Pro: $25/mo + $10/project, ~$540/yr (3 projects) - TBD account
+- Bluehost - Legacy hosting/domain - $0/mo, $0/yr (already paying) - domain@pfluger, HB gmail
+- GitHub - Code repository - $0/mo, $0/yr - TBD account (organization and then user)
+- OpenAsset DAM - Content storage - already have - TBD Accounts
+- Azure SSO - Account sign in - apps need to have keys, who makes these?
 
-- Claude Teams - AI assistant seats - ~$360-1,800/user/yr - TBD account
-- Claude Developer API - AI integration - ~$240-600/yr - TBD account
+- Claude Max 5x (NA) - Agentic development & research - $100/mo, $1,200/yr per seat - TBD account
+- Claude Teams - Agentic development & research - Std: $30/mo, $360/yr. Premium: $150/mo, $1,800/yr. (1 Std + 2 Premium = $330/mo, $3,960/yr) - TBD account
+- Claude API - Firm AI Integration - Opus 4.5 - ~1k msgs/mo (3K tk/msg), $35/mo, $420/yr - TBD account
+- Claude API - Firm AI Integration - Sonnet 4.5 - ~2k msgs/mo (3K tk/msg), $42/mo, $504/yr - TBD account
+- Claude API - Firm AI Integration - Haiku 4.5 - ~8k msgs/mo (3K tk/msg), $56/mo, $672/yr - TBD account
 
-- Mapbox API - Interactive maps - Free (50k loads/mo) - TBD account
-- Vantage Point API - CRM routing - Included - TBD account
-- OpenAsset API - Image sync - Included - TBD account
-- Resend API - Email automation - Free (3k emails/mo) - TBD account
-- Census API - Demographics data - Free - TBD account
+- Mapbox API - maping in apps - 50k loads/mo, $0/mo, $0/yr - TBD account
+- Vantage Point API - CRM Integration - Included w/ license, $0/mo, $0/yr - TBD account
+- OpenAsset API - DAM Integration - Included w/ license, $0/mo, $0/yr - TBD account
+- Resend API - email automation - 3k emails/mo, $0/mo, $0/yr - TBD account
+- Census API - US Census metrics - Unlimited, $0/mo, $0/yr - TBD account
 - Local Egnyte drive MCP ($11,154/yr) - listed as con, not recommended
-- Climate Studio - Building performance simulation - $2,500/yr - TBD pending
+- Climate Studio (NA) - Building performance and analaysis - $2,500/yr - TBD account
 
 ArchVis - Production & AI
-- CapCut Pro - Video editing - $180/yr - TBD
-- Digital Model Assets - 3D asset budget - $1,200/yr - dedicated account
+- CapCut Pro - Video editing - $240/yr - TBD account
+- Digital Model Assets - 3D asset budget - $1,200/yr - need dedicated account
 - Adobe Substance - Texturing - $1,400/yr - Designers pfluger email
-- Apple Developer - Vision Pro distribution - $99/yr - TBD
+- Apple Developer - Vision Pro distribution - $99/yr - apps@pfluger
 - Twinmotion - Real-time visualization - Free - team@pfluger
-- Blender - 3D modeling - Free - —
+- Blender - 3D modeling - Free - there is no account needed
 - Unreal Engine - Real-time engine - Free - team@pfluger
 
 - MidJourney GUI - AI image generation - $360/yr - TBD
 - Magnific GUI - AI image upscaling - $468/yr - TBD
-- Google Gemini Ultimate GUI - AI generation - $2,988/yr - TBD
+- Google Gemini GUI - AI image generation - Pro: 1k img, 3 vid, $20/mo, $240/yr. Ultimate: 1k img, 5 vid, $249/mo, $2,988/yr - TBD
 
-- Magnific API - AI upscaling (API) - $594/yr - TBD
-- Veo 3 Fast API - AI video generation - $324/yr - TBD
-- Veo 3 Standard API - AI video generation - $864/yr - TBD
+- Magnific API (Freepik) - AI upscaling - ~250 upscales/mo, $28/mo, $330/yr - TBD
+- Nano Banana Pro API - AI image generation - ~250 imgs/mo, $34/mo, $402/yr - TBD
+- Veo 3 Fast API - AI video generation - ~50 vids/mo (4-sec), $30/mo, $360/yr - TBD
+- Veo 3 Standard API - AI video generation - ~50 vids/mo (4-sec), $80/mo, $960/yr - TBD
 
 **2026 Totals (estimated)**
-- New paid software: ~$11,577/yr
-- Existing/included: ~$0 additional
-- Free tier tools: $0
+- With AI APIs: ~$11,600/yr
+- Without AI APIs: ~$9,600/yr
+- Net decrease from $31k: ~$19,400-$21,400 saved (63-69%)
+
 
 ### Consequence of Delay
 
-- Cannot finalize database schema or build persistence layer
-- Ezra (AI assistant) won't run, searching is all manual
-- Static project data, two sources of truth
-- Collaborate form doesn't route anywhere
-
-### Recommendation
-
-Cloudflare D1/R2 for database. Claude API first for highest user impact.
+- Cannot finalize database, apps, hosting
+- Cannot roll out Vision, Prism or R&B
+- Ezra (research assistant) won't run, searching is all manual
+- Static CRM  data, two sources of truth
 
 ---
 
@@ -458,19 +591,6 @@ Public Launch (#3)      Internal Launch (#4)
 
 **Minimum viable launch:** Decision #3 (public only, no internal features)
 **Full launch:** All 5 decisions
-
----
-
-## Ask
-
-Schedule 30-minute decision meeting with:
-- CO (Design Director)
-- CC (Marketing Director)
-- CB (Tech/Budget)
-- LF (Finance)
-- LP (?)
-
-Agenda: Review this document, make decisions, unblock January launch.
 
 ---
 
