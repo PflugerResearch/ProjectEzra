@@ -67,6 +67,8 @@ Top Priority: Bluehost (HB@gmail, domain@pfluger), Cloudflare (TBD) Card?, Supab
 
 Other Vis Setup: Magnific GUI (apps@pfluger) Card, Midjourney GUI (TBD) Card, Google Gemini GUI (TBD) Card, CapCut Pro (TBD) Card, Digital Model Assets (TBD), Apple Developer (apps@pfluger) Card, Figma (LS@pfluger) Card, Unreal Engine (team@pfluger) Free, Twinmotion (team@pfluger) Free, Magnific API (TBD) Card, Gemini API (TBD) Card
 
+
+
 **Attendees:** CO, CM, LP, LF, CB, DC
 **Agenda:**
 By LP
@@ -87,31 +89,32 @@ Discuss trade-offs and finalize software procurement/budget for 2026
 **Agenda:**
 
 **Set the date** (5 min)
-- Propose R&B launch end of January ok. 
+- Propose R&B launch end of January  ok. 
 - Are we committed to this date? Will need unblocks to accomplish this.
--still fine tuning budget, has to go by the board. 
 
 **Internal Launch** (10 min)
-- RB projects inner and outfacing need review
-- Ezra AI assistant and repo, pitch needs tech unblocks (reviewed with LP 1/7) will get the software from Grag, we need to get going. get the low items done. 
+- RB projects inner and outfacing need review will get the software from Grag, we need to get going. get the low items done. 
+- Ezra AI assistant and repo, pitch needs tech unblocks (reviewed with LP 1/7)
 - Who reviews? JS, CO, Me, BS, Others? Can we get tech unblocked?
+
 R&B purpose is to enhance the work' - CO
 secondary is expertice
 - in the application we will need to vet the projects and thier current schedule. 
 - The conversations will need to all go through th edirectors, they control the hours. 
 - peopel approving pitchs are CO, JS, BW, AW
 
-**External Launch** (10 min)
-- 2025 Content sign-off (12 projects, About/Process pages), there is going to be a new marketing director. 
+**External Launch** (10 min) , there is going to be a new marketing director. 
+- 2025 Content sign-off (12 projects, About/Process pages)
 - UI/Branding sign-off (colors, logo, URL)
 - Marketing pipeline (A4LE, not Texas Architect)?
 - Who does marketing? What resources do we have?
 
-**Research Hours** (10 min) CO - There wil be no OT, suffer the Revenue. 
-- 726 logged vs 2,000 planned - current policy isn't working 
+**Research Hours** (10 min)  CO - There wil be no OT, suffer the Revenue. 
+- 726 logged vs 2,000 planned - current policy isn't working
 - $50k (OT) vs $255k (on-clock) for same output
 - Need OT eligibility restored to hit research targets
 - Can we restore OT? What's the chain of command to get people on projects?
+
  - we will still go with the VP project numbers. Lisa will have all the VP, Get with Lisa with VP to go over hours. 
  get with lisa, walk through what we did for 2025, show the work flow, starting at 2000
 
@@ -137,7 +140,6 @@ get with LF on the VP hours with CO
 **VP Codes** (10 min)
 - Need codes created + communication chain activated
 - Who tells People Leaders, PMs, PAs it's legit?
-
 
 **Status:** Scheduled
 **Outcome:** _TBD_
@@ -408,26 +410,25 @@ Budget will be approved by EOM
 *| Claude API - Opus 4.5 | ~1k msgs/mo (3K tk/msg), $35/mo, $420/yr | Username/account |
 *| Claude API - Sonnet 4.5 | ~2k msgs/mo (3K tk/msg), $42/mo, $504/yr | Username/account |
 *| Claude API - Haiku 4.5 | ~8k msgs/mo (3K tk/msg), $56/mo, $672/yr | Username/account |
-| Vantage Point API | CRM / contact routing | Included in license | Username/account |
 *| Mapbox API | Interactive maps | Free tier (50k loads/mo) | Username/account |
 *| GitHub | Code repository | Included / Free | Username/account |
-| Census API | Demographics / district data | Free | Username/account |
 *| Climate Studio | Building performance simulation in lue of Safira Sketchup $2000/yr | ~$2,500/year | TBD - pending | going to try to pro rate and cancle safiri
 | Resend API | email automation API | Free Tier 3k emails/mo | Username/account |
+| Census API | Demographics / district data | Free | Username/account |
+| Vantage Point API | CRM / contact routing | Included in license | Username/account |
 
 ### ArchVis APIs & Services
 
 | API / Service | Purpose | Yearly Cost | Approval Needed |
 |---------------|---------|-------------|-----------------|
-*| Magnific GUI | AI image upscaling | $468/yr ($39/mo) | TBD |
+*| Magnific GUI | AI image upscaling | $468/yr ($39/mo) | Apps@pfluger | | TBD |
 *| Magnific API (Freepik) | AI upscaling | ~500 upscales/mo, $55/mo, $660/yr | TBD |
-*| Nano Banana Pro API | AI image generation (4K) | ~500 imgs/mo, $120/mo, $1,440/yr | TBD |
+*| Nano Banana Pro API | AI image generation (4K) | ~500 imgs/mo, $120/mo, $1,440/yr | TBD |  Told LP 1500
 *| Google Gemini GUI | Pro: 1k img, 3 vid, $20/mo, $240/yr. Ultimate: 1k img, 5 vid, $249/mo, $2,988/yr | TBD |
 *| MidJourney GUI | AI image generation | $360/yr ($30/mo) | TBD | getting a number of user accounts for people to use 
-*| Veo 3 Fast API | ~50 vids/mo (4-sec), $30/mo, $360/yr | TBD |
-*| Veo 3 Standard API | ~50 vids/mo (4-sec), $80/mo, $960/yr | TBD | Veo is 1500/yr
-*| AI Image/Video Budget | Consolidated bucket for AI tools | $2,500/yr | TBD |
-*| CapCut Pro | Video editing | $240/yr ($20/mo) | TBD |
+*| Veo 3 Fast API | ~50 vids/mo (4-sec), $30/mo, $360/yr | TBD |   at $360
+*| Veo 3 Standard API | ~50 vids/mo (4-sec), $80/mo, $960/yr | TBD |  Told LP 1000
+*| CapCut Pro | Video editing | $240/yr ($20/mo) | TBD | 
 *| Digital Model Assets | 3D asset budget | $1,200/yr ($100/mo) | dedicated Username/account |
 *| Twinmotion | Real-time visualization | Free | team@pfluger | double check with Logan on account cost
 *| Adobe Substance | Model creation, texturing | reduced from $4700 to $1400 | Designers pfluger email | 
@@ -435,6 +436,7 @@ Budget will be approved by EOM
 *| Unreal Engine | Real-time engine | Free | team@pfluger |
 *| Figma Professional | UI/UX design & prototyping | 5 seats × $16/mo = $80/mo, $960/yr | Jackie's pfluger email |
 *| Apple Developer | App distribution Build to Apple Vision Pro | $99/yr | TBD |
+|AI Bucket|
 
 ### Consequence of Delay
 
