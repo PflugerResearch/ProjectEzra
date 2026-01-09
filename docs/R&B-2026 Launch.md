@@ -68,6 +68,31 @@ Top Priority: Bluehost (HB@gmail, domain@pfluger), Cloudflare (TBD) Card?, Supab
 Other Vis Setup: Magnific GUI (apps@pfluger) Card, Midjourney GUI (TBD) Card, Google Gemini GUI (TBD) Card, CapCut Pro (TBD) Card, Digital Model Assets (TBD), Apple Developer (apps@pfluger) Card, Figma (LS@pfluger) Card, Unreal Engine (team@pfluger) Free, Twinmotion (team@pfluger) Free, Magnific API (TBD) Card, Gemini API (TBD) Card
 
 
+**Meeting Notes (LP Sidebar):**
+
+**Software & Licensing**
+- Safira: Prorate and cancel license
+- Rhino: Reach out for pricing, confirm with Austin
+- Claude: Kill Max 5x, set up Teams (1 Std + 1 Ulti), cancel CH account
+- Claude API username: `software@pflugerarchitects.com` workes better with Crag (noted from Austin)
+- Autodesk: ATG is rep, transitioning to FORMA
+
+**IT & Account Management**
+- Log all users/passwords into IT Glue
+- Double-check with Craig on IT Glue setup
+- Set up monthly 30-min tech budget check-in
+
+**Hardware & Equipment**
+- Get render machine cost from Austin
+- Get Apple Vision Pro costs
+- Get 3D printer costs
+
+**Makerspace (CP)**
+- Get CP membership + training costs
+- Bill time to regular CP, track hours separately if reallocation needed
+
+**Materials**
+- Get glass and plexi pricing
 
 **Attendees:** CO, CM, LP, LF, CB, DC
 **Agenda:**
@@ -80,8 +105,38 @@ Review existing licensing needs
 Discuss trade-offs and finalize software procurement/budget for 2026
 **Status:** Scheduled
 **Outcome:** _TBD_
+**Actionitems:**
 
- ---
+- AW: Prorate/cancel Safira license | need to hard conteact
+
+- AW: Cancel CH Claude Max 5x | awaiting support to contact back, calcled plan
+- AW: Cancel Claude Teams | awaiting support to contact back, calcled plan
+*- created new teams account for claude teams with software@pflugerarchitects.com, phone number is austin W, LP is card at $150 / mo for 5 seats.
+*- AW set up claude developer account | software@pflugerarchitects, no pass (email)
+*- Github account | created software@pflugerarchitects.com  kk(otS0>H-9r<kRHY|Cc, need to add to IT Glue
+*- Mapbox, | created account named pflugerarchtiects. email: software@pflugerarchitects.com, password is kk(otS0>H-9r<kRHY|Cc, need to add to IT Glue
+*- AW create CF account | software@pflugerarchitects.com veg72_pyvA3q6JU, deleter the developer@ account
+*- AW create SB account | software@pflugerarchitects.com -bQ98aK!kQ94pnT, deleted old org and requested deletion of account. project Pfluger_RB_Repo -c77.xSjc9v_RJc.
+*- AW: Reach out on Rhino pricing, confirm with Austin | no aditional rhino costs. Seats: 10 R8, 10 R7, 2 R6, aditional seat is $995. Seats are floating, 10 R8 max.
+*- AW: Get render machine, Apple Vision, 3D printer | Boxx render machine was ($9,000 not $5000)
+- aw create census account | 
+- aw create resend account | software@pflugerarchitects.com X-khxUcD.fjcWV9
+
+- Makerspace cost, ($95/mo consider 4mo a year / person), aditional one time training: $70 base, $135 laser cutting, $250 CNC. 
+
+- AW: Send glass and plexi pricing to TS, CO
+- AW: Send Makerspace (CP) membership + training costs to LP, CO
+
+- AW: Confirm IT Glue setup with Craig and all new log all users/passwords accounts created. 
+- AW: Set up monthly 30-min tech budget check-in
+
+- AW: Track all hours to C&P (keep separate log if reallocation needed)
+
+- AW download to LP | recipts, 9k computer, Rhino isnt Lic, $1k a seat.
+
+
+
+
  
 ### Thursday (1/9) 11am-noon — R&B Blocks 3, 4 + Prime 1, 5
 **Messages**
@@ -209,7 +264,7 @@ CC: I also want more eyes on it providing refinements, including you and Terry M
 
  ---
 
-### TBD - Project Prism (X25-RB10)
+### 01/15 - Project Prism (X25-RB10)
 **Messages**
 1/4 AW:
 Hello everyone, and Happy new year. Seeing some spots next week to set up a regroup on the cost estimator for 2026. Some items to revisit is our gameplan for LHISD, and the other ISDs it has been brought up to, and our relationship with Vermeulens/Alpha, subscription model, and the level of development we are comfortable with in 2026. Let me know yalls thoughts. Thanks!
@@ -435,8 +490,9 @@ Budget will be approved by EOM
 *| Blender | 3D modeling | Free | — |
 *| Unreal Engine | Real-time engine | Free | team@pfluger |
 *| Figma Professional | UI/UX design & prototyping | 5 seats × $16/mo = $80/mo, $960/yr | Jackie's pfluger email |
-*| Apple Developer | App distribution Build to Apple Vision Pro | $99/yr | TBD |
+*| Apple Developer | App distribution Build to Apple Vision Pro | $99/yr | TBD | 
 |AI Bucket|
+|Bambu Labs | 3d printing |  apps@pfluger|free 
 
 ### Consequence of Delay
 
