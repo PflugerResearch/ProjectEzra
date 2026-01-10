@@ -140,6 +140,9 @@ Discuss trade-offs and finalize software procurement/budget for 2026
  
 ### Thursday (1/9) 11am-noon — R&B Blocks 3, 4 + Prime 1, 5
 **Messages**
+1/8 AW → LF:
+Provided project number breakdowns for R&B. LF said she emailed Matt (AW not CC'd).
+
 **Attendees:** CO
 **Agenda:**
 
@@ -186,10 +189,13 @@ After midwinter everyone will be in person. There will be a section that is a Wh
 
 With Chad M, there is a new BIM manager coming on board. 
 
-Action items per CO
-Tony about the forum date and get on the adgenda. 
-get with LP, and CB on getting the software
-get with LF on the VP hours with CO
+**Action items per CO (1/8):**
+- [ ] Tony - Get forum date and get R&B on the agenda
+- [ ] LP, CB (Craig) - Get software/accounts set up
+- [x] LF (Lisa) - Coordinate on VP hours/coding (1/8 - sent project breakdowns, she emailed Matt)
+- [x] Craig/Austin - Email about software, CC Lauren and CO (1/8 - sent to Craig, checking with Austin 1/9)
+- [ ] Logan - Launch animation/marketing hype
+- [x] Pick launch date (avoid TASA Midwinter)
 
 
 **VP Codes** (10 min)
@@ -305,7 +311,60 @@ Hey all, Happy new years. Tony Schmitz did you have a time in mind to tackle thi
 ## 1. Research Hours Policy (CO, LP, LF)
 
 **Decision Owner:** CO, LP, LF
-**Decision:** Reverse the "research on the clock" policy and restore OT eligibility for research hours.
+**Decision:** ~~Reverse the "research on the clock" policy and restore OT eligibility for research hours.~~
+
+### UPDATE (1/8/26 CO Meeting)
+
+**Decision: Research stays ON THE CLOCK. No OT.**
+
+CO acknowledged the math ($50k OT vs $255k on-clock) and chose the on-clock path. Expectation is passion-driven work within 40 hours.
+
+**Chain of Command Paradox:**
+```
+Worker (has idea)
+    → tells PM "this is cool, we should do this"
+    → PM tells Principal to integrate into client conversations
+    → Directors oversee that it happens
+```
+
+The person doing the research has no authority to allocate hours. They must convince up the chain. Directors "control" hours but aren't initiating research. Principals talk to clients but aren't doing research. The researcher is at the bottom with ideas but no agency to execute.
+
+**R&B Council (Pitch Panel):**
+- CO (Christian Owens) - Chief Design Officer
+- BS (Brenda Swirczynski) - Education Facilities Planner
+- JS (Josh Sawyer) - Educational Planning Director
+- AW (Alex Wickes) - R&B Lead
+
+This panel decides which pitches are "worthy" of R&B effort.
+
+---
+
+### What Counts as "Research" (per CO, 1/8/26)
+
+**IS R&B:**
+- Novel ideas that differentiate the firm from competitors
+- Must tie to project outcomes quickly
+- Must demonstrate results before publishing externally
+- Example: Katherine & Braden's Sanctuary Spaces (X25-RB01) - it was "flipping it, an idea"
+
+**IS NOT R&B (just "Best Practices"):**
+- Post-occupancy surveys - "We've talked about this for five years"
+- Mass timber basics - "Every firm doing architecture should be doing this"
+- Materials research (Monse's work) - "Is that really R&B or just how we should be doing best practice?"
+- Sustainability/energy modeling - "We're barely talking about it, we need to be on level with competition"
+
+**The Contradiction:**
+CO says R&B is for differentiation, but then categorizes anything the firm *should* already be doing as "not R&B." If the firm isn't doing post-occupancy, mass timber, or energy modeling - and competitors are - that's not "best practice," that's a gap.
+
+**The Catch-22:**
+1. Can't publish research without project outcomes
+2. Can't get research on a project without convincing PM → Principal
+3. Can't explore ideas without a project to anchor to
+4. But novel ideas by definition don't have projects yet
+
+**CO's actual framework (reading between the lines):**
+- R&B = Ideas CO finds interesting that can be tied to active work
+- Not R&B = Foundational capability building the firm should fund through normal operations (but doesn't)
 
 ### Context
 
@@ -584,6 +643,7 @@ As of 1/4 there is a new VP job structure for overhead. But creating new project
 
 ### Communication Chain for Staff Assignment
 
+**Original assumption:**
 ```
 Leadership Decision (CO/JS)
         ↓
@@ -593,6 +653,64 @@ Project Managers
         ↓
 Staff assigned to R&B project numbers
 ```
+
+**Actual (per 1/8 meeting) - The Paradox:**
+```
+Worker (has idea, no authority)
+        ↓
+tells PM "this is cool, we should do this"
+        ↓
+PM tells Principal to integrate into client conversations
+        ↓
+Directors oversee that it happens
+```
+
+**The problem:** The person with the idea is at the bottom. They must convince up the chain to get hours. Directors "control" hours but don't initiate research. Principals are client-facing but aren't researching. The worker has vision but no agency.
+
+---
+
+### Design Forum (NEW - per 1/8 meeting)
+
+**What:** Tony Schmitz (TS) is now leading design shareouts/forums. R&B will be part of the agenda.
+
+**Who:** Directors + 2-3 "catalysts" per office (not just designers - includes PMs, PAs)
+
+**Purpose (per CO):** "Empower instigators" to ensure research happens in each office. Create an "army of instigators."
+
+**Timing & Location:**
+- Day and a half workshop in San Antonio
+- Scheduled right AFTER TASA Midwinter (conference ends Tue/Wed, workshop Wed/Thu)
+- PMs will already be in San Antonio for the conference - minimizes travel cost
+- Tony is finalizing the attendee list (tied to budget)
+
+**R&B at the Forum:**
+- Doesn't need to be a 20 minute presentation - just a heads-up
+- Goal: Let directors know R&B is coming before it launches
+- Message: "Your people are gonna be excited about it. Here's the best ways to support them."
+
+**Additional Coupling (per CO):**
+- AW to be partnered with Chad Martin + potential new BIM manager
+- Focus: Process and design technology alignment
+- CO: "Getting you coupled with this group is pretty important"
+
+**The Additional Layer:**
+```
+R&B Council approves pitch
+        ↓
+Design Forum "empowers" catalysts
+        ↓
+Catalysts tell... their office?... to care about research?
+        ↓
+But hours still controlled by Directors
+        ↓
+Who weren't part of the pitch decision
+```
+
+**The problem:** This adds inspiration/motivation theater but doesn't solve the authority gap. Catalysts can be "empowered" all day, but if Directors control hours and weren't involved in approving the pitch, the catalyst still has to convince up the chain.
+
+**Action Item:** AW to coordinate with Tony on forum date and get R&B on the agenda.
+
+---
 
 **The gap:** Alex controls the R&B projects in VP but cannot directly assign or communicate with staff. Someone at leadership level must:
 1. Inform People Leaders that research participation is legitimate
@@ -647,10 +765,11 @@ Public Launch (#3)      Internal Launch (#4)
 
 ## Executive Summary: Action Items by Decision
 
-1. **Research Hours Policy** — Reverse "research on the clock" policy, restore OT eligibility
+1. **Research Hours Policy** — ~~Reverse "research on the clock" policy, restore OT eligibility~~ **DECIDED 1/8: ON THE CLOCK, NO OT**
    - CO (Chief Design Officer)
    - LP (COO / co-CEO)
    - LF (Finance Director)
+   - **Outcome:** CO chose $255k revenue loss over $50k overhead. Researchers must convince PM → Principal → Directors. No direct authority to allocate hours.
 
 2. **Software & Infrastructure** — Approve database platform, APIs, and associated costs
    - CO (Chief Design Officer) — direction
