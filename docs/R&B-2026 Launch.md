@@ -94,6 +94,42 @@ Other Vis Setup: Magnific GUI (apps@pfluger) Card, Midjourney GUI (TBD) Card, Go
 **Materials**
 - Get glass and plexi pricing
 
+**Actionitems:**
+
+- AW: Prorate/cancel Safira license | need to hard conteact
+
+- AW: Cancel CH Claude Max 5x | awaiting support to contact back, calcled plan
+- AW: Cancel Claude Teams | awaiting support to contact back, calcled plan
+*- created new teams account for claude teams with software@pflugerarchitects.com, phone number is austin W, LP is card at $150 / mo for 5 seats.
+*- AW set up claude developer account | software@pflugerarchitects, no pass (email)
+*- Github account | created software@pflugerarchitects.com  kk(otS0>H-9r<kRHY|Cc, need to add to IT Glue
+*- Mapbox, | created account named pflugerarchtiects. email: software@pflugerarchitects.com, password is kk(otS0>H-9r<kRHY|Cc, need to add to IT Glue
+*- AW create CF account | software@pflugerarchitects.com veg72_pyvA3q6JU, deleter the developer@ account
+*- AW create SB account | software@pflugerarchitects.com -bQ98aK!kQ94pnT, deleted old org and requested deletion of account. project Pfluger_RB_Repo -c77.xSjc9v_RJc.
+*- AW: Reach out on Rhino pricing, confirm with Austin | no aditional rhino costs. Seats: 10 R8, 10 R7, 2 R6, aditional seat is $995. Seats are floating, 10 R8 max.
+*- AW: Get render machine, Apple Vision, 3D printer | Boxx render machine was ($9,000 not $5000)
+- aw create census account | 
+- aw create resend account | software@pflugerarchitects.com X-khxUcD.fjcWV9
+
+- Makerspace cost, ($95/mo consider 4mo a year / person), aditional one time training: $70 base, $135 laser cutting, $250 CNC. 
+
+- AW: Send glass and plexi pricing to TS, CO
+- AW: Send Makerspace (CP) membership + training costs to LP, CO
+
+- AW: Confirm IT Glue setup with Craig and all new log all users/passwords accounts created. 
+- AW: Set up monthly 30-min tech budget check-in
+
+- AW: Track all hours to C&P (keep separate log if reallocation needed)
+
+- AW download to LP | recipts, 9k computer, Rhino isnt Lic, $1k a seat.
+
+
+
+
+
+
+
+
 **Attendees:** CO, CM, LP, LF, CB, DC
 **Agenda:**
 By LP
